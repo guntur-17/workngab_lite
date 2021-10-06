@@ -1,9 +1,9 @@
-import 'package:absen_lite/widgets/clock_card.dart';
+import 'package:absen_lite/widgets/shop_card.dart';
 import 'package:flutter/material.dart';
 import 'package:absen_lite/theme.dart';
 
-class AttendanceHistoryPage extends StatelessWidget {
-  const AttendanceHistoryPage({Key? key}) : super(key: key);
+class VisitingListPage extends StatelessWidget {
+  const VisitingListPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +11,7 @@ class AttendanceHistoryPage extends StatelessWidget {
       return Center(
         child: Container(
           width: MediaQuery.of(context).size.width * 0.95,
-          // margin: EdgeInsets.only(top: 30),
+          // margin: EdgeInsets.only(top: 20),
           child: SingleChildScrollView(
             child: Center(
               child: Container(
@@ -19,18 +19,18 @@ class AttendanceHistoryPage extends StatelessWidget {
                 width: MediaQuery.of(context).size.width * 0.90,
                 child: Column(
                   children: [
-                    ClockOutCard(),
-                    ClockInCard(),
-                    ClockOutCard(),
-                    ClockInCard(),
-                    ClockOutCard(),
-                    ClockInCard(),
-                    ClockOutCard(),
-                    ClockInCard(),
-                    ClockOutCard(),
-                    ClockInCard(),
-                    ClockOutCard(),
-                    ClockInCard(),
+                    ShopCard(),
+                    ShopCard(),
+                    ShopCard(),
+                    ShopCard(),
+                    ShopCard(),
+                    ShopCard(),
+                    ShopCard(),
+                    ShopCard(),
+                    ShopCard(),
+                    ShopCard(),
+                    ShopCard(),
+                    ShopCard(),
                   ],
                 ),
               ),
@@ -52,7 +52,7 @@ class AttendanceHistoryPage extends StatelessWidget {
             bottomOpacity: 0.0,
             elevation: 0.0,
             title: new Text(
-              'Attendance History',
+              'Today Visiting List',
               style: trueBlackTextStyle.copyWith(fontWeight: FontWeight.w600),
             ),
           ),

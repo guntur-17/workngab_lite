@@ -1,10 +1,14 @@
-import 'package:absensi_project/theme.dart';
-import 'package:absensi_project/widgets/announce_card.dart';
-import 'package:absensi_project/widgets/attendance_card.dart';
-import 'package:absensi_project/widgets/menu_card.dart';
-import 'announce_pages.dart';
-import 'attendance_history_pages.dart';
+import 'package:absen_lite/pages/attendance_history_pages.dart';
+import 'package:absen_lite/pages/visiting_list_pages.dart';
+import 'package:absen_lite/theme.dart';
+import 'package:absen_lite/widgets/clock_card.dart';
+import 'package:absen_lite/widgets/menu_card.dart';
+import 'package:absen_lite/widgets/shop_card.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:relative_scale/relative_scale.dart';
+import 'package:absen_lite/providers/auth_provider.dart';
+import 'package:absen_lite/models/user_model.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({Key? key}) : super(key: key);
@@ -16,109 +20,84 @@ class DashboardPage extends StatefulWidget {
 class _DashboardPageState extends State<DashboardPage> {
   @override
   Widget build(BuildContext context) {
-    Widget title() {
-      return Stack(
-        children: [
-          Padding(
-            padding: EdgeInsets.only(top: 15, left: 12, right: 12),
-            child: Image.asset(
-              'assets/welcome.png',
-              // height: 165,
-              // width: 335,
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(top: 20, left: 39, right: 12),
-            child: Container(
-              height: MediaQuery.of(context).size.height * 0.17,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Hi, Farino Joshua',
-                        textAlign: TextAlign.left,
-                        style: whiteTextStyle.copyWith(
-                            fontSize: 18, fontWeight: semiBold),
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    UserModel nick = authProvider.user;
+
+    String? gambar = nick.photo;
+
+    Widget nama() {
+      return Container(
+        child: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.only(left: 30, right: 12, top: 10),
+              child: Container(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Container(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Welcome, ${nick.name}',
+                              textAlign: TextAlign.left,
+                              style: whiteTextStyle.copyWith(
+                                  fontSize: 20, fontWeight: semiBold),
+                            ),
+                            Text(
+                              'Sales',
+                              textAlign: TextAlign.left,
+                              style: whiteTextStyle.copyWith(
+                                  fontSize: 16, fontWeight: semiBold),
+                            ),
+                          ],
+                        ),
                       ),
-                      Text(
-                        'IT Support',
-                        textAlign: TextAlign.left,
-                        style: whiteTextStyle.copyWith(
-                            fontSize: 14, fontWeight: medium),
-                      ),
-                    ],
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.03),
-                      Text(
-                        'PT. Idea Indonesia',
-                        textAlign: TextAlign.left,
-                        style: whiteTextStyle.copyWith(
-                            fontSize: 14, fontWeight: reguler),
-                      ),
-                    ],
-                  ),
-                ],
+                    )
+                  ],
+                ),
               ),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       );
     }
 
     Widget menu() {
-      return Container(
-        height: MediaQuery.of(context).size.height * 0.13,
-        // margin: EdgeInsets.only(top: 10),
-        padding: EdgeInsets.only(left: 14, right: 14),
-        child: SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            children: [
-              SizedBox(
-                width: 6,
-              ),
-              AttendanceCard(),
-              SizedBox(
-                width: 6,
-              ),
-              TimeOffCard(),
-              SizedBox(
-                width: 6,
-              ),
-              MeetingsCard(),
-              SizedBox(
-                width: 6,
-              ),
-              PayRollCard(),
-              SizedBox(
-                width: 6,
-              ),
-              MedicalCard(),
-              SizedBox(
-                width: 6,
-              ),
-            ],
-          ),
-        ),
+      return RelativeBuilder(
+        builder: (context, height, width, sy, sx) {
+          return Container(
+            margin: EdgeInsets.only(top: 18),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                AttendanceCard(),
+                SizedBox(
+                  width: 10,
+                ),
+                VisitCard(),
+              ],
+            ),
+          );
+        },
       );
     }
 
     Widget header() {
       return Container(
-        // width: MediaQuery.of(context).size.width - 26,
-        //
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/header.png'),
+            fit: BoxFit.cover,
+          ),
+        ),
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsets.only(left: 20, right: 20, top: 23),
+              padding: EdgeInsets.only(left: 22, right: 22, top: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -127,70 +106,36 @@ class _DashboardPageState extends State<DashboardPage> {
                       children: [
                         Image.asset(
                           'assets/dashboard_logo.png',
-                          color: trueBlack,
+                          color: whiteColor,
                         ),
                         SizedBox(
-                          width: 6,
+                          width: 10,
                         ),
                         Text(
                           'Dashboard',
-                          style: trueBlackTextStyle.copyWith(
-                              fontSize: 20, fontWeight: semiBold),
+                          style: whiteTextStyle.copyWith(
+                              fontSize: 22, fontWeight: semiBold),
                         ),
                       ],
                     ),
                   ),
                   Container(
-                    // margin: EdgeInsets.only(top: 18),
-                    child: Image.asset(
-                      'assets/avatar.png',
-                      height: 60,
-                      width: 60,
-                    ),
-                  ),
+                      width: 50,
+                      height: 50,
+                      decoration: new BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: new DecorationImage(
+                              fit: BoxFit.fill,
+                              image: new NetworkImage("$gambar")))),
                 ],
               ),
             ),
             Column(
               children: [
-                title(),
+                nama(),
+                menu(),
               ],
             ),
-          ],
-        ),
-      );
-    }
-
-    Widget announce() {
-      return Container(
-        margin: EdgeInsets.only(bottom: 26, top: 10),
-        width: MediaQuery.of(context).size.width * 0.91,
-        // height: 140,
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('Announcement'),
-                InkWell(
-                  child: Text('see all'),
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => AnnouncePage()));
-                  },
-                )
-              ],
-            ),
-            SizedBox(
-              height: 6,
-            ),
-            AnnounceCard(),
-            SizedBox(
-              height: 7,
-            ),
-            AnnounceCard(),
           ],
         ),
       );
@@ -198,17 +143,25 @@ class _DashboardPageState extends State<DashboardPage> {
 
     Widget attencance_history() {
       return Container(
-        width: MediaQuery.of(context).size.width * 0.91,
-        margin: EdgeInsets.only(bottom: 2),
+        width: MediaQuery.of(context).size.width * 0.85,
+        margin: EdgeInsets.only(top: 22, bottom: 10),
         // height: 195,
         child: Column(
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Attendance History'),
+                Text(
+                  'Attendance History',
+                  style: trueBlackTextStyle.copyWith(
+                      fontSize: 16, fontWeight: semiBold),
+                ),
                 InkWell(
-                  child: Text('see all'),
+                  child: Text(
+                    'See All',
+                    style: trueBlackTextStyle.copyWith(
+                        fontSize: 14, fontWeight: light),
+                  ),
                   onTap: () {
                     Navigator.push(
                         context,
@@ -221,15 +174,66 @@ class _DashboardPageState extends State<DashboardPage> {
             SizedBox(
               height: 6,
             ),
-            AttendCardIn(),
-            SizedBox(
-              height: 7,
+            ClockOutCard(),
+            // SizedBox(
+            //   height: 6,
+            // ),
+            ClockInCard(),
+          ],
+        ),
+      );
+    }
+
+    Widget visiting_list() {
+      return Container(
+        width: MediaQuery.of(context).size.width * 0.85,
+        margin: EdgeInsets.only(top: 12, bottom: 10),
+        // height: 195,
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Today Visiting List',
+                  style: trueBlackTextStyle.copyWith(
+                      fontSize: 16, fontWeight: semiBold),
+                ),
+                InkWell(
+                  child: Text(
+                    'See All',
+                    style: trueBlackTextStyle.copyWith(
+                        fontSize: 14, fontWeight: light),
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => VisitingListPage()));
+                  },
+                )
+              ],
             ),
-            AttendCardOut(),
             SizedBox(
-              height: 7,
+              height: 6,
             ),
-            AttendCardIn(),
+            ShopCard(),
+            // SizedBox(
+            //   height: 6,
+            // ),
+            ShopCard(),
+          ],
+        ),
+      );
+    }
+
+    Widget body() {
+      return Container(
+        // transform: Matrix4.translationValues(0.0, -115.0, 0.0),
+        child: Column(
+          children: [
+            attencance_history(),
+            visiting_list(),
           ],
         ),
       );
@@ -242,9 +246,7 @@ class _DashboardPageState extends State<DashboardPage> {
           child: Column(
             children: [
               header(),
-              menu(),
-              attencance_history(),
-              announce(),
+              body(),
             ],
           ),
         ),

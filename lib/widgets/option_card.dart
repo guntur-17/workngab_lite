@@ -1,6 +1,7 @@
+import 'package:absen_lite/pages/detail_profile.dart';
+import 'package:absen_lite/pages/guide_permission.dart';
+import 'package:absen_lite/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:absensi_project/theme.dart';
-import 'package:absensi_project/pages/guide_permission.dart';
 
 class UserCard extends StatelessWidget {
   const UserCard({Key? key}) : super(key: key);
@@ -9,32 +10,38 @@ class UserCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width - 60,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              Image.asset(
-                'assets/user.png',
-                width: 40,
-                height: 40,
-              ),
-              SizedBox(
-                width: 20,
-              ),
-              Text(
-                'Profil Saya',
-                style:
-                    blackTextStyle.copyWith(fontSize: 14, fontWeight: reguler),
-              )
-            ],
-          ),
-          Image.asset(
-            'assets/rightButton.png',
-            width: 20,
-            height: 40,
-          )
-        ],
+      child: InkWell(
+        onTap: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => DetailProfile()));
+        },
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                Image.asset(
+                  'assets/user.png',
+                  width: 40,
+                  height: 40,
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Text(
+                  'Profil Saya',
+                  style: blackTextStyle.copyWith(
+                      fontSize: 14, fontWeight: reguler),
+                )
+              ],
+            ),
+            Image.asset(
+              'assets/rightButton.png',
+              width: 20,
+              height: 40,
+            )
+          ],
+        ),
       ),
     );
   }

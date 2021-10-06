@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:absensi_project/theme.dart';
+import 'package:absen_lite/theme.dart';
 
 class HourCard extends StatelessWidget {
   const HourCard({Key? key}) : super(key: key);
@@ -7,8 +7,8 @@ class HourCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 75,
-      height: 90,
+      width: MediaQuery.of(context).size.width * 0.20,
+      height: MediaQuery.of(context).size.height * 0.25,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
           color: whiteColor,
@@ -49,8 +49,8 @@ class ClockOut extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 75,
-      height: 90,
+      width: MediaQuery.of(context).size.width * 0.20,
+      height: MediaQuery.of(context).size.height * 0.25,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
           color: whiteColor,
@@ -91,8 +91,8 @@ class FullHour extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 75,
-      height: 90,
+      width: MediaQuery.of(context).size.width * 0.20,
+      height: MediaQuery.of(context).size.height * 0.25,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
           color: whiteColor,

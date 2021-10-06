@@ -1,4 +1,4 @@
-import 'package:absensi_project/theme.dart';
+import 'package:absen_lite/theme.dart';
 import 'package:flutter/material.dart';
 
 class GuidePermissionTable extends StatelessWidget {

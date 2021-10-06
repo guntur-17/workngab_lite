@@ -1,267 +1,144 @@
-import 'package:absensi_project/pages/clockin_pages.dart';
-import 'package:absensi_project/pages/reimbursement_pages.dart';
-import 'package:absensi_project/pages/timeoff_pages.dart';
-import 'package:absensi_project/theme.dart';
-import 'package:absensi_project/pages/meetings_pages.dart';
-import 'package:absensi_project/pages/payroll_pages.dart';
+import 'package:absen_lite/pages/clockin_pages.dart';
+import 'package:absen_lite/pages/visiting_pages.dart';
+import 'package:absen_lite/theme.dart';
+
 import 'package:flutter/material.dart';
+import 'package:relative_scale/relative_scale.dart';
 
 class AttendanceCard extends StatelessWidget {
   const AttendanceCard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(5),
-      height: MediaQuery.of(context).size.height * 0.10,
-      width: MediaQuery.of(context).size.width * 0.22,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-        color: whiteColor,
-        border: Border.all(color: whiteColor, width: 1),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
-            spreadRadius: 1,
-            blurRadius: 7,
-            offset: Offset(0, 5), // changes position of shadow
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          IconButton(
-            icon: Image.asset(
-              'assets/attendance.png',
+    return RelativeBuilder(builder: (context, height, width, sy, sx) {
+      return InkWell(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ClockInPage(),
             ),
-            iconSize: 34,
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ClockInPage(),
+          );
+        },
+        child: Container(
+          // padding: EdgeInsets.all(25),
+          height: sx(223),
+          width: sx(223),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15),
+            color: whiteColor,
+            border: Border.all(color: whiteColor, width: 1),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.2),
+                spreadRadius: 1,
+                blurRadius: 7,
+                offset: Offset(0, 5), // changes position of shadow
+              ),
+            ],
+          ),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                IconButton(
+                  icon: Image.asset(
+                    'assets/attendance.png',
+                  ),
+                  iconSize: 66,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ClockInPage(),
+                      ),
+                    );
+                  },
                 ),
-              );
-            },
+                SizedBox(
+                  height: 2,
+                ),
+                Text(
+                  'Attendance',
+                  style: trueBlackTextStyle.copyWith(
+                      fontSize: 16, fontWeight: semiBold),
+                )
+              ],
+            ),
           ),
-          SizedBox(
-            height: 2,
-          ),
-          Text(
-            'Attendance',
-            style: trueBlackTextStyle.copyWith(fontSize: 8, fontWeight: light),
-          )
-        ],
-      ),
-    );
+        ),
+      );
+    });
   }
 }
 
-class TimeOffCard extends StatelessWidget {
-  const TimeOffCard({Key? key}) : super(key: key);
+class VisitCard extends StatelessWidget {
+  const VisitCard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(5),
-      height: MediaQuery.of(context).size.height * 0.10,
-      width: MediaQuery.of(context).size.width * 0.22,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-        color: whiteColor,
-        border: Border.all(color: whiteColor, width: 1),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
-            spreadRadius: 1,
-            blurRadius: 7,
-            offset: Offset(0, 5), // changes position of shadow
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          IconButton(
-            icon: Image.asset(
-              'assets/calender.png',
-            ),
-            iconSize: 34,
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => TimeoffPage(),
+    return RelativeBuilder(
+      builder: (context, height, width, sy, sx) {
+        return InkWell(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => VisitingPage(),
+              ),
+            );
+          },
+          child: Container(
+            // padding: EdgeInsets.all(30),
+            height: sx(223),
+            width: sx(223),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              color: whiteColor,
+              border: Border.all(color: whiteColor, width: 1),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.2),
+                  spreadRadius: 1,
+                  blurRadius: 7,
+                  offset: Offset(0, 5), // changes position of shadow
                 ),
-              );
-            },
-          ),
-          SizedBox(
-            height: 2,
-          ),
-          Text(
-            'Time Off',
-            style: trueBlackTextStyle.copyWith(fontSize: 8, fontWeight: light),
-          )
-        ],
-      ),
-    );
-  }
-}
-
-class MeetingsCard extends StatelessWidget {
-  const MeetingsCard({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(5),
-      height: MediaQuery.of(context).size.height * 0.10,
-      width: MediaQuery.of(context).size.width * 0.22,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-        color: whiteColor,
-        border: Border.all(color: whiteColor, width: 1),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
-            spreadRadius: 1,
-            blurRadius: 7,
-            offset: Offset(0, 5), // changes position of shadow
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          IconButton(
-            icon: Image.asset(
-              'assets/meetings.png',
+              ],
             ),
-            iconSize: 34,
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => MeetingsPage(),
-                ),
-              );
-            },
-          ),
-          SizedBox(
-            height: 2,
-          ),
-          Text(
-            'Meetings',
-            style: trueBlackTextStyle.copyWith(fontSize: 8, fontWeight: light),
-          )
-        ],
-      ),
-    );
-  }
-}
-
-class PayRollCard extends StatelessWidget {
-  const PayRollCard({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(5),
-      height: MediaQuery.of(context).size.height * 0.10,
-      width: MediaQuery.of(context).size.width * 0.22,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-        color: whiteColor,
-        border: Border.all(color: whiteColor, width: 1),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
-            spreadRadius: 1,
-            blurRadius: 7,
-            offset: Offset(0, 5), // changes position of shadow
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          IconButton(
-            icon: Image.asset(
-              'assets/payroll.png',
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  IconButton(
+                    icon: Image.asset(
+                      'assets/map.png',
+                    ),
+                    iconSize: 66,
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => VisitingPage(),
+                        ),
+                      );
+                    },
+                  ),
+                  SizedBox(
+                    height: 2,
+                  ),
+                  Text(
+                    'Visitng',
+                    style: trueBlackTextStyle.copyWith(
+                        fontSize: 16, fontWeight: semiBold),
+                  )
+                ],
+              ),
             ),
-            iconSize: 34,
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => PayrollPages(),
-                ),
-              );
-            },
           ),
-          SizedBox(
-            height: 2,
-          ),
-          Text(
-            'Payroll',
-            style: trueBlackTextStyle.copyWith(fontSize: 8, fontWeight: light),
-          )
-        ],
-      ),
-    );
-  }
-}
-
-class MedicalCard extends StatelessWidget {
-  const MedicalCard({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(5),
-      height: MediaQuery.of(context).size.height * 0.10,
-      width: MediaQuery.of(context).size.width * 0.23,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-        color: whiteColor,
-        border: Border.all(color: whiteColor, width: 1),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
-            spreadRadius: 1,
-            blurRadius: 7,
-            offset: Offset(0, 5), // changes position of shadow
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          IconButton(
-            icon: Image.asset(
-              'assets/medical.png',
-            ),
-            iconSize: 34,
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ReimbursementPage(),
-                ),
-              );
-            },
-          ),
-          SizedBox(
-            height: 2,
-          ),
-          Text(
-            'Reimbursement',
-            style: trueBlackTextStyle.copyWith(fontSize: 8, fontWeight: light),
-          )
-        ],
-      ),
+        );
+      },
     );
   }
 }

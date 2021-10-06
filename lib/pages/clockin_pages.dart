@@ -1,84 +1,107 @@
+import 'package:absen_lite/widgets/loading_button.dart';
 import 'package:flutter/material.dart';
-import 'package:absensi_project/theme.dart';
-import 'package:absensi_project/widgets/hour_card.dart';
+import 'package:absen_lite/theme.dart';
+import 'package:absen_lite/widgets/hour_card.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:intl/intl.dart';
+import 'package:intl/date_symbol_data_local.dart';
+// import 'package:intl/intl_browser.dart';
+import 'package:relative_scale/relative_scale.dart';
+import 'package:geocoding/geocoding.dart';
 
-class ClockInPage extends StatelessWidget {
+class ClockInPage extends StatefulWidget {
   const ClockInPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    Widget header() {
-      return Container(
-        child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.only(left: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(top: 57),
-                    child: Row(
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                          child: Image.asset(
-                            'assets/back.png',
-                            width: 26,
-                            height: 26,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                      padding: EdgeInsets.only(top: 57),
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.20,
-                          ),
-                          Text(
-                            'Attendance',
-                            style: blackTextStyle.copyWith(
-                                fontSize: 20, fontWeight: semiBold),
-                          ),
-                        ],
-                      )),
-                  Container(
-                    child: Image.asset(
-                      'assets/rounded.png',
-                      width: 130,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      );
-    }
+  _ClockInPageState createState() => _ClockInPageState();
+}
 
+class _ClockInPageState extends State<ClockInPage> {
+  bool _isClockIn = false;
+  DateFormat? dateFormat;
+  DateFormat? timeFormat;
+
+  dynamic currentTime = DateFormat.Hm().format(DateTime.now());
+  // dynamic date = DateFormat.yMMMMEEEEd('id_ID').format(DateTime.now());
+
+  String currentAddress = 'My Address';
+  Position? currentposition;
+  bool isLoading = false;
+
+  void initState() {
+    super.initState();
+    _determinePosition();
+    initializeDateFormatting();
+    dateFormat = new DateFormat.yMMMMd('id_ID');
+    timeFormat = new DateFormat.Hms('id_ID');
+  }
+
+  Future<Position?> _determinePosition() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    setState(() {
+      isLoading = true;
+    });
+
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      Fluttertoast.showToast(msg: 'Please Keep your location on.');
+    }
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        Fluttertoast.showToast(msg: 'Location Permission is denied');
+      }
+    }
+    if (permission == LocationPermission.deniedForever) {
+      Fluttertoast.showToast(msg: 'Permission is denied Forever');
+    }
+    Position position = await Geolocator.getCurrentPosition(
+      desiredAccuracy: LocationAccuracy.high,
+    );
+
+    try {
+      List<Placemark> placemarks =
+          await placemarkFromCoordinates(position.latitude, position.longitude);
+      Placemark place = placemarks[0];
+      setState(() {
+        currentposition = position;
+        currentAddress =
+            " ${place.street}, ${place.subLocality}, ${place.locality}, ${place.subAdministrativeArea}, ${place.administrativeArea} ${place.postalCode}";
+        setState(() {
+          isLoading = false;
+        });
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     Widget day() {
       return Container(
-        margin: EdgeInsets.only(top: 117),
+        margin: EdgeInsets.only(top: 30),
         child: Center(
           child: Container(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  '07:30',
-                  style: blackTextStyle.copyWith(
+                  '${currentTime}',
+                  style: trueBlackTextStyle.copyWith(
                       fontSize: 28, fontWeight: semiBold),
                 ),
                 SizedBox(
                   height: 3,
                 ),
                 Text(
-                  'Senin, 12 Maret 2021',
+                  // 'Senin, 12 Maret 2021 ${}',
+                  '${DateFormat.yMMMMEEEEd('id_ID').format(DateTime.now())}',
+
                   style:
                       greyTextStyle.copyWith(fontSize: 18, fontWeight: reguler),
                 )
@@ -91,14 +114,19 @@ class ClockInPage extends StatelessWidget {
 
     Widget tap() {
       return Container(
-        margin: EdgeInsets.only(top: 220),
+        margin: EdgeInsets.only(top: 30),
         child: Column(
           children: [
             Center(
-              child: Image.asset(
-                'assets/clockIn.png',
-                width: 160,
-                height: 160,
+              child: IconButton(
+                icon: Image.asset(
+                    _isClockIn ? 'assets/clockOut.png' : 'assets/clockIn.png'),
+                iconSize: 160,
+                onPressed: () {
+                  setState(() {
+                    _isClockIn = !_isClockIn;
+                  });
+                },
               ),
             ),
           ],
@@ -111,14 +139,45 @@ class ClockInPage extends StatelessWidget {
         children: [
           Center(
             child: Container(
-              margin: EdgeInsets.only(top: 410),
-              width: MediaQuery.of(context).size.width * 0.6,
-              height: 30,
+              margin: EdgeInsets.only(top: 27),
+              width: MediaQuery.of(context).size.width * 0.75,
+              height: MediaQuery.of(context).size.width * 0.20,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
                   color: lightgreyColor),
               //isi dari kotak berupa location
-              child: Column(),
+              child: Container(
+                margin: EdgeInsets.all(5),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(Icons.location_on_outlined),
+                        Expanded(
+                          child: InkWell(
+                            child: Text(
+                              currentAddress,
+                              textAlign: TextAlign.center,
+                              style: trueBlackTextStyle.copyWith(
+                                  fontSize: 12, fontWeight: medium),
+                            ),
+                            // onTap: () {
+                            //   _determinePosition();
+                            // },
+                          ),
+                        ),
+                      ],
+                    ),
+                    // TextButton(
+                    //   onPressed: () {
+                    //     _determinePosition();
+                    //   },
+                    //   child: Text('locate me'),
+                    // )
+                  ],
+                ),
+              ),
             ),
           ),
         ],
@@ -130,12 +189,16 @@ class ClockInPage extends StatelessWidget {
         children: [
           Center(
             child: Container(
-              margin: EdgeInsets.only(top: 480),
+              margin: EdgeInsets.only(top: 40),
               width: MediaQuery.of(context).size.width * 0.8,
               height: 95,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [HourCard(), ClockOut(), FullHour()],
+                children: [
+                  HourCard(),
+                  ClockOut(),
+                  FullHour(),
+                ],
               ),
             ),
           ),
@@ -145,9 +208,45 @@ class ClockInPage extends StatelessWidget {
 
     return SafeArea(
       child: Scaffold(
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(80.0),
+          child: AppBar(
+            toolbarHeight: 120,
+            leading: IconButton(
+              icon: Icon(
+                Icons.arrow_back,
+                color: trueBlack,
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+            iconTheme: IconThemeData(color: Colors.black),
+            centerTitle: true,
+            backgroundColor: Colors.white,
+            bottomOpacity: 0.0,
+            elevation: 0.0,
+            title: Text(
+              'Attendance',
+              style: TextStyle(color: Colors.black),
+            ),
+            actions: <Widget>[
+              Container(
+                child: Image(image: AssetImage('assets/rounded.png')),
+              ),
+            ],
+          ),
+        ),
         backgroundColor: whiteColor,
-        body: Stack(
-          children: [header(), day(), tap(), location(), clock()],
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              day(),
+              tap(),
+              isLoading ? Loadinglocation() : location(),
+              clock(),
+            ],
+          ),
         ),
       ),
     );

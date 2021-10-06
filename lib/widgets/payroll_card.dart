@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:absensi_project/theme.dart';
+import 'package:absen_lite/theme.dart';
 
 class PayrollCard extends StatelessWidget {
   const PayrollCard({Key? key}) : super(key: key);

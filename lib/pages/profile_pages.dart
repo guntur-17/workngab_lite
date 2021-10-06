@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:absensi_project/theme.dart';
-import 'package:absensi_project/widgets/option_card.dart';
-import 'package:absensi_project/widgets/dialog_box.dart';
+import 'package:absen_lite/theme.dart';
+import 'package:absen_lite/widgets/option_card.dart';
+import 'package:absen_lite/widgets/dialog_box.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -78,10 +78,10 @@ class ProfilePage extends StatelessWidget {
             SizedBox(
               height: 22,
             ),
-            SettingCard(),
-            SizedBox(
-              height: 22,
-            ),
+            // SettingCard(),
+            // SizedBox(
+            //   height: 22,
+            // ),
             GuideCard(),
             SizedBox(
               height: 22,

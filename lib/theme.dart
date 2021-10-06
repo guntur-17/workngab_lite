@@ -10,6 +10,7 @@ Color darkBlueColor = Color(0xff577BA8);
 Color skyblueColor = Color(0xff79AAF3);
 Color guideBlueColor = Color(0xff567AA6);
 Color guideCardColor = Color(0xff7392BA);
+Color blueBlurColor = Color(0xffC3D5E4);
 
 Color blackColor = Color(0xff686868);
 Color greyColor = Color(0xff878787);
