@@ -1,4 +1,7 @@
+import 'package:absen_lite/models/user_model.dart';
+import 'package:absen_lite/providers/auth_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:relative_scale/relative_scale.dart';
 import '../theme.dart';
 
@@ -7,6 +10,9 @@ class DetailProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    UserModel data = authProvider.user;
+
     Widget photo() {
       return Container(
         margin: EdgeInsets.only(top: 15, bottom: 9),
@@ -15,15 +21,19 @@ class DetailProfile extends StatelessWidget {
             Container(
               width: MediaQuery.of(context).size.width * 0.3,
               height: MediaQuery.of(context).size.width * 0.3,
-              decoration: BoxDecoration(shape: BoxShape.circle),
-              child: Column(
-                children: [
-                  Image.asset(
-                    'assets/avatar.png',
-                    fit: BoxFit.fill,
-                  )
-                ],
-              ),
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  image: DecorationImage(
+                      image: new NetworkImage('${data.photo}'),
+                      fit: BoxFit.fill)),
+              // child: Column(
+              //   children: [
+              //     Image.asset(
+              //       '${data.photo}',
+              //       fit: BoxFit.fill,
+              //     )
+              //   ],
+              // ),
             )
           ],
         ),
@@ -53,7 +63,7 @@ class DetailProfile extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(right: 8, left: 8),
                       child: Text(
-                        'Farino Joshua',
+                        '${data.name}',
                         style: blackTextStyle.copyWith(
                             fontSize: 14, fontWeight: reguler),
                       ),
@@ -90,7 +100,7 @@ class DetailProfile extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(left: 8, right: 8),
                       child: Text(
-                        'Staff IT',
+                        'Sales',
                         style: blackTextStyle.copyWith(
                             fontSize: 14, fontWeight: reguler),
                       ),
@@ -127,7 +137,7 @@ class DetailProfile extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(left: 8, right: 8),
                       child: Text(
-                        '3212131707990001',
+                        '${data.nik}',
                         style: blackTextStyle.copyWith(
                             fontSize: 14, fontWeight: reguler),
                       ),
@@ -164,7 +174,7 @@ class DetailProfile extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(left: 8, right: 8),
                       child: Text(
-                        'Admoon',
+                        '${data.username}',
                         style: blackTextStyle.copyWith(
                             fontSize: 14, fontWeight: reguler),
                       ),
@@ -201,7 +211,7 @@ class DetailProfile extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(left: 8, right: 8),
                       child: Text(
-                        'farinojoshua@gmail.com',
+                        '${data.email}',
                         style: blackTextStyle.copyWith(
                             fontSize: 14, fontWeight: reguler),
                       ),
@@ -238,7 +248,7 @@ class DetailProfile extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(left: 8, right: 8),
                       child: Text(
-                        'Sigma Male',
+                        '${data.gender}',
                         style: blackTextStyle.copyWith(
                             fontSize: 14, fontWeight: reguler),
                       ),
