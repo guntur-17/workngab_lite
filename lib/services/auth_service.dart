@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:absen_lite/models/user_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService {
   String baseUrl = 'http://workab.sakataguna-dev.com/api';
@@ -21,7 +22,9 @@ class AuthService {
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body)['data'];
       UserModel user = UserModel.fromJson(data['user']);
-      user.token = 'Bearer ' + data['access_token'];
+      // SharedPreferences prefs = await SharedPreferences.getInstance();
+      // var token = prefs.setString('token', user.token as String);
+      user.access_token = 'Bearer ' + data['access_token'];
 
       return user;
     } else {
@@ -59,12 +62,14 @@ class AuthService {
 
     var response = await http.get(url, headers: headers);
 
-    print(response.body);
     print(response.statusCode);
+    print(response.body);
 
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body)['data'];
       UserModel user = UserModel.fromJson(data['user']);
+      user.access_token = 'Bearer ' + token;
+      // print(user.access_token);
 
       return user;
     } else {

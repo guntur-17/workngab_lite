@@ -1,5 +1,6 @@
 import 'package:absen_lite/pages/dashboard_pages.dart';
 import 'package:absen_lite/pages/home.dart';
+import 'package:absen_lite/providers/attendance_provider.dart';
 import 'package:absen_lite/providers/auth_provider.dart';
 import 'package:absen_lite/widgets/loading_button.dart';
 import 'package:flutter/material.dart';
@@ -38,7 +39,7 @@ class _LoginPageState extends State<LoginPage> {
         final SharedPreferences prefs = await SharedPreferences.getInstance();
         // prefs.setString('username', authProvider.user.username as String);
         // prefs.setString('password', passwordController.text);
-        prefs.setString('token', authProvider.user.token as String);
+        prefs.setString('token', authProvider.user.access_token as String);
         Navigator.pushReplacement(context, route);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(

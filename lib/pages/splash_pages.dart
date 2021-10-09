@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:absen_lite/pages/home.dart';
 import 'package:absen_lite/pages/login_pages.dart';
+import 'package:absen_lite/providers/attendance_provider.dart';
 import 'package:absen_lite/providers/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -29,6 +30,7 @@ class _SplashPageState extends State<SplashPage> {
     // );
     // clear();
     validator();
+    getattendance();
     //perubahan
     // getValidationData().whenComplete(() async {
     // Timer(
@@ -79,6 +81,15 @@ class _SplashPageState extends State<SplashPage> {
         ),
       );
     }
+  }
+
+  getattendance() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = prefs.getString('token');
+    await Provider.of<AttedanceProvider>(context, listen: false)
+        .getAttendances(token);
+    // await AttedanceProvider().getAttendances(token);
+    // Navigator.pushReplacement(context, route);
   }
 
   //perubahan

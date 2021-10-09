@@ -1,7 +1,12 @@
+import 'dart:async';
+
+import 'package:absen_lite/models/attendance_model.dart';
 import 'package:absen_lite/pages/attendance_history_pages.dart';
 import 'package:absen_lite/pages/visiting_list_pages.dart';
+import 'package:absen_lite/providers/attendance_provider.dart';
 import 'package:absen_lite/theme.dart';
 import 'package:absen_lite/widgets/clock_card.dart';
+import 'package:absen_lite/widgets/loading_button.dart';
 import 'package:absen_lite/widgets/menu_card.dart';
 import 'package:absen_lite/widgets/shop_card.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +14,7 @@ import 'package:provider/provider.dart';
 import 'package:relative_scale/relative_scale.dart';
 import 'package:absen_lite/providers/auth_provider.dart';
 import 'package:absen_lite/models/user_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({Key? key}) : super(key: key);
@@ -18,9 +24,68 @@ class DashboardPage extends StatefulWidget {
 }
 
 class _DashboardPageState extends State<DashboardPage> {
+  // Timer? timer;
+  // int counter = 0;
+  bool isLoading = false;
+
+  // void initState() {
+  //   // attedanceProvider.getAttendances(authProvider.user.access_token);
+  //   attendanceHandler();
+  //   // timer =
+  //   //     Timer.periodic(Duration(seconds: 1), (Timer t) => attendanceHandler());
+  //   super.initState();
+  // }
+
+  // initState() {
+  //   // attedanceProvider.getAttendances(authProvider.user.access_token);
+  //   isLoading = true;
+  //   attendanceHandler();
+  //   super.initState();
+  // }
+
+  // attendanceHandler() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   var token = prefs.getString('token');
+  //   await AttedanceProvider().getAttendances(token);
+  //   // Navigator.push(
+  //   //   context,
+  //   //   MaterialPageRoute(builder: (context) => AttendanceHistoryPage()),
+  //   // );
+  //   // setState(() {
+  //   //   isLoading = false;
+  //   // });
+  // }
+
   @override
   Widget build(BuildContext context) {
     AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    AttedanceProvider attedanceProvider =
+        Provider.of<AttedanceProvider>(context, listen: false);
+
+    // bool isLoading = false;
+    attendanceHandler() async {
+      // setState(() {
+      //   isLoading = true;
+      // });
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      var token = prefs.getString('token');
+      await Provider.of<AttedanceProvider>(context, listen: false)
+          .getAttendances(token);
+    }
+
+    // void initState() {
+    //   super.initState();
+    //   attendanceHandler();
+    // }
+
+    setState(() {
+      attendanceHandler();
+
+      setState(() {
+        isLoading = false;
+      });
+    });
+
     UserModel nick = authProvider.user;
 
     String? gambar = nick.photo;
@@ -158,27 +223,36 @@ class _DashboardPageState extends State<DashboardPage> {
                 ),
                 InkWell(
                   child: Text(
-                    'See All',
+                    // '${authProvider.user.access_token}',
+                    'See all',
                     style: trueBlackTextStyle.copyWith(
                         fontSize: 14, fontWeight: light),
                   ),
                   onTap: () {
+                    attedanceProvider
+                        .getAttendances(authProvider.user.access_token);
                     Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => AttendanceHistoryPage()));
+                    // attendanceHandler();
                   },
                 )
               ],
             ),
-            SizedBox(
-              height: 6,
+            Column(
+              children: attedanceProvider.attendances
+                  .map((attendance) => ClockOutCard(attendance))
+                  .toList(),
             ),
-            ClockOutCard(),
             // SizedBox(
             //   height: 6,
             // ),
-            ClockInCard(),
+            // ClockOutCard(),
+            // // SizedBox(
+            // //   height: 6,
+            // // ),
+            // ClockInCard(),
           ],
         ),
       );
@@ -232,8 +306,8 @@ class _DashboardPageState extends State<DashboardPage> {
         // transform: Matrix4.translationValues(0.0, -115.0, 0.0),
         child: Column(
           children: [
-            attencance_history(),
-            visiting_list(),
+            isLoading ? LoadingButton() : attencance_history(),
+            // visiting_list(),
           ],
         ),
       );
