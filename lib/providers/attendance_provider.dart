@@ -15,13 +15,15 @@ class AttedanceProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> getAttendances(String? token) async {
+  Future<bool> getAttendances(String? token) async {
     try {
       List<AttendanceModel> attendances =
           await AttendanceService().getAttendances(token);
       _attendances = attendances;
+      return true;
     } catch (e) {
       print(e);
+      return false;
     }
   }
 

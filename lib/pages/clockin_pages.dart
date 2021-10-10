@@ -135,53 +135,57 @@ class _ClockInPageState extends State<ClockInPage> {
     }
 
     Widget location() {
-      return Column(
-        children: [
-          Center(
-            child: Container(
-              margin: EdgeInsets.only(top: 27),
-              width: MediaQuery.of(context).size.width * 0.75,
-              height: MediaQuery.of(context).size.width * 0.20,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: lightgreyColor),
-              //isi dari kotak berupa location
+      return RelativeBuilder(builder: (context, height, width, sy, sx) {
+        return Column(
+          children: [
+            Center(
               child: Container(
-                margin: EdgeInsets.all(5),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Row(
-                      children: [
-                        Icon(Icons.location_on_outlined),
-                        Expanded(
-                          child: InkWell(
-                            child: Text(
-                              currentAddress,
-                              textAlign: TextAlign.center,
-                              style: trueBlackTextStyle.copyWith(
-                                  fontSize: 12, fontWeight: medium),
+                margin: EdgeInsets.only(top: 27),
+                width: MediaQuery.of(context).size.width * 0.75,
+                height: MediaQuery.of(context).size.width * 0.20,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    color: lightgreyColor),
+                //isi dari kotak berupa location
+                child: Container(
+                  margin: EdgeInsets.all(5),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Row(
+                        children: [
+                          Icon(Icons.location_on_outlined),
+                          Expanded(
+                            child: InkWell(
+                              child: Text(
+                                currentAddress,
+                                overflow: TextOverflow.ellipsis,
+                                textAlign: TextAlign.center,
+                                style: trueBlackTextStyle.copyWith(
+                                    fontSize: 12, fontWeight: medium),
+                              ),
+
+                              // onTap: () {
+                              //   _determinePosition();
+                              // },
                             ),
-                            // onTap: () {
-                            //   _determinePosition();
-                            // },
                           ),
-                        ),
-                      ],
-                    ),
-                    // TextButton(
-                    //   onPressed: () {
-                    //     _determinePosition();
-                    //   },
-                    //   child: Text('locate me'),
-                    // )
-                  ],
+                        ],
+                      ),
+                      // TextButton(
+                      //   onPressed: () {
+                      //     _determinePosition();
+                      //   },
+                      //   child: Text('locate me'),
+                      // )
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
-      );
+          ],
+        );
+      });
     }
 
     Widget clock() {

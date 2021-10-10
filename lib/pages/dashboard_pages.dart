@@ -57,34 +57,41 @@ class _DashboardPageState extends State<DashboardPage> {
   // }
 
   @override
+  void initState() {
+    attendanceHandler();
+    // TODO: implement initState
+    super.initState();
+  }
+
+  attendanceHandler() async {
+    // setState(() {
+    //   isLoading = true;
+    // });
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = prefs.getString('token');
+    if (await Provider.of<AttedanceProvider>(context, listen: false)
+        .getAttendances(token)) setState(() {});
+  }
+
   Widget build(BuildContext context) {
     AuthProvider authProvider = Provider.of<AuthProvider>(context);
     AttedanceProvider attedanceProvider =
         Provider.of<AttedanceProvider>(context, listen: false);
 
     // bool isLoading = false;
-    attendanceHandler() async {
-      // setState(() {
-      //   isLoading = true;
-      // });
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      var token = prefs.getString('token');
-      await Provider.of<AttedanceProvider>(context, listen: false)
-          .getAttendances(token);
-    }
 
     // void initState() {
     //   super.initState();
     //   attendanceHandler();
     // }
 
-    setState(() {
-      attendanceHandler();
+    // setState(() {
+    //   attendanceHandler();
 
-      setState(() {
-        isLoading = false;
-      });
-    });
+    //   setState(() {
+    //     isLoading = false;
+    //   });
+    // });
 
     UserModel nick = authProvider.user;
 
