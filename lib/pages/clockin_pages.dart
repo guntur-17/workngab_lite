@@ -1,3 +1,6 @@
+import 'package:absen_lite/pages/home.dart';
+import 'package:absen_lite/providers/attendance_provider.dart';
+import 'package:absen_lite/providers/auth_provider.dart';
 import 'package:absen_lite/widgets/loading_button.dart';
 import 'package:flutter/material.dart';
 import 'package:absen_lite/theme.dart';
@@ -6,9 +9,11 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:provider/provider.dart';
 // import 'package:intl/intl_browser.dart';
 import 'package:relative_scale/relative_scale.dart';
 import 'package:geocoding/geocoding.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ClockInPage extends StatefulWidget {
   const ClockInPage({Key? key}) : super(key: key);
@@ -82,6 +87,30 @@ class _ClockInPageState extends State<ClockInPage> {
 
   @override
   Widget build(BuildContext context) {
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    AttedanceProvider attedanceProvider =
+        Provider.of<AttedanceProvider>(context);
+
+    handleCheckin() async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      var token = prefs.getString('token');
+      if (await attedanceProvider.attendanceIn(
+        token,
+        currentTime,
+        currentposition!.latitude.toString(),
+        currentposition!.longitude.toString(),
+      )) {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => HomePage()));
+      }
+      // if (await attedanceProvider.attendanceIn(
+      //   authProvider.user.access_token,
+      //   currentTime,
+      //   currentposition!.latitude.toString(),
+      //   currentposition!.longitude.toString(),
+      // )) {}
+    }
+
     Widget day() {
       return Container(
         margin: EdgeInsets.only(top: 30),
@@ -123,9 +152,10 @@ class _ClockInPageState extends State<ClockInPage> {
                     _isClockIn ? 'assets/clockOut.png' : 'assets/clockIn.png'),
                 iconSize: 160,
                 onPressed: () {
-                  setState(() {
-                    _isClockIn = !_isClockIn;
-                  });
+                  _isClockIn == false ? handleCheckin() : handleCheckin();
+                  // setState(() {
+                  //   _isClockIn = !_isClockIn;
+                  // });
                 },
               ),
             ),

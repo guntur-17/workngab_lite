@@ -26,34 +26,26 @@ class _ProfilePageState extends State<ProfilePage> {
           width: MediaQuery.of(context).size.width - 40,
           child: Row(
             children: [
-              Container(
-                padding: EdgeInsets.only(top: 5, bottom: 5),
-                width: 70,
-                height: 83,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                child: Column(
-                  children: [
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.3,
-                      height: MediaQuery.of(context).size.width * 0.2,
-                      decoration: BoxDecoration(
-                          shape: BoxShape.rectangle,
-                          image: DecorationImage(
-                              image: new NetworkImage('${data.photo}'),
-                              fit: BoxFit.fill)),
-                      // child: Column(
-                      //   children: [
-                      //     Image.asset(
-                      //       '${data.photo}',
-                      //       fit: BoxFit.fill,
-                      //     )
-                      //   ],
-                      // ),
-                    )
-                  ],
-                ),
+              Column(
+                children: [
+                  Container(
+                    width: 75,
+                    height: 75,
+                    decoration: BoxDecoration(
+                        shape: BoxShape.rectangle,
+                        image: DecorationImage(
+                            image: new NetworkImage('${data.photo}'),
+                            fit: BoxFit.fill)),
+                    // child: Column(
+                    //   children: [
+                    //     Image.asset(
+                    //       '${data.photo}',
+                    //       fit: BoxFit.fill,
+                    //     )
+                    //   ],
+                    // ),
+                  )
+                ],
               ),
               SizedBox(
                 width: 10,
