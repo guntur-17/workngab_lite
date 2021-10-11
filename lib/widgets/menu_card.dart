@@ -129,7 +129,7 @@ class VisitCard extends StatelessWidget {
                     height: 2,
                   ),
                   Text(
-                    'Visitng',
+                    'Visiting',
                     style: trueBlackTextStyle.copyWith(
                         fontSize: 16, fontWeight: semiBold),
                   )
