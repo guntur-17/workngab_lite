@@ -2,12 +2,14 @@ import 'dart:io';
 
 import 'package:absen_lite/pages/dashboard_pages.dart';
 import 'package:absen_lite/pages/home.dart';
+import 'package:absen_lite/pages/stock_list_pages.dart';
 import 'package:absen_lite/providers/auth_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 import 'package:absen_lite/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Scanner extends StatefulWidget {
   const Scanner({Key? key}) : super(key: key);
@@ -43,10 +45,17 @@ class _ScannerState extends State<Scanner> {
                       print(val);
                       print(result!.code);
                     });
-                    await authProvider.login(
-                        username: 'nadine10', password: '12345678');
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => HomePage()));
+                    // await authProvider.login(
+                    //     username: 'nadine10', password: '12345678');
+                    SharedPreferences prefs =
+                        await SharedPreferences.getInstance();
+                    var token = prefs.getString('token');
+                    if (await authProvider.getUser(token: token)) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => StockListPage()));
+                    }
                   }
                 });
               }),

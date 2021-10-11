@@ -1,13 +1,24 @@
+import 'package:absen_lite/models/user_model.dart';
+import 'package:absen_lite/providers/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:absen_lite/theme.dart';
 import 'package:absen_lite/widgets/option_card.dart';
 import 'package:absen_lite/widgets/dialog_box.dart';
+import 'package:provider/provider.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
 
   @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  @override
   Widget build(BuildContext context) {
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    UserModel data = authProvider.user;
+
     Widget head() {
       return Center(
         child: Container(
@@ -24,11 +35,23 @@ class ProfilePage extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-                    Image.asset(
-                      'assets/ava.png',
-                      fit: BoxFit.fill,
-                      alignment: Alignment.center,
-                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.3,
+                      height: MediaQuery.of(context).size.width * 0.2,
+                      decoration: BoxDecoration(
+                          shape: BoxShape.rectangle,
+                          image: DecorationImage(
+                              image: new NetworkImage('${data.photo}'),
+                              fit: BoxFit.fill)),
+                      // child: Column(
+                      //   children: [
+                      //     Image.asset(
+                      //       '${data.photo}',
+                      //       fit: BoxFit.fill,
+                      //     )
+                      //   ],
+                      // ),
+                    )
                   ],
                 ),
               ),
@@ -39,7 +62,7 @@ class ProfilePage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Farino Joshua',
+                    '${data.name}',
                     style:
                         blackTextStyle.copyWith(fontSize: 18, fontWeight: bold),
                   ),
@@ -47,7 +70,7 @@ class ProfilePage extends StatelessWidget {
                     height: 4,
                   ),
                   Text(
-                    'CEO',
+                    'Sales',
                     style: blackTextStyle.copyWith(
                         fontSize: 14, fontWeight: reguler),
                   )
