@@ -6,7 +6,8 @@ import 'package:absen_lite/pages/stock_list_pages.dart';
 import 'package:absen_lite/providers/auth_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
-
+import 'package:absen_lite/geolocation_class/geolocation_class.dart';
+import 'package:absen_lite/geolocation_class/geolocation_pos.dart';
 import 'package:absen_lite/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -28,6 +29,9 @@ class _ScannerState extends State<Scanner> {
   @override
   Widget build(BuildContext context) {
     AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    var userLocation = Provider.of<GeoLocation>(context);
+    userLocation.radiuscentermeters = 1000; //1000 = 100 meters
+    userLocation.setPointCenter(dummyCenterLatitude, dummyCenterLongitude);
     return Scaffold(
       body: Stack(
         children: [
@@ -50,11 +54,14 @@ class _ScannerState extends State<Scanner> {
                     SharedPreferences prefs =
                         await SharedPreferences.getInstance();
                     var token = prefs.getString('token');
-                    if (await authProvider.getUser(token: token)) {
+                    if (await authProvider.getUser(token: token) &&
+                        userLocation.isInRange == true) {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => StockListPage()));
+                    } else {
+                      print('not in range');
                     }
                   }
                 });
