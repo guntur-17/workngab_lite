@@ -2,9 +2,12 @@ import 'dart:io';
 
 import 'package:absen_lite/pages/dashboard_pages.dart';
 import 'package:absen_lite/pages/home.dart';
+import 'package:absen_lite/providers/scanner_provider.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
+import 'package:absen_lite/services/scanner_service.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:absen_lite/models/scanner_model.dart';
 import 'package:absen_lite/pages/stock_list_pages.dart';
 import 'package:absen_lite/providers/auth_provider.dart';
 import 'package:provider/provider.dart';
@@ -37,7 +40,7 @@ class _ScannerState extends State<Scanner> {
     double? longUser = widget.long;
     // double latUser = currentposition!.latitude;
     // double longUser = currentposition!.longitude;
-    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    ScannerProvider scannerProvider = Provider.of<ScannerProvider>(context);
     double radius = Geolocator.distanceBetween(
         latUser!, longUser!, -6.345467377355538, 106.82834248759139);
     // var userLocation = Provider.of<GeoLocation>(context);
@@ -65,19 +68,29 @@ class _ScannerState extends State<Scanner> {
                     SharedPreferences prefs =
                         await SharedPreferences.getInstance();
                     var token = prefs.getString('token');
-                    if (await authProvider.getUser(token: token) &&
+                    var barcode =
+                        '3l8k33LxWaINdqxjwv5eElWNm58ydOE8mzEIRey1kmR7s2W8Sa8thxR5a3B8';
+                    var latTest = '-6.3454';
+                    var longTest = '106.8283';
+                    if (await scannerProvider.scanQR(
+                                token: token,
+                                barcode: barcode,
+                                lat: latTest,
+                                long: longTest) &&
                             radius <= 300
                         // userLocation.isInRange == true,
                         ) {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => StockListPage()));
-                      print(radius);
-                      print(latUser);
-                      print(longUser);
-                    } else {
-                      print('not in range');
+                      if (result!.code == barcode) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => StockListPage()));
+                        print(radius);
+                        print(latUser);
+                        print(longUser);
+                      } else {
+                        print('not in range');
+                      }
                     }
                   }
                 });
