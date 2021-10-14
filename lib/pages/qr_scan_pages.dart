@@ -70,8 +70,8 @@ class _ScannerState extends State<Scanner> {
                     var token = prefs.getString('token');
                     var barcode =
                         '3l8k33LxWaINdqxjwv5eElWNm58ydOE8mzEIRey1kmR7s2W8Sa8thxR5a3B8';
-                    var latTest = '-6.3454';
-                    var longTest = '106.8283';
+                    double latTest = -6.3454;
+                    double longTest = 106.8283;
                     if (await scannerProvider.scanQR(
                                 token: token,
                                 barcode: barcode,

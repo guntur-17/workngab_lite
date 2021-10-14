@@ -30,8 +30,8 @@ class AttedanceProvider with ChangeNotifier {
   Future<bool> attendanceIn(
     String? token,
     String? time,
-    String? lat,
-    String? long,
+    double? lat,
+    double? long,
   ) async {
     try {
       if (await AttendanceService().attendanceIn(token, time, lat, long)) {

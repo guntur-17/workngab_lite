@@ -97,8 +97,8 @@ class _ClockInPageState extends State<ClockInPage> {
       if (await attedanceProvider.attendanceIn(
         token,
         currentTime,
-        currentposition!.latitude.toString(),
-        currentposition!.longitude.toString(),
+        currentposition!.latitude,
+        currentposition!.longitude,
       )) {
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => HomePage()));

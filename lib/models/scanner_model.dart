@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class ScannerModel {
   int? id;
-  String? lat;
-  String? long;
+  double? lat;
+  double? long;
   String? name;
   String? address;
   String? barcode;

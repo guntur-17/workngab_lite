@@ -5,8 +5,8 @@ class AttendanceModel {
   int? user_id;
   String? type;
   String? time;
-  String? lat;
-  String? long;
+  double? lat;
+  double? long;
   DateTime? createdAt;
 
   AttendanceModel({

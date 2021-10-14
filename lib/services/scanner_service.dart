@@ -15,8 +15,8 @@ class ScannerService {
     String? barcode,
     // String? address,
 
-    String? lat,
-    String? long,
+    double? lat,
+    double? long,
   }) async {
     var url = Uri.parse('$baseUrl/user/visiting/shop/$barcode');
     var headers = {

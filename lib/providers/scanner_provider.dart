@@ -14,8 +14,8 @@ class ScannerProvider with ChangeNotifier {
   Future<bool> scanQR({
     String? token,
     String? barcode,
-    String? lat,
-    String? long,
+    double? lat,
+    double? long,
   }) async {
     try {
       if (await ScannerService()

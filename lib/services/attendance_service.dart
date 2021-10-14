@@ -47,8 +47,8 @@ class AttendanceService {
   Future<bool> attendanceIn(
     String? token,
     String? time,
-    String? lat,
-    String? long,
+    double? lat,
+    double? long,
   ) async {
     var url = Uri.parse('$baseUrl/user/attendance-in');
     var headers = {
