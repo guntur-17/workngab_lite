@@ -1,4 +1,5 @@
 import 'package:absen_lite/models/scanner_model.dart';
+import 'package:absen_lite/providers/product_provider.dart';
 import 'package:absen_lite/providers/scanner_provider.dart';
 import 'package:absen_lite/widgets/item_card.dart';
 import 'package:flutter/material.dart';
@@ -6,21 +7,41 @@ import 'package:absen_lite/theme.dart';
 import 'package:absen_lite/widgets/shop_card.dart';
 import 'package:provider/provider.dart';
 import 'package:relative_scale/relative_scale.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class StockListPage extends StatefulWidget {
   double? lat;
   double? long;
+  int? id;
 
-  StockListPage(this.lat, this.long);
+  StockListPage(this.lat, this.long, this.id);
 
   @override
   State<StockListPage> createState() => _StockListPageState();
 }
 
 class _StockListPageState extends State<StockListPage> {
+  void initState() {
+    ProductHandler();
+    super.initState();
+  }
+
+  ProductHandler() async {
+    print(widget.id);
+    // setState(() {
+    //   isLoading = true;
+    // });
+    // print(ScannerProvider().data.id);
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = prefs.getString('token');
+    if (await Provider.of<ProductProvider>(context, listen: false)
+        .getProduct(widget.id, token)) setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     ScannerProvider scannerProvider = Provider.of<ScannerProvider>(context);
+    ProductProvider productProvider = Provider.of<ProductProvider>(context);
     double? latShop = widget.lat;
     double? longShop = widget.long;
     ScannerModel shop = scannerProvider.data;
@@ -98,6 +119,11 @@ class _StockListPageState extends State<StockListPage> {
               ),
               textAlign: TextAlign.start,
             ),
+            Column(
+              children: productProvider.showProduct
+                  .map((products) => ItemCard(products))
+                  .toList(),
+            )
           ],
         ),
       );
@@ -120,6 +146,13 @@ class _StockListPageState extends State<StockListPage> {
               detail_shop(),
               line(),
               stock_list(),
+              // SingleChildScrollView(
+              //   child: Column(
+              //     children: [
+
+              //     ],
+              //   ),
+              // ),
             ],
           ),
         ),
@@ -127,37 +160,39 @@ class _StockListPageState extends State<StockListPage> {
     }
 
     return SafeArea(
-      child: Scaffold(
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(80.0),
-          child: AppBar(
-            toolbarHeight: 120,
-            leading: IconButton(
-              icon: Icon(
-                Icons.arrow_back,
-                color: trueBlack,
+      child: SafeArea(
+        child: Scaffold(
+          appBar: PreferredSize(
+            preferredSize: Size.fromHeight(80.0),
+            child: AppBar(
+              toolbarHeight: 120,
+              leading: IconButton(
+                icon: Icon(
+                  Icons.arrow_back,
+                  color: trueBlack,
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
               ),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-            iconTheme: IconThemeData(color: Colors.black),
-            centerTitle: true,
-            backgroundColor: blueBlurColor,
-            bottomOpacity: 0.0,
-            elevation: 0.0,
-            title: new Text(
-              'Stock List',
-              style: trueBlackTextStyle.copyWith(fontWeight: FontWeight.w600),
+              iconTheme: IconThemeData(color: Colors.black),
+              centerTitle: true,
+              backgroundColor: blueBlurColor,
+              bottomOpacity: 0.0,
+              elevation: 0.0,
+              title: new Text(
+                'Stock List',
+                style: trueBlackTextStyle.copyWith(fontWeight: FontWeight.w600),
+              ),
             ),
           ),
-        ),
-        backgroundColor: blueBlurColor,
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            body(),
-          ],
+          backgroundColor: blueBlurColor,
+          body: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              body(),
+            ],
+          ),
         ),
       ),
     );

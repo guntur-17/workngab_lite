@@ -85,12 +85,13 @@ class _ScannerState extends State<Scanner> {
                       ScannerModel shop = scannerProvider.data;
                       double radius = Geolocator.distanceBetween(
                           latUser!, longUser!, shop.lat!, shop.long!);
-                      if (radius <= 300) {
+                      int? id = shop.id;
+                      if (radius >= 300) {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
-                                    StockListPage(latUser, longUser)));
+                                    StockListPage(latUser, longUser, id)));
                       } else {
                         print('not in range');
                       }
