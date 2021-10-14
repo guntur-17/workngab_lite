@@ -6,7 +6,7 @@ import 'package:absen_lite/providers/auth_provider.dart';
 import 'package:http/http.dart' as http;
 
 class AttendanceService {
-  String baseUrl = 'http://workab.sakataguna-dev.com/api';
+  String baseUrl = 'http://decoy.sakataguna-dev.com/api';
   // String token = AuthProvider.user.token;
 
   Future<List<AttendanceModel>> getAttendances(String? token) async {

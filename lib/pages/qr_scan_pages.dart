@@ -41,8 +41,7 @@ class _ScannerState extends State<Scanner> {
     // double latUser = currentposition!.latitude;
     // double longUser = currentposition!.longitude;
     ScannerProvider scannerProvider = Provider.of<ScannerProvider>(context);
-    double radius = Geolocator.distanceBetween(
-        latUser!, longUser!, -6.345467377355538, 106.82834248759139);
+
     // var userLocation = Provider.of<GeoLocation>(context);
     // userLocation.radiuscentermeters = 1000; //1000 = 100 meters
     // userLocation.setPointCenter(dummyCenterLatitude, dummyCenterLongitude);
@@ -65,34 +64,43 @@ class _ScannerState extends State<Scanner> {
                     });
                     // await authProvider.login(
                     //     username: 'nadine10', password: '12345678');
+
                     SharedPreferences prefs =
                         await SharedPreferences.getInstance();
                     var token = prefs.getString('token');
-                    var barcode =
-                        '3l8k33LxWaINdqxjwv5eElWNm58ydOE8mzEIRey1kmR7s2W8Sa8thxR5a3B8';
-                    double latTest = -6.3454;
-                    double longTest = 106.8283;
+                    // var barcode =
+                    //     '3l8k33LxWaINdqxjwv5eElWNm58ydOE8mzEIRey1kmR7s2W8Sa8thxR5a3B8';
+                    // double latTest = -6.3454;
+                    // double longTest = 106.8283;
                     if (await scannerProvider.scanQR(
-                                token: token,
-                                barcode: barcode,
-                                lat: latTest,
-                                long: longTest) &&
-                            radius <= 300
+                            token: token,
+                            barcode: result!.code,
+                            lat: latUser,
+                            long: longUser)
                         // userLocation.isInRange == true,
-                        ) {
-                      if (result!.code == barcode) {
+                        )
+                    //   {
+                    // if (result!.code == barcode)
+                    {
+                      ScannerModel shop = scannerProvider.data;
+                      double radius = Geolocator.distanceBetween(
+                          latUser!, longUser!, shop.lat!, shop.long!);
+                      if (radius <= 300) {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => StockListPage()));
-                        print(radius);
-                        print(latUser);
-                        print(longUser);
+                                builder: (context) =>
+                                    StockListPage(latUser, longUser)));
                       } else {
                         print('not in range');
                       }
+                      print(latUser);
+                      print(longUser);
+                    } else {
+                      print('wrong barcode');
                     }
                   }
+                  // }
                 });
               }),
           Align(

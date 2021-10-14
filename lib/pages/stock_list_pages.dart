@@ -1,14 +1,31 @@
+import 'package:absen_lite/models/scanner_model.dart';
+import 'package:absen_lite/providers/scanner_provider.dart';
 import 'package:absen_lite/widgets/item_card.dart';
 import 'package:flutter/material.dart';
 import 'package:absen_lite/theme.dart';
 import 'package:absen_lite/widgets/shop_card.dart';
+import 'package:provider/provider.dart';
 import 'package:relative_scale/relative_scale.dart';
 
-class StockListPage extends StatelessWidget {
-  const StockListPage({Key? key}) : super(key: key);
+class StockListPage extends StatefulWidget {
+  double? lat;
+  double? long;
+
+  StockListPage(this.lat, this.long);
 
   @override
+  State<StockListPage> createState() => _StockListPageState();
+}
+
+class _StockListPageState extends State<StockListPage> {
+  @override
   Widget build(BuildContext context) {
+    ScannerProvider scannerProvider = Provider.of<ScannerProvider>(context);
+    double? latShop = widget.lat;
+    double? longShop = widget.long;
+    ScannerModel shop = scannerProvider.data;
+    String? nama = shop.name;
+    String? alamat = shop.address;
     Widget detail_shop() {
       return Container(
         margin: EdgeInsets.only(left: 4, top: 29),
@@ -24,7 +41,7 @@ class StockListPage extends StatelessWidget {
                   width: 17,
                 ),
                 Text(
-                  'Toko Super Murah',
+                  '$nama',
                   style: trueBlackTextStyle.copyWith(
                     fontSize: 18,
                     fontWeight: medium,
@@ -36,7 +53,7 @@ class StockListPage extends StatelessWidget {
               height: 20,
             ),
             Text(
-              'Jl. Dr. Setiabudi No.42 - 46, Hegarmanah, Kec. Cidadap, Kota Bandung, Jawa Barat 401412',
+              '$alamat',
               style: trueBlackTextStyle.copyWith(
                 fontSize: 14,
                 fontWeight: medium,

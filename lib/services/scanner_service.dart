@@ -6,10 +6,10 @@ import 'package:absen_lite/providers/scanner_provider.dart';
 import 'package:http/http.dart' as http;
 
 class ScannerService {
-  String baseUrl = 'http://workab.sakataguna-dev.com/api';
+  String baseUrl = 'http://decoy.sakataguna-dev.com/api';
   // String barcode = ScannerProvider.scanner.barcode;
 
-  Future<bool> scanQR({
+  Future<ScannerModel> scanQR({
     // String? name,
     String? token,
     String? barcode,
@@ -29,10 +29,10 @@ class ScannerService {
     print(response.statusCode);
 
     if (response.statusCode == 200) {
-      // var data = jsonDecode(response.body)['data'];
-      // ScannerModel scanQR = ScannerModel.fromJson(data['visiting']);
+      var dataa = jsonDecode(response.body)['data'];
+      ScannerModel data = ScannerModel.fromJson(dataa['visiting']);
 
-      return true;
+      return data;
     } else {
       throw Exception('Gagal Scan');
     }

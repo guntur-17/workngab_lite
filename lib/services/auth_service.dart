@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService {
-  String baseUrl = 'http://workab.sakataguna-dev.com/api';
+  String baseUrl = 'http://decoy.sakataguna-dev.com/api';
 
   Future<UserModel> login({
     String? username,
