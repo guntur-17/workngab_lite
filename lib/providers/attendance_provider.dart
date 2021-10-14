@@ -9,6 +9,14 @@ class AttedanceProvider with ChangeNotifier {
   List<AttendanceModel> _attendances = [];
 
   List<AttendanceModel> get attendances => _attendances;
+  bool _checkConditionClock = true;
+
+  bool get checkConditionClock => _checkConditionClock;
+
+  set checkConditionClock(bool checkConditionClock) {
+    _checkConditionClock = checkConditionClock;
+    notifyListeners();
+  }
 
   set attendances(List<AttendanceModel> attendances) {
     _attendances = attendances;
@@ -44,6 +52,7 @@ class AttedanceProvider with ChangeNotifier {
       return false;
     }
   }
+
   // Future<bool> login({String? username, String? password}) async {
   //   try {
   //     UserModel user =

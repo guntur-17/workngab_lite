@@ -1,3 +1,4 @@
+import 'package:absen_lite/pages/attendance_history_pages.dart';
 import 'package:absen_lite/pages/home.dart';
 import 'package:absen_lite/providers/attendance_provider.dart';
 import 'package:absen_lite/providers/auth_provider.dart';
@@ -23,7 +24,11 @@ class ClockInPage extends StatefulWidget {
 }
 
 class _ClockInPageState extends State<ClockInPage> {
-  bool _isClockIn = false;
+  late Image img;
+  Image imgIn = Image.asset('assets/clockIn.png', width: 160, height: 160);
+  Image imgOut = Image.asset('assets/clockOut.png', width: 160, height: 160);
+
+  bool _isClockIn = true;
   DateFormat? dateFormat;
   DateFormat? timeFormat;
 
@@ -36,10 +41,29 @@ class _ClockInPageState extends State<ClockInPage> {
 
   void initState() {
     super.initState();
+    img = imgIn;
     _determinePosition();
     initializeDateFormatting();
+    checkhasil();
     dateFormat = new DateFormat.yMMMMd('id_ID');
     timeFormat = new DateFormat.Hms('id_ID');
+  }
+
+  Future checkhasil() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool? clockIn = prefs.getBool('checkClock');
+    // AttedanceProvider().checkConditionClock = clockIn as bool;
+    if (clockIn == null) {
+      clockIn = true;
+    }
+    // print(AttedanceProvider().checkConditionClock);
+    print('ini clockin hasil ' + clockIn.toString());
+
+    if (clockIn == true) {
+      img = imgIn;
+    } else {
+      img = imgOut;
+    }
   }
 
   Future<Position?> _determinePosition() async {
@@ -90,25 +114,48 @@ class _ClockInPageState extends State<ClockInPage> {
     AuthProvider authProvider = Provider.of<AuthProvider>(context);
     AttedanceProvider attedanceProvider =
         Provider.of<AttedanceProvider>(context);
+    // bool _isClockIn = false;
+
+    _attendance() async {
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      bool? clockIn = await prefs.getBool('checkClock');
+      print('ini clockin attend ' + clockIn.toString());
+      if (clockIn == null) {
+        clockIn = true;
+      }
+      _isClockIn = clockIn as bool;
+      if (_isClockIn == true) {
+        _isClockIn = false;
+      } else {
+        _isClockIn = true;
+      }
+
+      print('ini isclockin ' + _isClockIn.toString());
+      prefs.setBool('checkClock', _isClockIn as bool);
+    }
 
     handleCheckin() async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       var token = prefs.getString('token');
-      if (await attedanceProvider.attendanceIn(
-        token,
-        currentTime,
-        currentposition!.latitude,
-        currentposition!.longitude,
-      )) {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => HomePage()));
-      }
+      _attendance();
+      Navigator.pop(context);
+      // Navigator.push(
+      //     context, MaterialPageRoute(builder: (context) => HomePage()));
       // if (await attedanceProvider.attendanceIn(
-      //   authProvider.user.access_token,
+      //   token,
       //   currentTime,
-      //   currentposition!.latitude.toString(),
-      //   currentposition!.longitude.toString(),
-      // )) {}
+      //   currentposition!.latitude,
+      //   currentposition!.longitude,
+      // )) {
+      //   _isClockIn = true;
+      //   Navigator.push(
+      //       context, MaterialPageRoute(builder: (context) => HomePage()));
+      // }
+    }
+
+    handleCheckout() async {
+      _attendance();
+      Navigator.pop(context);
     }
 
     Widget day() {
@@ -142,27 +189,75 @@ class _ClockInPageState extends State<ClockInPage> {
     }
 
     Widget tap() {
-      return Container(
-        margin: EdgeInsets.only(top: 30),
-        child: Column(
-          children: [
-            Center(
-              child: IconButton(
-                icon: Image.asset(
-                    _isClockIn ? 'assets/clockOut.png' : 'assets/clockIn.png'),
-                iconSize: 160,
-                onPressed: () {
-                  _isClockIn == false ? handleCheckin() : handleCheckin();
-                  // setState(() {
-                  //   _isClockIn = !_isClockIn;
-                  // });
-                },
-              ),
-            ),
-          ],
+      return InkWell(
+        onTap: () {
+          check() async {
+            final SharedPreferences prefs =
+                await SharedPreferences.getInstance();
+            bool? clockIn = prefs.getBool('checkClock');
+            if (clockIn == null) {
+              clockIn = true;
+            }
+            print(clockIn);
+            if (clockIn == true) {
+              handleCheckin();
+            } else {
+              handleCheckout();
+            }
+          }
+
+          setState(() {
+            check();
+          });
+
+          // if (_isClockIn == true) {
+          //   _isClockIn = false;
+          // } else {
+          //   _isClockIn = true;
+          // }
+          // print(_isClockIn);
+          // setState(() {});
+          // clockIn == false?
+          //     ? handleCheckin()
+          //     : handleCheckout();
+        },
+        child: Container(
+          margin: EdgeInsets.only(top: 30),
+          child: Column(
+            children: [
+              Center(child: img),
+            ],
+          ),
         ),
       );
     }
+
+    // Widget tap() {
+    //   return Container(
+    //     margin: EdgeInsets.only(top: 30),
+    //     child: Column(
+    //       children: [
+    //         Center(
+    //           child: IconButton(
+    //             icon: Image.asset(
+    //                 (attedanceProvider.checkConditionClock == true)
+    //                     ? 'assets/clockIn.png'
+    //                     : 'assets/clockOut.png'),
+    //             iconSize: 160,
+    //             onPressed: () {
+    //               (attedanceProvider.checkConditionClock == true)
+    //                   ? handleCheckin()
+    //                   : handleCheckout();
+    //               // setState(() {
+    //               //   _isClockIn = !_isClockIn;
+    //               // });
+    //             },
+    //           ),
+    //         ),
+    //       ],
+    //     ),
+    //   );
+    // }
 
     Widget location() {
       return RelativeBuilder(builder: (context, height, width, sy, sx) {
