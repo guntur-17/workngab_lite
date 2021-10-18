@@ -4,6 +4,7 @@ import 'package:absen_lite/providers/auth_provider.dart';
 import 'package:absen_lite/providers/product_provider.dart';
 import 'package:absen_lite/providers/scanner_provider.dart';
 import 'package:absen_lite/providers/shop_provider.dart';
+import 'package:absen_lite/providers/visiting_all_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -24,7 +25,8 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (context) => ScannerProvider()),
         ChangeNotifierProvider(create: (context) => AuthProvider()),
         ChangeNotifierProvider(create: (context) => AttedanceProvider()),
-        ChangeNotifierProvider(create: (context) => ShopProvider())
+        ChangeNotifierProvider(create: (context) => ShopProvider()),
+        ChangeNotifierProvider(create: (context) => VisitingAllProvider())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

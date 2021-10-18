@@ -1,4 +1,5 @@
 import 'package:absen_lite/models/shop_model.dart';
+import 'package:absen_lite/models/visiting_all_model.dart';
 import 'package:absen_lite/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:relative_scale/relative_scale.dart';
@@ -6,8 +7,11 @@ import 'package:relative_scale/relative_scale.dart';
 class ShopCard extends StatelessWidget {
   // const ShopCard({Key? key}) : super(key: key);
 
-  final ShopModel shop;
-  ShopCard(this.shop);
+  final VisistingAllModel visiting;
+  ShopCard(this.visiting);
+
+  // final ShopModel shop;
+  // ShopCard(this.shop)
   @override
   Widget build(BuildContext context) {
     return RelativeBuilder(
@@ -31,7 +35,7 @@ class ShopCard extends StatelessWidget {
                           SizedBox(
                             width: 3,
                           ),
-                          Text('${shop.name}',
+                          Text('Toko Super Murah',
                               style: trueBlackTextStyle.copyWith(
                                   fontSize: 18, fontWeight: FontWeight.w500))
                         ],
@@ -85,7 +89,7 @@ class ShopCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Text('${shop.name}',
+                        Text('Toko Super Murah',
                             style: trueBlackTextStyle.copyWith(
                                 fontSize: 18, fontWeight: FontWeight.w500)),
                         Text('Grogol, Jakarta Barat',

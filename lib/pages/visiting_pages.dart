@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'package:absen_lite/pages/camera_pages.dart';
+// import 'package:absen_lite/providers/visiting_all_provider.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -7,8 +9,10 @@ import 'package:absen_lite/pages/stock_list_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:absen_lite/theme.dart';
 import 'package:absen_lite/widgets/shop_card.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:relative_scale/relative_scale.dart';
 
 class VisitingPage extends StatefulWidget {
@@ -24,6 +28,7 @@ class _VisitingPageState extends State<VisitingPage> {
   // bool _isClockIn = false;
   DateFormat? dateFormat;
   DateFormat? timeFormat;
+  File? image;
 
   dynamic currentTime = DateFormat.Hm().format(DateTime.now());
   String currentAddress = 'My Address';
@@ -85,9 +90,12 @@ class _VisitingPageState extends State<VisitingPage> {
   }
 
   String? _result;
+  File? _picker;
 
   @override
   Widget build(BuildContext context) {
+    // VisitingAllProvider visitingAllProvider =
+    // Provider.of<VisitingAllProvider>(context, listen: false);
     Widget day() {
       return Container(
         margin: EdgeInsets.only(top: 30),
@@ -124,25 +132,68 @@ class _VisitingPageState extends State<VisitingPage> {
       _result = result;
     }
 
+    Future _getPhoto(BuildContext context) async {
+      // double lat = currentposition!.latitude;
+      // double long = currentposition!.longitude;
+      final picker = await Navigator.push(
+          context, MaterialPageRoute(builder: (c) => CameraPages()));
+      _picker = picker;
+    }
+
+    // Future getPhoto() async {
+    //   final ImagePicker _picker = ImagePicker();
+
+    //   // Capture a photo
+    //   final XFile? photo = await _picker.pickImage(source: ImageSource.camera);
+    //   //mengubah Xfile jadi file
+    //   image = File(photo!.path);
+
+    //   setState(() {});
+    // }
+
     Widget tap() {
-      return InkWell(
-        onTap: () {
-          _openScanner(context);
-        },
-        child: Container(
-          margin: EdgeInsets.only(top: 30),
-          child: Column(
-            children: [
-              Center(
-                child: Image.asset(
-                  'assets/scan.png',
-                  width: 160,
-                  height: 160,
-                ),
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          InkWell(
+            onTap: () {
+              _openScanner(context);
+            },
+            child: Container(
+              margin: EdgeInsets.only(top: 30),
+              child: Column(
+                children: [
+                  Center(
+                    child: Image.asset(
+                      'assets/scan.png',
+                      width: 80,
+                      height: 80,
+                    ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
-        ),
+          InkWell(
+            onTap: () {
+              _getPhoto(context);
+            },
+            child: Container(
+              margin: EdgeInsets.only(top: 30),
+              child: Column(
+                children: [
+                  Center(
+                    child: Image.asset(
+                      'assets/scan.png',
+                      width: 80,
+                      height: 80,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       );
     }
 
@@ -223,7 +274,11 @@ class _VisitingPageState extends State<VisitingPage> {
               thickness: 1,
               height: 20,
             ),
-            ShopCard()
+            Column(
+                // children: visitingAllProvider.showAll
+                // .map((showAll) => ShopCard(showAll))
+                // .toList(),
+                ),
           ],
         ),
       );

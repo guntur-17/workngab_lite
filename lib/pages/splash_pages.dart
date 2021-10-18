@@ -5,6 +5,7 @@ import 'package:absen_lite/pages/login_pages.dart';
 import 'package:absen_lite/providers/attendance_provider.dart';
 import 'package:absen_lite/providers/auth_provider.dart';
 import 'package:absen_lite/providers/shop_provider.dart';
+import 'package:absen_lite/providers/visiting_all_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -33,6 +34,7 @@ class _SplashPageState extends State<SplashPage> {
     validator();
     getattendance();
     getshop();
+    getvisiting();
     //perubahan
     // getValidationData().whenComplete(() async {
     // Timer(
@@ -100,6 +102,13 @@ class _SplashPageState extends State<SplashPage> {
     await Provider.of<ShopProvider>(context, listen: false).getShops(token);
     // await AttedanceProvider().getAttendances(token);
     // Navigator.pushReplacement(context, route);
+  }
+
+  getvisiting() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = prefs.getString('token');
+    await Provider.of<VisitingAllProvider>(context, listen: false)
+        .getAllVisit(token);
   }
 
   //perubahan
