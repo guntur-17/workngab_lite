@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class AttendanceModel {
   int? id;
   int? user_id;

@@ -4,6 +4,7 @@ import 'package:absen_lite/models/attendance_model.dart';
 import 'package:absen_lite/pages/attendance_history_pages.dart';
 import 'package:absen_lite/pages/visiting_list_pages.dart';
 import 'package:absen_lite/providers/attendance_provider.dart';
+import 'package:absen_lite/providers/shop_provider.dart';
 import 'package:absen_lite/theme.dart';
 import 'package:absen_lite/widgets/clock_card.dart';
 import 'package:absen_lite/widgets/loading_button.dart';
@@ -58,25 +59,26 @@ class _DashboardPageState extends State<DashboardPage> {
 
   @override
   void initState() {
-    attendanceHandler();
+    // attendanceHandler();
     // TODO: implement initState
     super.initState();
   }
 
-  attendanceHandler() async {
-    // setState(() {
-    //   isLoading = true;
-    // });
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    var token = prefs.getString('token');
-    if (await Provider.of<AttedanceProvider>(context, listen: false)
-        .getAttendances(token)) setState(() {});
-  }
+  // attendanceHandler() async {
+  //   // setState(() {
+  //   //   isLoading = true;
+  //   // });
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   var token = prefs.getString('token');
+  //   if (await Provider.of<AttedanceProvider>(context, listen: false)
+  //       .getAttendances(token)) setState(() {});
+  // }
 
   Widget build(BuildContext context) {
     AuthProvider authProvider = Provider.of<AuthProvider>(context);
     AttedanceProvider attedanceProvider =
         Provider.of<AttedanceProvider>(context, listen: false);
+    ShopProvider shopProvider = Provider.of<ShopProvider>(context);
 
     // bool isLoading = false;
 
@@ -295,14 +297,29 @@ class _DashboardPageState extends State<DashboardPage> {
                 )
               ],
             ),
-            SizedBox(
-              height: 6,
+            Column(
+              // children: attedanceProvider.attendances
+              //     .map((attendance) => ClockOutCard(attendance))
+              //     .toList(),
+              // children: ShopProvider.shops.map((shop) => ShopCard(shop).toList())
+              // children:
+              //     shopProvider.shops.map((shop) => ShopCard(shop)).toList(),
+              // SizedBox(
+              //   height: 6,
+              // ),
+              children: [
+                ShopCard(),
+                SizedBox(
+                  height: 6,
+                ),
+                ShopCard(),
+              ],
+              // ShopCard(),
+              // // SizedBox(
+              // //   height: 6,
+              // // ),
+              // ShopCard(),
             ),
-            ShopCard(),
-            // SizedBox(
-            //   height: 6,
-            // ),
-            ShopCard(),
           ],
         ),
       );
@@ -314,6 +331,7 @@ class _DashboardPageState extends State<DashboardPage> {
         child: Column(
           children: [
             isLoading ? LoadingButton() : attencance_history(),
+            visiting_list(),
             // visiting_list(),
           ],
         ),
