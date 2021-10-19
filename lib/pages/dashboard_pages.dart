@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:absen_lite/models/attendance_model.dart';
 import 'package:absen_lite/pages/attendance_history_pages.dart';
+import 'package:absen_lite/pages/shop_list_pages.dart';
+// import 'package:absen_lite/pages/shop_list_pages.dart';
 import 'package:absen_lite/pages/visiting_list_pages.dart';
 import 'package:absen_lite/providers/attendance_provider.dart';
 import 'package:absen_lite/providers/shop_provider.dart';
@@ -11,6 +13,7 @@ import 'package:absen_lite/widgets/clock_card.dart';
 import 'package:absen_lite/widgets/loading_button.dart';
 import 'package:absen_lite/widgets/menu_card.dart';
 import 'package:absen_lite/widgets/shop_card.dart';
+import 'package:absen_lite/widgets/visiting_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:relative_scale/relative_scale.dart';
@@ -61,6 +64,8 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   void initState() {
     attendanceHandler();
+    getvisiting();
+    shopListHandler();
     // visitingHandler();
     // attendanceHandler();
     // TODO: implement initState
@@ -68,13 +73,46 @@ class _DashboardPageState extends State<DashboardPage> {
   }
 
   attendanceHandler() async {
-    // setState(() {
-    //   isLoading = true;
-    // });
+    setState(() {
+      isLoading = true;
+    });
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var token = prefs.getString('token');
     if (await Provider.of<AttedanceProvider>(context, listen: false)
         .getAttendances(token)) setState(() {});
+    setState(() {
+      isLoading = false;
+    });
+  }
+
+  getvisiting() async {
+    setState(() {
+      isLoading = true;
+    });
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = prefs.getString('token');
+    await Provider.of<VisitingAllProvider>(context, listen: false)
+        .getAllVisit(token);
+    setState(() {
+      isLoading = false;
+    });
+  }
+
+  shopListHandler() async {
+    setState(() {
+      isLoading = true;
+    });
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = prefs.getString('token');
+    // await AttedanceProvider().getAttendances(token);
+    await ShopProvider().getShops(token);
+    setState(() {
+      isLoading = false;
+    });
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(builder: (context) => AttendanceHistoryPage()),
+    // );
   }
 
   // visitingHandler() async {
@@ -88,9 +126,10 @@ class _DashboardPageState extends State<DashboardPage> {
     AuthProvider authProvider = Provider.of<AuthProvider>(context);
     AttedanceProvider attedanceProvider =
         Provider.of<AttedanceProvider>(context, listen: false);
-    ShopProvider shopProvider = Provider.of<ShopProvider>(context);
     VisitingAllProvider visitingAllProvider =
         Provider.of<VisitingAllProvider>(context);
+    ShopProvider shopProvider =
+        Provider.of<ShopProvider>(context, listen: false);
 
     // bool isLoading = false;
 
@@ -265,6 +304,8 @@ class _DashboardPageState extends State<DashboardPage> {
               children: attedanceProvider.attendances
                   .map((attendance) => ClockOutCard(attendance))
                   .toList(),
+              // children:
+              //     shopProvider.shops.map((shop) => ShopCard(shop)).toList(),
             ),
             // SizedBox(
             //   height: 6,
@@ -311,7 +352,7 @@ class _DashboardPageState extends State<DashboardPage> {
             ),
             Column(
               children: visitingAllProvider.showAll
-                  .map((visiting) => ShopCard(visiting))
+                  .map((visiting) => VisitingCard(visiting))
                   .toList(),
             ),
           ],
@@ -325,7 +366,7 @@ class _DashboardPageState extends State<DashboardPage> {
         child: Column(
           children: [
             isLoading ? LoadingButton() : attencance_history(),
-            visiting_list(),
+            isLoading ? LoadingButton() : visiting_list(),
             // visiting_list(),
           ],
         ),

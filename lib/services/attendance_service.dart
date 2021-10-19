@@ -1,8 +1,7 @@
 import 'dart:convert';
 
 import 'package:absen_lite/models/attendance_model.dart';
-import 'package:absen_lite/models/user_model.dart';
-import 'package:absen_lite/providers/auth_provider.dart';
+
 import 'package:http/http.dart' as http;
 
 class AttendanceService {
@@ -17,12 +16,6 @@ class AttendanceService {
       'Authorization': token as String
     };
 
-    // var body = jsonEncode({
-    //   'type': type,
-    //   'time': time,
-    //   'created_at': created_at,
-    // });
-
     var response = await http.get(url, headers: headers);
     print(response.statusCode);
     print(response.body);
@@ -30,9 +23,6 @@ class AttendanceService {
     if (response.statusCode == 200) {
       List data = jsonDecode(response.body)['data']['attendance'];
       List<AttendanceModel> attendances = [];
-      // AttendanceModel attendance = AttendanceModel.fromJson(data['attendance']);
-      // attendance.token = 'Bearer' + data['access_token'];
-      // print(data);
 
       for (var item in data) {
         attendances.add(AttendanceModel.fromJson(item));

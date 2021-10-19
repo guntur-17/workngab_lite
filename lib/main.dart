@@ -25,8 +25,9 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (context) => ScannerProvider()),
         ChangeNotifierProvider(create: (context) => AuthProvider()),
         ChangeNotifierProvider(create: (context) => AttedanceProvider()),
-        ChangeNotifierProvider(create: (context) => ShopProvider()),
-        ChangeNotifierProvider(create: (context) => VisitingAllProvider())
+        // ChangeNotifierProvider(create: (context) => ShopProvider()),
+        ChangeNotifierProvider(create: (context) => VisitingAllProvider()),
+        ChangeNotifierProvider(create: (context) => ShopProvider())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

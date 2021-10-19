@@ -1,5 +1,8 @@
 import 'dart:io';
 import 'package:absen_lite/pages/camera_pages.dart';
+import 'package:absen_lite/pages/shop_list_pages.dart';
+import 'package:absen_lite/providers/auth_provider.dart';
+import 'package:absen_lite/providers/shop_provider.dart';
 // import 'package:absen_lite/providers/visiting_all_provider.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
@@ -94,6 +97,9 @@ class _VisitingPageState extends State<VisitingPage> {
 
   @override
   Widget build(BuildContext context) {
+    ShopProvider shopProvider =
+        Provider.of<ShopProvider>(context, listen: false);
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
     // VisitingAllProvider visitingAllProvider =
     // Provider.of<VisitingAllProvider>(context, listen: false);
     Widget day() {
@@ -136,7 +142,7 @@ class _VisitingPageState extends State<VisitingPage> {
       // double lat = currentposition!.latitude;
       // double long = currentposition!.longitude;
       final picker = await Navigator.push(
-          context, MaterialPageRoute(builder: (c) => CameraPages()));
+          context, MaterialPageRoute(builder: (c) => ShopListPage()));
       _picker = picker;
     }
 
@@ -176,6 +182,9 @@ class _VisitingPageState extends State<VisitingPage> {
           ),
           InkWell(
             onTap: () {
+              //  attedanceProvider
+              //           .getAttendances(authProvider.user.access_token);
+              shopProvider.getShops(authProvider.user.access_token);
               _getPhoto(context);
             },
             child: Container(

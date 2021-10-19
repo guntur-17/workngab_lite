@@ -1,10 +1,14 @@
 import 'dart:io';
 
+import 'package:absen_lite/pages/test_pages.dart';
 import 'package:absen_lite/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class CameraPages extends StatefulWidget {
+  int? id;
+  String? name;
+  CameraPages(this.id, this.name);
   // const CameraPages({Key? key}) : super(key: key);
 
   @override
@@ -21,13 +25,37 @@ class _CameraPagesState extends State<CameraPages> {
     // Capture a photo
     final XFile? photo = await _picker.pickImage(source: ImageSource.camera);
     //mengubah Xfile jadi file
-    image = File(photo!.path);
+    if (photo != null) {
+      image = File(photo.path);
+    }
 
     setState(() {});
   }
 
+  nextpage() {
+    if (image != null) {
+      // Navigator.push(
+      //         context,
+      //         MaterialPageRoute(
+      //           builder: (context) => testPage(image)),
+      //         ),
+      //       );
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => testPage(image)));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    // Widget nextpage() {
+    //   return Container(
+    //     child: Column(
+    //       children: [
+
+    //       ],
+    //     ),
+    //   );   }
+
     return Container(
       color: whiteColor,
       height: 200,
@@ -36,7 +64,10 @@ class _CameraPagesState extends State<CameraPages> {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('Photo'),
+          Text(
+            '${widget.name}',
+            style: trueBlackTextStyle.copyWith(fontSize: 14, fontWeight: light),
+          ),
           image != null
               ? Container(
                   height: MediaQuery.of(context).size.width,
@@ -46,16 +77,44 @@ class _CameraPagesState extends State<CameraPages> {
                     fit: BoxFit.cover,
                   ),
                 )
+              // nextpage()
               : Container(),
-          TextButton(
-              style: TextButton.styleFrom(backgroundColor: blueColor),
-              onPressed: () async {
-                await getPhoto();
-              },
-              child: Text(
-                'Ambil Gambar',
-                style: whiteTextStyle,
-              ))
+          image != null
+              ? TextButton(
+                  style: TextButton.styleFrom(backgroundColor: blueColor),
+                  onPressed: () async {
+                    await getPhoto();
+                  },
+                  child: Text(
+                    'retake a photo',
+                    style: whiteTextStyle,
+                  ),
+                )
+              : TextButton(
+                  style: TextButton.styleFrom(backgroundColor: blueColor),
+                  onPressed: () async {
+                    await getPhoto();
+                  },
+                  child: Text(
+                    'Take a photo',
+                    style: whiteTextStyle,
+                  ),
+                ),
+          image != null
+              ? TextButton(
+                  style: TextButton.styleFrom(backgroundColor: blueColor),
+                  onPressed: () async {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => testPage(image)));
+                  },
+                  child: Text(
+                    'next',
+                    style: whiteTextStyle,
+                  ),
+                )
+              : Container(),
         ],
       ),
     );

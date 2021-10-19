@@ -1,35 +1,46 @@
-import 'package:absen_lite/providers/visiting_all_provider.dart';
-import 'package:absen_lite/widgets/shop_card.dart';
-import 'package:absen_lite/widgets/visiting_card.dart';
-import 'package:flutter/material.dart';
+import 'package:absen_lite/providers/shop_provider.dart';
 import 'package:absen_lite/theme.dart';
+import 'package:absen_lite/widgets/loading_button.dart';
+import 'package:absen_lite/widgets/shop_card.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class VisitingListPage extends StatefulWidget {
-  const VisitingListPage({Key? key}) : super(key: key);
+class ShopListPage extends StatefulWidget {
+  const ShopListPage({Key? key}) : super(key: key);
 
   @override
-  State<VisitingListPage> createState() => _VisitingListPageState();
+  _ShopListPageState createState() => _ShopListPageState();
 }
 
-class _VisitingListPageState extends State<VisitingListPage> {
+class _ShopListPageState extends State<ShopListPage> {
+  bool isLoading = false;
   void initState() {
-    getvisiting();
+    shopListHandler();
     super.initState();
   }
 
-  getvisiting() async {
+  shopListHandler() async {
+    setState(() {
+      isLoading = true;
+    });
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var token = prefs.getString('token');
-    await Provider.of<VisitingAllProvider>(context, listen: false)
-        .getAllVisit(token);
+    // await AttedanceProvider().getAttendances(token);
+    await ShopProvider().getShops(token);
+    setState(() {
+      isLoading = false;
+    });
+
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(builder: (context) => AttendanceHistoryPage()),
+    // );
   }
 
   @override
   Widget build(BuildContext context) {
-    VisitingAllProvider visitingAllProvider =
-        Provider.of<VisitingAllProvider>(context);
+    ShopProvider shopProvider = Provider.of<ShopProvider>(context);
     Widget card() {
       return Center(
         child: Container(
@@ -41,9 +52,11 @@ class _VisitingListPageState extends State<VisitingListPage> {
                 margin: EdgeInsets.only(bottom: 20),
                 width: MediaQuery.of(context).size.width * 0.90,
                 child: Column(
-                  children: visitingAllProvider.showAll
-                      .map((visiting) => VisitingCard(visiting))
-                      .toList(),
+                  children:
+                      shopProvider.shops.map((shop) => ShopCard(shop)).toList(),
+                  // children: visitingAllProvider.showAll
+                  //     .map((visiting) => VisitingCard(visiting))
+                  //     .toList(),
                 ),
               ),
             ),
@@ -73,7 +86,7 @@ class _VisitingListPageState extends State<VisitingListPage> {
             bottomOpacity: 0.0,
             elevation: 0.0,
             title: new Text(
-              'Today Visiting List',
+              'TShop',
               style: trueBlackTextStyle.copyWith(fontWeight: FontWeight.w600),
             ),
           ),
@@ -82,7 +95,8 @@ class _VisitingListPageState extends State<VisitingListPage> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              card(),
+              isLoading ? LoadingButton() : card(),
+              // card(),
             ],
           ),
         ),
