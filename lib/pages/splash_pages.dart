@@ -32,9 +32,9 @@ class _SplashPageState extends State<SplashPage> {
     // );
     // clear();
     validator();
-    // getattendance();
+    getattendance();
     getshop();
-    // getvisiting();
+    getvisiting();
     //perubahan
     // getValidationData().whenComplete(() async {
     // Timer(
@@ -93,14 +93,14 @@ class _SplashPageState extends State<SplashPage> {
     }
   }
 
-  // getattendance() async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   var token = prefs.getString('token');
-  //   await Provider.of<AttedanceProvider>(context, listen: false)
-  //       .getAttendances(token);
-  //   // await AttedanceProvider().getAttendances(token);
-  //   // Navigator.pushReplacement(context, route);
-  // }
+  getattendance() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = prefs.getString('token');
+    await Provider.of<AttedanceProvider>(context, listen: false)
+        .getAttendances(token);
+    // await AttedanceProvider().getAttendances(token);
+    // Navigator.pushReplacement(context, route);
+  }
 
   getshop() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -110,12 +110,12 @@ class _SplashPageState extends State<SplashPage> {
     // Navigator.pushReplacement(context, route);
   }
 
-  // getvisiting() async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   var token = prefs.getString('token');
-  //   await Provider.of<VisitingAllProvider>(context, listen: false)
-  //       .getAllVisit(token);
-  // }
+  getvisiting() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = prefs.getString('token');
+    await Provider.of<VisitingAllProvider>(context, listen: false)
+        .getAllVisit(token);
+  }
 
   //perubahan
   // Future getValidationData() async {

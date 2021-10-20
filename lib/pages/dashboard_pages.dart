@@ -301,9 +301,10 @@ class _DashboardPageState extends State<DashboardPage> {
               ],
             ),
             Column(
-              children: attedanceProvider.attendances
-                  .map((attendance) => ClockOutCard(attendance))
-                  .toList(),
+              children: List.generate(
+                  2,
+                  (index) =>
+                      ClockOutCard(attedanceProvider.attendances[index])),
               // children:
               //     shopProvider.shops.map((shop) => ShopCard(shop)).toList(),
             ),
@@ -350,10 +351,16 @@ class _DashboardPageState extends State<DashboardPage> {
                 )
               ],
             ),
+            // Column(
+            //   children: visitingAllProvider.showAll
+            //       .map((visiting) => VisitingCard(visiting))
+            //       .toList(),
+            // ),
             Column(
-              children: visitingAllProvider.showAll
-                  .map((visiting) => VisitingCard(visiting))
-                  .toList(),
+              children: List.generate(3,
+                  (index) => VisitingCard(visitingAllProvider.showAll[index])),
+              // children:
+              //     shopProvider.shops.map((shop) => ShopCard(shop)).toList(),
             ),
           ],
         ),
