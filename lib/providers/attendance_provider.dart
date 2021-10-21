@@ -53,6 +53,24 @@ class AttedanceProvider with ChangeNotifier {
     }
   }
 
+  Future<bool> attendanceOut(
+    String? token,
+    String? time,
+    double? lat,
+    double? long,
+  ) async {
+    try {
+      if (await AttendanceService().attendanceOut(token, time, lat, long)) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      print(e);
+      return false;
+    }
+  }
+
   // Future<bool> login({String? username, String? password}) async {
   //   try {
   //     UserModel user =

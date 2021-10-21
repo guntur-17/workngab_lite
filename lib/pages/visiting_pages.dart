@@ -134,7 +134,9 @@ class _VisitingPageState extends State<VisitingPage> {
       double lat = currentposition!.latitude;
       double long = currentposition!.longitude;
       final result = await Navigator.push(
-          context, MaterialPageRoute(builder: (c) => Scanner(lat, long)));
+          context,
+          MaterialPageRoute(
+              builder: (c) => Scanner(lat, long, currentAddress)));
       _result = result;
     }
 

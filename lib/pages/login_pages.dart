@@ -2,6 +2,7 @@ import 'package:absen_lite/pages/dashboard_pages.dart';
 import 'package:absen_lite/pages/home.dart';
 import 'package:absen_lite/providers/attendance_provider.dart';
 import 'package:absen_lite/providers/auth_provider.dart';
+import 'package:absen_lite/providers/visiting_all_provider.dart';
 import 'package:absen_lite/widgets/loading_button.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -40,6 +41,10 @@ class _LoginPageState extends State<LoginPage> {
         // prefs.setString('username', authProvider.user.username as String);
         // prefs.setString('password', passwordController.text);
         prefs.setString('token', authProvider.user.access_token as String);
+
+        var token = prefs.getString('token');
+        await Provider.of<VisitingAllProvider>(context, listen: false)
+            .getAllVisit(token);
         Navigator.pushReplacement(context, route);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(

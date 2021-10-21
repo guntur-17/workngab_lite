@@ -65,7 +65,7 @@ class _DashboardPageState extends State<DashboardPage> {
   void initState() {
     attendanceHandler();
     getvisiting();
-    shopListHandler();
+    // shopListHandler();
     // visitingHandler();
     // attendanceHandler();
     // TODO: implement initState
@@ -98,22 +98,22 @@ class _DashboardPageState extends State<DashboardPage> {
     });
   }
 
-  shopListHandler() async {
-    setState(() {
-      isLoading = true;
-    });
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    var token = prefs.getString('token');
-    // await AttedanceProvider().getAttendances(token);
-    await ShopProvider().getShops(token);
-    setState(() {
-      isLoading = false;
-    });
-    // Navigator.push(
-    //   context,
-    //   MaterialPageRoute(builder: (context) => AttendanceHistoryPage()),
-    // );
-  }
+  // shopListHandler() async {
+  //   setState(() {
+  //     isLoading = true;
+  //   });
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   var token = prefs.getString('token');
+  //   // await AttedanceProvider().getAttendances(token);
+  //   await ShopProvider().getShops(token);
+  //   setState(() {
+  //     isLoading = false;
+  //   });
+  //   // Navigator.push(
+  //   //   context,
+  //   //   MaterialPageRoute(builder: (context) => AttendanceHistoryPage()),
+  //   // );
+  // }
 
   // visitingHandler() async {
   //   SharedPreferences prefs = await SharedPreferences.getInstance();

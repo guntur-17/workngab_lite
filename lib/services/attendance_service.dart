@@ -58,4 +58,29 @@ class AttendanceService {
       throw Exception('Gagal attendance in ');
     }
   }
+
+  Future<bool> attendanceOut(
+    String? token,
+    String? time,
+    double? lat,
+    double? long,
+  ) async {
+    var url = Uri.parse('$baseUrl/user/attendance-out');
+    var headers = {
+      'Content-Type': 'application/json',
+      'Authorization': token as String
+    };
+    var body = jsonEncode({'time': time, 'lat': lat, 'long': long});
+
+    var response = await http.post(url, headers: headers, body: body);
+
+    print(response.statusCode);
+    print(response.body);
+
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      throw Exception('Gagal attendance in ');
+    }
+  }
 }

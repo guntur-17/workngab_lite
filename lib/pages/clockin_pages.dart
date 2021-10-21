@@ -138,24 +138,35 @@ class _ClockInPageState extends State<ClockInPage> {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       var token = prefs.getString('token');
       _attendance();
-      Navigator.pop(context);
+      // Navigator.pop(context);
       // Navigator.push(
       //     context, MaterialPageRoute(builder: (context) => HomePage()));
-      // if (await attedanceProvider.attendanceIn(
-      //   token,
-      //   currentTime,
-      //   currentposition!.latitude,
-      //   currentposition!.longitude,
-      // )) {
-      //   _isClockIn = true;
-      //   Navigator.push(
-      //       context, MaterialPageRoute(builder: (context) => HomePage()));
-      // }
+      if (await attedanceProvider.attendanceIn(
+        token,
+        currentTime,
+        currentposition!.latitude,
+        currentposition!.longitude,
+      )) {
+        // _isClockIn = true;
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => HomePage()));
+      }
     }
 
     handleCheckout() async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      var token = prefs.getString('token');
       _attendance();
-      Navigator.pop(context);
+      if (await attedanceProvider.attendanceOut(
+        token,
+        currentTime,
+        currentposition!.latitude,
+        currentposition!.longitude,
+      )) {
+        // _isClockIn = true;
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => HomePage()));
+      }
     }
 
     Widget day() {

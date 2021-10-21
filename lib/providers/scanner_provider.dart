@@ -46,4 +46,24 @@ class ScannerProvider with ChangeNotifier {
     //   return false;
     // }
   }
+
+  Future<bool> visitingScanner(
+    String? token,
+    String? address,
+    String? barcode,
+    double? lat,
+    double? long,
+  ) async {
+    try {
+      if (await ScannerService()
+          .visitingScanner(token, address, barcode, lat, long)) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      print(e);
+      return false;
+    }
+  }
 }

@@ -30,11 +30,37 @@ class ScannerService {
 
     if (response.statusCode == 200) {
       var dataa = jsonDecode(response.body)['data'];
-      ScannerModel data = ScannerModel.fromJson(dataa['visiting']);
+      ScannerModel data = ScannerModel.fromJson(dataa['shop_detail']);
 
       return data;
     } else {
       throw Exception('Gagal Scan');
+    }
+  }
+
+  Future<bool> visitingScanner(
+    String? token,
+    String? address,
+    String? barcode,
+    double? lat,
+    double? long,
+  ) async {
+    var url = Uri.parse('$baseUrl/user/visiting/shop/$barcode');
+    var headers = {
+      'Content-Type': 'application/json',
+      'Authorization': token as String
+    };
+    var body = jsonEncode({'address': address, 'lat': lat, 'long': long});
+
+    var response = await http.post(url, headers: headers, body: body);
+
+    print(response.statusCode);
+    print(response.body);
+
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      throw Exception('Gagal upload visiting Scanner');
     }
   }
 }

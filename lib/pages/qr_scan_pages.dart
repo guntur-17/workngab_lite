@@ -20,8 +20,9 @@ class Scanner extends StatefulWidget {
   // const Scanner({Key? key}) : super(key: key);
   double? lat;
   double? long;
+  String? addressUser;
 
-  Scanner(this.lat, this.long);
+  Scanner(this.lat, this.long, this.addressUser);
 
   @override
   _ScannerState createState() => _ScannerState();
@@ -38,6 +39,7 @@ class _ScannerState extends State<Scanner> {
   Widget build(BuildContext context) {
     double? latUser = widget.lat;
     double? longUser = widget.long;
+    String? addressUser = widget.addressUser;
     // double latUser = currentposition!.latitude;
     // double longUser = currentposition!.longitude;
     ScannerProvider scannerProvider = Provider.of<ScannerProvider>(context);
@@ -73,10 +75,11 @@ class _ScannerState extends State<Scanner> {
                     // double latTest = -6.3454;
                     // double longTest = 106.8283;
                     if (await scannerProvider.scanQR(
-                            token: token,
-                            barcode: result!.code,
-                            lat: latUser,
-                            long: longUser)
+                      token: token,
+                      barcode: result!.code,
+                      lat: latUser,
+                      long: longUser,
+                    )
                         // userLocation.isInRange == true,
                         )
                     //   {
@@ -90,8 +93,8 @@ class _ScannerState extends State<Scanner> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>
-                                    StockListPage(latUser, longUser, id)));
+                                builder: (context) => StockListPage(latUser,
+                                    longUser, id, result!.code, addressUser)));
                       } else {
                         print('not in range');
                       }

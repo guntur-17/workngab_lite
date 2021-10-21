@@ -1,4 +1,5 @@
 import 'package:absen_lite/models/scanner_model.dart';
+import 'package:absen_lite/pages/home.dart';
 import 'package:absen_lite/providers/product_provider.dart';
 import 'package:absen_lite/providers/scanner_provider.dart';
 import 'package:absen_lite/widgets/item_card.dart';
@@ -13,8 +14,10 @@ class StockListPage extends StatefulWidget {
   double? lat;
   double? long;
   int? id;
+  String? barcode;
+  String? addressUser;
 
-  StockListPage(this.lat, this.long, this.id);
+  StockListPage(this.lat, this.long, this.id, this.barcode, this.addressUser);
 
   @override
   State<StockListPage> createState() => _StockListPageState();
@@ -22,31 +25,59 @@ class StockListPage extends StatefulWidget {
 
 class _StockListPageState extends State<StockListPage> {
   void initState() {
-    ProductHandler();
+    //
     super.initState();
   }
 
-  ProductHandler() async {
-    print(widget.id);
-    // setState(() {
-    //   isLoading = true;
-    // });
-    // print(ScannerProvider().data.id);
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    var token = prefs.getString('token');
-    if (await Provider.of<ProductProvider>(context, listen: false)
-        .getProduct(widget.id, token)) setState(() {});
-  }
+  // ProductHandler() async {
+  //   print(widget.id);
+  //   // setState(() {
+  //   //   isLoading = true;
+  //   // });
+  //   // print(ScannerProvider().data.id);
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   var token = prefs.getString('token');
+  //   if (await Provider.of<ProductProvider>(context, listen: false)
+  //       .getProduct(widget.id, token)) setState(() {});
+  // }
 
   @override
   Widget build(BuildContext context) {
     ScannerProvider scannerProvider = Provider.of<ScannerProvider>(context);
-    ProductProvider productProvider = Provider.of<ProductProvider>(context);
-    double? latShop = widget.lat;
-    double? longShop = widget.long;
+    // ProductProvider productProvider = Provider.of<ProductProvider>(context);
+    double? latUser = widget.lat;
+    double? longUser = widget.long;
+    String? addressUser = widget.addressUser;
+    String? barcode = widget.barcode;
     ScannerModel shop = scannerProvider.data;
     String? nama = shop.name;
     String? alamat = shop.address;
+
+    // handleCheckout() async {
+    //   SharedPreferences prefs = await SharedPreferences.getInstance();
+    //   var token = prefs.getString('token');
+    //   _attendance();
+    //   if (await attedanceProvider.attendanceOut(
+    //     token,
+    //     currentTime,
+    //     currentposition!.latitude,
+    //     currentposition!.longitude,
+    //   )) {
+    //     // _isClockIn = true;
+    //     Navigator.push(
+    //         context, MaterialPageRoute(builder: (context) => HomePage()));
+    //   }
+
+    handleUploadScanner() async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      var token = prefs.getString('token');
+      if (await scannerProvider.visitingScanner(
+          token, addressUser, barcode, latUser, longUser)) {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => HomePage()));
+      }
+    }
+
     Widget detail_shop() {
       return Container(
         margin: EdgeInsets.only(left: 4, top: 29),
@@ -79,7 +110,9 @@ class _StockListPageState extends State<StockListPage> {
                 fontSize: 14,
                 fontWeight: medium,
               ),
-            )
+            ),
+            // Text('$addressUser'),
+            // Text('$barcode')
           ],
         ),
       );
@@ -101,9 +134,9 @@ class _StockListPageState extends State<StockListPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Stock List',
+              '$addressUser',
               style: trueBlackTextStyle.copyWith(
-                fontSize: 24,
+                fontSize: 14,
                 fontWeight: medium,
               ),
               textAlign: TextAlign.start,
@@ -112,18 +145,29 @@ class _StockListPageState extends State<StockListPage> {
               height: 6,
             ),
             Text(
-              'Please update the rest of your item list',
+              '$barcode',
               style: trueBlackTextStyle.copyWith(
                 fontSize: 14,
                 fontWeight: medium,
               ),
               textAlign: TextAlign.start,
             ),
-            Column(
-              children: productProvider.showProduct
-                  .map((products) => ItemCard(products))
-                  .toList(),
-            )
+            TextButton(
+              style: TextButton.styleFrom(backgroundColor: blueColor),
+              onPressed: () async {
+                // await getPhoto();
+                handleUploadScanner();
+              },
+              child: Text(
+                'Upload',
+                style: whiteTextStyle,
+              ),
+            ),
+            // Column(
+            //   children: productProvider.showProduct
+            //       .map((products) => ItemCard(products))
+            //       .toList(),
+            // )
           ],
         ),
       );
