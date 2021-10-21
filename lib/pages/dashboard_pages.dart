@@ -91,8 +91,8 @@ class _DashboardPageState extends State<DashboardPage> {
     });
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var token = prefs.getString('token');
-    await Provider.of<VisitingAllProvider>(context, listen: false)
-        .getAllVisit(token);
+    if (await Provider.of<VisitingAllProvider>(context, listen: false)
+        .getAllVisit(token)) setState(() {});
     setState(() {
       isLoading = false;
     });

@@ -14,23 +14,20 @@ class ScannerService {
     String? token,
     String? barcode,
     // String? address,
-
-    double? lat,
-    double? long,
   }) async {
-    var url = Uri.parse('$baseUrl/user/visiting/shop/$barcode');
+    var url = Uri.parse('$baseUrl/user/visiting/shop/check/$barcode');
     var headers = {
       'Content-Type': 'application/json',
       'Authorization': token as String
     };
-    var body = jsonEncode({'lat': lat, 'long': long});
-    var response = await http.post(url, headers: headers, body: body);
+    // var body = jsonEncode({'lat': lat, 'long': long});
+    var response = await http.get(url, headers: headers);
     print(response.body);
     print(response.statusCode);
 
     if (response.statusCode == 200) {
       var dataa = jsonDecode(response.body)['data'];
-      ScannerModel data = ScannerModel.fromJson(dataa['shop_detail']);
+      ScannerModel data = ScannerModel.fromJson(dataa['visiting']);
 
       return data;
     } else {

@@ -14,8 +14,6 @@ class ScannerProvider with ChangeNotifier {
   Future<bool> scanQR({
     String? token,
     String? barcode,
-    double? lat,
-    double? long,
   }) async {
     try {
       // if (await ScannerService()
@@ -24,8 +22,8 @@ class ScannerProvider with ChangeNotifier {
       // } else {
       //   return false;
       // }
-      ScannerModel data = await ScannerService()
-          .scanQR(token: token, barcode: barcode, lat: lat, long: long);
+      ScannerModel data =
+          await ScannerService().scanQR(token: token, barcode: barcode);
       _data = data;
       return true;
     } catch (e) {
