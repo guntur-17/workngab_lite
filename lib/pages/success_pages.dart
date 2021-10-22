@@ -2,14 +2,34 @@ import 'package:absen_lite/models/shop_model.dart';
 import 'package:absen_lite/pages/home.dart';
 import 'package:absen_lite/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:intl/intl.dart';
 import 'package:relative_scale/relative_scale.dart';
 
-class SuccessPages extends StatelessWidget {
+class SuccessPages extends StatefulWidget {
   // const SuccessPages({Key? key}) : super(key: key);
   // final ShopModel shop;
   // SuccessPages(this.shop);
   String? shopName;
   SuccessPages(this.shopName);
+
+  @override
+  State<SuccessPages> createState() => _SuccessPagesState();
+}
+
+class _SuccessPagesState extends State<SuccessPages> {
+  DateFormat? dateFormat;
+
+  dynamic currentTime = DateFormat.Hm().format(DateTime.now());
+
+  void initState() {
+    super.initState();
+
+    initializeDateFormatting();
+
+    dateFormat = new DateFormat.yMMMMd('id_ID');
+    // timeFormat = new DateFormat.Hms('id_ID');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +69,7 @@ class SuccessPages extends StatelessWidget {
                     blackTextStyle.copyWith(fontSize: 18, fontWeight: reguler),
               ),
               Text(
-                '09:00',
+                '$currentTime',
                 style:
                     trueBlackTextStyle.copyWith(fontSize: 24, fontWeight: bold),
               )
@@ -85,14 +105,14 @@ class SuccessPages extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text(
-                        '${shopName}',
+                        '${widget.shopName}',
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.center,
                         style: trueBlackTextStyle.copyWith(
                             fontSize: 18, fontWeight: FontWeight.w500),
                       ),
                       Text(
-                        '12 September 2021',
+                        '${DateFormat.yMMMMEEEEd('id_ID').format(DateTime.now())}',
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.center,
                         style: trueBlackTextStyle.copyWith(

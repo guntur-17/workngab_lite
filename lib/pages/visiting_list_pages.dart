@@ -73,7 +73,7 @@ class _VisitingListPageState extends State<VisitingListPage> {
             bottomOpacity: 0.0,
             elevation: 0.0,
             title: new Text(
-              'Today Visiting List',
+              'Visiting List',
               style: trueBlackTextStyle.copyWith(fontWeight: FontWeight.w600),
             ),
           ),

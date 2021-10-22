@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:absen_lite/pages/home.dart';
+import 'package:absen_lite/pages/success_pages.dart';
 import 'package:absen_lite/pages/test_pages.dart';
 import 'package:absen_lite/providers/scanner_provider.dart';
 import 'package:absen_lite/theme.dart';
@@ -67,13 +68,13 @@ class _CameraPagesState extends State<CameraPages> {
     //       ],
     //     ),
     //   );   }
-    handleUploadPhoto() async {
+    handleUploadPhoto(String? name) async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       var token = prefs.getString('token');
       if (await scannerProvider.visitingPhoto(
           widget.id, token, widget.addressUser, image)) {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => HomePage()));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => SuccessPages(name)));
       }
     }
 
@@ -252,7 +253,7 @@ class _CameraPagesState extends State<CameraPages> {
                         //     context,
                         //     MaterialPageRoute(
                         //         builder: (context) => testPage(image)));
-                        handleUploadPhoto();
+                        handleUploadPhoto(widget.name);
                       },
                       child: Text(
                         'next',

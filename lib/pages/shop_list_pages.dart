@@ -43,17 +43,17 @@ class _ShopListPageState extends State<ShopListPage> {
 
   shopListHandler() async {
     // if (!mounted) return;
-    setState(() {
-      isLoading = true;
-    });
+    // setState(() {
+    //   isLoading = true;
+    // });
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var token = prefs.getString('token');
     // await AttedanceProvider().getAttendances(token);
     await ShopProvider().getShops(token);
     if (!mounted) return;
-    setState(() {
-      isLoading = false;
-    });
+    // setState(() {
+    //   isLoading = false;
+    // });
 
     // Navigator.push(
     //   context,
