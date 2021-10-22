@@ -225,7 +225,7 @@ class _ShopListPageState extends State<ShopListPage> {
                       Row(
                         children: [
                           Container(
-                            width: 256,
+                            width: MediaQuery.of(context).size.width * 0.6,
                             child: Text(
                               shop!.name,
                               overflow: TextOverflow.ellipsis,

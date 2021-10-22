@@ -95,7 +95,7 @@ class VisitingCard extends StatelessWidget {
                         Row(
                           children: [
                             Container(
-                              width: 240,
+                              width: MediaQuery.of(context).size.width * 0.6,
                               child: Text('${visiting.shop_name}',
                                   overflow: TextOverflow.ellipsis,
                                   style: trueBlackTextStyle.copyWith(
@@ -107,7 +107,7 @@ class VisitingCard extends StatelessWidget {
                         Row(
                           children: [
                             Container(
-                              width: 240,
+                              width: MediaQuery.of(context).size.width * 0.6,
                               child: Text('${visiting.shop_address}',
                                   overflow: TextOverflow.ellipsis,
                                   style: trueBlackTextStyle.copyWith(

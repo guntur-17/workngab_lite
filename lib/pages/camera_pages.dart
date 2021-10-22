@@ -5,6 +5,7 @@ import 'package:absen_lite/pages/success_pages.dart';
 import 'package:absen_lite/pages/test_pages.dart';
 import 'package:absen_lite/providers/scanner_provider.dart';
 import 'package:absen_lite/theme.dart';
+import 'package:absen_lite/widgets/loading_button.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
@@ -60,6 +61,7 @@ class _CameraPagesState extends State<CameraPages> {
   @override
   Widget build(BuildContext context) {
     ScannerProvider scannerProvider = Provider.of<ScannerProvider>(context);
+    bool isLoading = false;
     // Widget nextpage() {
     //   return Container(
     //     child: Column(
@@ -69,6 +71,10 @@ class _CameraPagesState extends State<CameraPages> {
     //     ),
     //   );   }
     handleUploadPhoto(String? name) async {
+      setState(() {
+        isLoading = true;
+      });
+
       SharedPreferences prefs = await SharedPreferences.getInstance();
       var token = prefs.getString('token');
       if (await scannerProvider.visitingPhoto(
@@ -76,6 +82,10 @@ class _CameraPagesState extends State<CameraPages> {
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => SuccessPages(name)));
       }
+
+      setState(() {
+        isLoading = false;
+      });
     }
 
     Widget title() {
@@ -176,23 +186,23 @@ class _CameraPagesState extends State<CameraPages> {
     }
 
     Widget retakeSelfie() {
-      return Padding(
-        padding: const EdgeInsets.only(top: 20),
-        child: Container(
-          width: MediaQuery.of(context).size.width * 0.4,
-          height: MediaQuery.of(context).size.height * 0.06,
-          decoration: BoxDecoration(
-              color: blueColor, borderRadius: BorderRadius.circular(10)),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Text(
-                'Retake',
-                style: whiteTextStyle.copyWith(fontSize: 18, fontWeight: bold),
-              ),
-            ],
+      return Column(
+        children: [
+          TextButton(
+            style: TextButton.styleFrom(backgroundColor: blueColor),
+            onPressed: () async {
+              // Navigator.push(
+              //     context,
+              //     MaterialPageRoute(
+              //         builder: (context) => testPage(image)));
+              handleUploadPhoto(widget.name);
+            },
+            child: Text(
+              'next',
+              style: whiteTextStyle,
+            ),
           ),
-        ),
+        ],
       );
     }
 
@@ -246,20 +256,9 @@ class _CameraPagesState extends State<CameraPages> {
                       ),
                     ),
               image != null
-                  ? TextButton(
-                      style: TextButton.styleFrom(backgroundColor: blueColor),
-                      onPressed: () async {
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (context) => testPage(image)));
-                        handleUploadPhoto(widget.name);
-                      },
-                      child: Text(
-                        'next',
-                        style: whiteTextStyle,
-                      ),
-                    )
+                  ? isLoading
+                      ? LoadingDefault()
+                      : retakeSelfie()
                   : Container(),
             ],
           ),
