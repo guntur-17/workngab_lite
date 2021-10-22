@@ -64,7 +64,7 @@ class VisitingCard extends StatelessWidget {
                         padding: EdgeInsets.all(10),
                         width: sx(400),
                         child: Text('${visiting.shop_address}',
-                            overflow: TextOverflow.ellipsis,
+                            // overflow: TextOverflow.fade,
                             style: trueBlackTextStyle.copyWith(
                                 fontSize: 14, fontWeight: FontWeight.w400))),
                   ],
@@ -73,48 +73,45 @@ class VisitingCard extends StatelessWidget {
             ),
           ),
           child: Container(
-            width: MediaQuery.of(context).size.width - 60,
+            // decoration: BoxDecoration(color: blackColor),
+            width: MediaQuery.of(context).size.width,
             height: sy(40),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
+                Image.asset(
+                  'assets/toko.png',
+                  width: sy(40),
+                  height: sy(40),
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Image.asset(
-                      'assets/toko.png',
-                      width: sy(40),
-                      height: sy(40),
-                    ),
-                    SizedBox(
-                      width: 16,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    Row(
                       children: [
-                        Row(
-                          children: [
-                            Container(
-                              width: MediaQuery.of(context).size.width * 0.6,
-                              child: Text('${visiting.shop_name}',
-                                  overflow: TextOverflow.ellipsis,
-                                  style: trueBlackTextStyle.copyWith(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w500)),
-                            ),
-                          ],
+                        Container(
+                          width: MediaQuery.of(context).size.width * 0.6,
+                          child: Text('${visiting.shop_name}',
+                              overflow: TextOverflow.ellipsis,
+                              style: trueBlackTextStyle.copyWith(
+                                  fontSize: 18, fontWeight: FontWeight.w500)),
                         ),
-                        Row(
-                          children: [
-                            Container(
-                              width: MediaQuery.of(context).size.width * 0.6,
-                              child: Text('${visiting.shop_address}',
-                                  overflow: TextOverflow.ellipsis,
-                                  style: trueBlackTextStyle.copyWith(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w300)),
-                            ),
-                          ],
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                          width: MediaQuery.of(context).size.width * 0.6,
+                          child: Expanded(
+                            child: Text('${visiting.shop_address}',
+                                overflow: TextOverflow.ellipsis,
+                                style: trueBlackTextStyle.copyWith(
+                                    fontSize: 14, fontWeight: FontWeight.w300)),
+                          ),
                         ),
                       ],
                     ),

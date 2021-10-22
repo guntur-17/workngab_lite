@@ -146,7 +146,7 @@ class _CameraPagesState extends State<CameraPages> {
             child: Expanded(
               child: Text(
                 '${widget.addressUser}',
-                maxLines: 3,
+                // maxLines: 3,
                 overflow: TextOverflow.ellipsis,
                 // textDirection: TextDirection.rtl,
                 textAlign: TextAlign.justify,
