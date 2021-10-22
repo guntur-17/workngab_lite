@@ -132,6 +132,7 @@ class _DashboardPageState extends State<DashboardPage> {
         Provider.of<ShopProvider>(context, listen: false);
 
     List list = attedanceProvider.attendances.reversed.toList();
+    List list2 = visitingAllProvider.showAll.reversed.toList();
 
     // bool isLoading = false;
 
@@ -331,9 +332,7 @@ class _DashboardPageState extends State<DashboardPage> {
             Column(
               children: List.generate(
                 3,
-                (index) => VisitingCard(
-                  visitingAllProvider.showAll[index],
-                ),
+                (index) => VisitingCard(list2[index]),
               ),
               // children:
               //     shopProvider.shops.map((shop) => ShopCard(shop)).toList(),

@@ -7,6 +7,7 @@ import 'package:absen_lite/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:relative_scale/relative_scale.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
@@ -79,67 +80,74 @@ class _CameraPagesState extends State<CameraPages> {
     }
 
     Widget title() {
-      return Padding(
-        padding: const EdgeInsets.only(top: 20),
-        child: Container(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset('assets/toko.png', width: (60), height: (60)),
-              SizedBox(
-                width: 3,
-              ),
-              Text('${widget.name}',
-                  style: trueBlackTextStyle.copyWith(
-                      fontSize: 18, fontWeight: FontWeight.w500))
-            ],
+      return RelativeBuilder(builder: (context, height, width, sy, sx) {
+        return Padding(
+          padding: const EdgeInsets.only(top: 20),
+          child: Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset('assets/toko.png', width: sx(60), height: sy(60)),
+                SizedBox(
+                  width: 3,
+                ),
+                Text('${widget.name}',
+                    style: trueBlackTextStyle.copyWith(
+                        fontSize: 18, fontWeight: FontWeight.w500))
+              ],
+            ),
           ),
-        ),
-      );
+        );
+      });
     }
 
     Widget alamat() {
-      return Padding(
-        padding: const EdgeInsets.only(top: 20, left: 45, right: 45),
-        child: Container(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              // Image.asset(
-              //   'assets/loc.png',
-              //   width: 20,
-              //   height: 20,
-              // ),
-              SizedBox(
-                width: 10,
-              ),
-              Text(
-                'Alamat',
-                style:
-                    blackTextStyle.copyWith(fontSize: 14, fontWeight: reguler),
-              )
-            ],
+      return RelativeBuilder(builder: (context, height, width, sy, sx) {
+        return Padding(
+          padding: const EdgeInsets.only(top: 20, left: 45, right: 45),
+          child: Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Image.asset(
+                  'assets/loc.png',
+                  width: sx(20),
+                  height: sy(20),
+                ),
+                SizedBox(
+                  width: sx(10),
+                ),
+                Text(
+                  'Alamat',
+                  style: blackTextStyle.copyWith(
+                      fontSize: 14, fontWeight: reguler),
+                )
+              ],
+            ),
           ),
-        ),
-      );
+        );
+      });
     }
 
     Widget fullalamat() {
-      return Padding(
-        padding: const EdgeInsets.only(top: 10, left: 45, right: 45),
-        child: Container(
-          child: Expanded(
-            child: Text(
-              '${widget.addressUser}',
-              maxLines: 4,
-              overflow: TextOverflow.ellipsis,
-              // textDirection: TextDirection.rtl,
-              textAlign: TextAlign.justify,
-              style: blackTextStyle.copyWith(fontSize: 14, fontWeight: reguler),
+      return RelativeBuilder(builder: (context, height, width, sy, sx) {
+        return Padding(
+          padding: const EdgeInsets.only(top: 10, left: 45, right: 45),
+          child: Container(
+            child: Expanded(
+              child: Text(
+                '${widget.addressUser}',
+                maxLines: 3,
+                overflow: TextOverflow.ellipsis,
+                // textDirection: TextDirection.rtl,
+                textAlign: TextAlign.justify,
+                style:
+                    blackTextStyle.copyWith(fontSize: 14, fontWeight: reguler),
+              ),
             ),
           ),
-        ),
-      );
+        );
+      });
     }
 
     Widget buttonSelfie() {

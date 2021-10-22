@@ -200,38 +200,121 @@ class _ClockInPageState extends State<ClockInPage> {
     }
 
     Widget tap() {
-      return InkWell(
-        onTap: () {
-          check() async {
-            final SharedPreferences prefs =
-                await SharedPreferences.getInstance();
-            bool? clockIn = prefs.getBool('checkClock');
-            if (clockIn == null) {
-              clockIn = true;
-            }
-            print(clockIn);
-            if (clockIn == true) {
-              handleCheckin();
-            } else {
-              handleCheckout();
-            }
-          }
+      return TextButton(
+        onPressed: () => showDialog<String>(
+          context: context,
+          builder: (BuildContext context) => AlertDialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+                side: BorderSide(color: blueShadow, width: 4)),
+            title: Center(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    child: Column(
+                      children: [
+                        Image.asset('assets/warning.png', width: 46, height: 46)
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 10, left: 10, right: 10),
+                    child: Text('Are you sure to do it now?',
+                        style: trueBlackTextStyle.copyWith(
+                            fontSize: 16, fontWeight: semiBold)),
+                  ),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  InkWell(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Container(
+                      margin: EdgeInsets.only(bottom: 20),
+                      width: 70,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: blueShadow),
+                      child: Center(
+                        child: Wrap(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.all(3),
+                              child: Text(
+                                'NO',
+                                style: whiteTextStyle.copyWith(
+                                    fontSize: 14, fontWeight: medium),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      check() async {
+                        final SharedPreferences prefs =
+                            await SharedPreferences.getInstance();
+                        bool? clockIn = prefs.getBool('checkClock');
+                        if (clockIn == null) {
+                          clockIn = true;
+                        }
+                        print(clockIn);
+                        if (clockIn == true) {
+                          handleCheckin();
+                        } else {
+                          handleCheckout();
+                        }
+                      }
 
-          setState(() {
-            check();
-          });
-
-          // if (_isClockIn == true) {
-          //   _isClockIn = false;
-          // } else {
-          //   _isClockIn = true;
-          // }
-          // print(_isClockIn);
-          // setState(() {});
-          // clockIn == false?
-          //     ? handleCheckin()
-          //     : handleCheckout();
-        },
+                      setState(() {
+                        check();
+                      });
+                    },
+                    child: Container(
+                      margin: EdgeInsets.only(bottom: 20),
+                      width: 70,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: whiteColor,
+                        boxShadow: [
+                          BoxShadow(
+                            color: blueShadow.withOpacity(0.2),
+                            spreadRadius: 1,
+                            blurRadius: 4,
+                            offset: Offset(0, 2), // changes position of shadow
+                          ),
+                        ],
+                      ),
+                      child: Center(
+                        child: Wrap(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.all(3),
+                              child: Text(
+                                'YES',
+                                style: blueTextStyle.copyWith(
+                                    fontSize: 14, fontWeight: medium),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
+        ),
         child: Container(
           margin: EdgeInsets.only(top: 30),
           child: Column(

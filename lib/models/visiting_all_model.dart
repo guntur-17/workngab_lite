@@ -14,7 +14,7 @@ class VisistingAllModel {
   VisistingAllModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     shop_name = json['shop_name'];
-    shop_address = json['shop_adrress'];
+    shop_address = json['shop_address'];
     status = json['status'];
   }
 

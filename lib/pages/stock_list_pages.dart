@@ -1,5 +1,6 @@
 import 'package:absen_lite/models/scanner_model.dart';
 import 'package:absen_lite/pages/home.dart';
+import 'package:absen_lite/pages/success_pages.dart';
 import 'package:absen_lite/providers/product_provider.dart';
 import 'package:absen_lite/providers/scanner_provider.dart';
 import 'package:absen_lite/widgets/item_card.dart';
@@ -74,7 +75,7 @@ class _StockListPageState extends State<StockListPage> {
       if (await scannerProvider.visitingScanner(
           token, addressUser, barcode, latUser, longUser)) {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => HomePage()));
+            context, MaterialPageRoute(builder: (context) => SuccessPages()));
       }
     }
 

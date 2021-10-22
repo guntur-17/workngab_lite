@@ -58,9 +58,18 @@ class _SplashPageState extends State<SplashPage> {
     // var username = prefs.getString('username');
     // var password = prefs.getString('password');
     var token = prefs.getString('token');
-    await Provider.of<AuthProvider>(context, listen: false)
-        .getUser(token: token);
-    Navigator.pushReplacement(context, route);
+    if (await Provider.of<AuthProvider>(context, listen: false)
+        .getUser(token: token)) {
+      Navigator.pushReplacement(context, route);
+    } else {
+      Timer(
+        Duration(seconds: 2),
+        () => Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (BuildContext context) => LoginPage()),
+        ),
+      );
+    }
+    // Navigator.pushReplacement(context, route);
   }
 
   validator() async {

@@ -35,7 +35,7 @@ class VisitingCard extends StatelessWidget {
                           SizedBox(
                             width: 3,
                           ),
-                          Text('Toko Super Murah',
+                          Text('${visiting.shop_name}',
                               style: trueBlackTextStyle.copyWith(
                                   fontSize: 18, fontWeight: FontWeight.w500))
                         ],
@@ -60,8 +60,7 @@ class VisitingCard extends StatelessWidget {
                     Container(
                         padding: EdgeInsets.all(10),
                         width: sx(400),
-                        child: Text(
-                            'Jl. Dr. Setiabudi No.42 - 46, Hegarmanah, Kec. Cidadap, Kota Bandung, Jawa Barat 401412 ',
+                        child: Text('${visiting.shop_address}',
                             style: trueBlackTextStyle.copyWith(
                                 fontSize: 14, fontWeight: FontWeight.w400))),
                   ],
@@ -89,10 +88,10 @@ class VisitingCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Text('Toko Super Murah',
+                        Text('${visiting.shop_name}',
                             style: trueBlackTextStyle.copyWith(
                                 fontSize: 18, fontWeight: FontWeight.w500)),
-                        Text('Grogol, Jakarta Barat',
+                        Text('${visiting.shop_address}',
                             style: trueBlackTextStyle.copyWith(
                                 fontSize: 14, fontWeight: FontWeight.w300)),
                       ],
