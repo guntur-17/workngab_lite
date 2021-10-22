@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:absen_lite/models/scanner_model.dart';
 import 'package:absen_lite/services/scanner_service.dart';
 import 'package:flutter/widgets.dart';
@@ -60,6 +62,27 @@ class ScannerProvider with ChangeNotifier {
         return false;
       }
     } catch (e) {
+      print(e);
+      return false;
+    }
+  }
+
+  Future<bool> visitingPhoto(
+    int? id,
+    String? token,
+    String? address,
+    // double? lat,
+    // double? long,
+    File? image,
+  ) async {
+    try {
+      if (await ScannerService().visitingPhoto(id, token, address, image)) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      print("gagal provider photo");
       print(e);
       return false;
     }

@@ -5,8 +5,8 @@ import 'package:absen_lite/theme.dart';
 
 import 'package:absen_lite/widgets/guide_permission_table.dart';
 
-class GuidePermission extends StatelessWidget {
-  const GuidePermission({Key? key}) : super(key: key);
+class GuideVisiting extends StatelessWidget {
+  const GuideVisiting({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +77,7 @@ class GuidePermission extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Bagaimana Cara Melakukan Absen',
+                Text('Bagaimana Cara Melakukan Absen\nVisiting',
                     style: trueBlackTextStyle.copyWith(
                         fontSize: 16, fontWeight: bold)),
                 Image.asset('assets/question.png', width: 17, height: 17)

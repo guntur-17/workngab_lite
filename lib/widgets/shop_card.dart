@@ -11,7 +11,10 @@ class ShopCard extends StatelessWidget {
   // final VisistingAllModel visiting;
   // VisitingCard(this.visiting);
   final ShopModel shop;
-  ShopCard(this.shop);
+  double? latUser;
+  double? longUser;
+  String? addressUser;
+  ShopCard(this.shop, this.latUser, this.longUser, this.addressUser);
 
   @override
   Widget build(BuildContext context) {
@@ -22,13 +25,14 @@ class ShopCard extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => CameraPages(shop.id, shop.name),
+                builder: (context) => CameraPages(
+                    shop.id, shop.name, latUser, longUser, addressUser),
               ),
             );
           },
           child: Container(
             margin: EdgeInsets.only(bottom: 15),
-            width: MediaQuery.of(context).size.width - 60,
+            width: MediaQuery.of(context).size.width - 30,
             height: sy(40),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -37,32 +41,36 @@ class ShopCard extends StatelessWidget {
                   children: [
                     Image.asset(
                       'assets/toko.png',
-                      width: sy(40),
-                      height: sy(40),
+                      width: sy(20),
+                      height: sy(20),
                     ),
                     SizedBox(
-                      width: 16,
+                      width: 7,
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Text(
-                          '${shop.name}',
-                          overflow: TextOverflow.ellipsis,
-                          textAlign: TextAlign.center,
-                          style: trueBlackTextStyle.copyWith(
-                              fontSize: 18, fontWeight: FontWeight.w500),
+                        Flexible(
+                          child: Container(
+                            child: Text(
+                              '${shop.name}',
+                              overflow: TextOverflow.fade,
+                              textAlign: TextAlign.center,
+                              style: trueBlackTextStyle.copyWith(
+                                  fontSize: 18, fontWeight: FontWeight.w500),
+                            ),
+                          ),
                         ),
                       ],
                     ),
                   ],
                 ),
-                Image.asset(
-                  'assets/rightButton.png',
-                  width: sx(20),
-                  height: sx(20),
-                ),
+                // Image.asset(
+                //   'assets/rightButton.png',
+                //   width: sx(20),
+                //   height: sx(20),
+                // ),
               ],
             ),
           ),

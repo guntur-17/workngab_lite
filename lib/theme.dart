@@ -27,6 +27,8 @@ Color borderOrange = Color(0xffFF902A);
 Color borderPink = Color(0xffFF6A88);
 Color redColor = Color(0xffC64949);
 
+Color yellowColor = Color(0xffFFEEC4);
+
 TextStyle trueBlackTextStyle = GoogleFonts.poppins(color: trueBlack);
 
 TextStyle blackTextStyle = GoogleFonts.poppins(color: blackColor);

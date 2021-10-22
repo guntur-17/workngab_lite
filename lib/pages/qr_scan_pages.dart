@@ -87,7 +87,7 @@ class _ScannerState extends State<Scanner> {
                       double radius = Geolocator.distanceBetween(
                           latUser!, longUser!, shop.lat!, shop.long!);
                       int? id = shop.id;
-                      if (radius <= 300) {
+                      if (radius >= 300) {
                         Navigator.push(
                             context,
                             MaterialPageRoute(

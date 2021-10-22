@@ -95,6 +95,24 @@ class Loadinglocation extends StatelessWidget {
   }
 }
 
+class LoadingDefault extends StatelessWidget {
+  const LoadingDefault({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Container(
+        width: 18,
+        height: 18,
+        child: CircularProgressIndicator(
+          strokeWidth: 3,
+          valueColor: AlwaysStoppedAnimation(blueColor),
+        ),
+      ),
+    );
+  }
+}
+
 class LoadingClockCard extends StatelessWidget {
   const LoadingClockCard({Key? key}) : super(key: key);
 

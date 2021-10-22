@@ -32,9 +32,7 @@ class _SplashPageState extends State<SplashPage> {
     // );
     // clear();
     validator();
-    getattendance();
-    getshop();
-    getvisiting();
+
     //perubahan
     // getValidationData().whenComplete(() async {
     // Timer(
@@ -82,6 +80,9 @@ class _SplashPageState extends State<SplashPage> {
         // print(password);
         print(token);
         getUser();
+        getattendance();
+        getshop();
+        getvisiting();
       });
     } else {
       Timer(

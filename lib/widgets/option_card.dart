@@ -1,4 +1,5 @@
 import 'package:absen_lite/pages/detail_profile.dart';
+import 'package:absen_lite/pages/guide_option.dart';
 import 'package:absen_lite/pages/guide_permission.dart';
 import 'package:absen_lite/theme.dart';
 import 'package:flutter/material.dart';
@@ -94,8 +95,8 @@ class GuideCard extends StatelessWidget {
       width: MediaQuery.of(context).size.width - 60,
       child: InkWell(
         onTap: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => GuidePermission()));
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => GuideOption()));
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

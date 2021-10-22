@@ -7,7 +7,12 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ShopListPage extends StatefulWidget {
-  const ShopListPage({Key? key}) : super(key: key);
+  // const ShopListPage({Key? key}) : super(key: key);
+  double? lat;
+  double? long;
+  String? addressUser;
+
+  ShopListPage(this.lat, this.long, this.addressUser);
 
   @override
   _ShopListPageState createState() => _ShopListPageState();
@@ -45,15 +50,17 @@ class _ShopListPageState extends State<ShopListPage> {
       return Center(
         child: Container(
           width: MediaQuery.of(context).size.width * 0.95,
-          // margin: EdgeInsets.only(top: 20),
+          margin: EdgeInsets.only(top: 10),
           child: SingleChildScrollView(
             child: Center(
               child: Container(
                 margin: EdgeInsets.only(bottom: 20),
                 width: MediaQuery.of(context).size.width * 0.90,
                 child: Column(
-                  children:
-                      shopProvider.shops.map((shop) => ShopCard(shop)).toList(),
+                  children: shopProvider.shops
+                      .map((shop) => ShopCard(
+                          shop, widget.lat, widget.long, widget.addressUser))
+                      .toList(),
                   // children: visitingAllProvider.showAll
                   //     .map((visiting) => VisitingCard(visiting))
                   //     .toList(),
@@ -86,18 +93,20 @@ class _ShopListPageState extends State<ShopListPage> {
             bottomOpacity: 0.0,
             elevation: 0.0,
             title: new Text(
-              'TShop',
+              'Shop',
               style: trueBlackTextStyle.copyWith(fontWeight: FontWeight.w600),
             ),
           ),
         ),
         backgroundColor: whiteColor,
         body: SingleChildScrollView(
-          child: Column(
-            children: [
-              isLoading ? LoadingButton() : card(),
-              // card(),
-            ],
+          child: Center(
+            child: Column(
+              children: [
+                isLoading ? LoadingDefault() : card(),
+                // card(),
+              ],
+            ),
           ),
         ),
       ),

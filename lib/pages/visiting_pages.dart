@@ -102,33 +102,56 @@ class _VisitingPageState extends State<VisitingPage> {
     AuthProvider authProvider = Provider.of<AuthProvider>(context);
     // VisitingAllProvider visitingAllProvider =
     // Provider.of<VisitingAllProvider>(context, listen: false);
-    Widget day() {
+    Widget text() {
       return Container(
-        margin: EdgeInsets.only(top: 30),
-        child: Center(
-          child: Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  '07:30',
-                  style: trueBlackTextStyle.copyWith(
-                      fontSize: 28, fontWeight: semiBold),
-                ),
-                SizedBox(
-                  height: 3,
-                ),
-                Text(
-                  'Senin, 12 Maret 2021',
-                  style:
-                      greyTextStyle.copyWith(fontSize: 18, fontWeight: reguler),
-                )
-              ],
+        width: MediaQuery.of(context).size.width,
+        margin: EdgeInsets.only(left: 22),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Text(
+              'Choose Your Choice',
+              style:
+                  trueBlackTextStyle.copyWith(fontSize: 24, fontWeight: bold),
             ),
-          ),
+            Text(
+              'You can scan barcode or take a selfie',
+              style:
+                  trueBlackTextStyle.copyWith(fontSize: 14, fontWeight: light),
+            )
+          ],
         ),
       );
     }
+
+    // Widget day() {
+    //   return Container(
+    //     margin: EdgeInsets.only(top: 30),
+    //     child: Center(
+    //       child: Container(
+    //         child: Column(
+    //           crossAxisAlignment: CrossAxisAlignment.center,
+    //           children: [
+    //             Text(
+    //               '07:30',
+    //               style: trueBlackTextStyle.copyWith(
+    //                   fontSize: 28, fontWeight: semiBold),
+    //             ),
+    //             SizedBox(
+    //               height: 3,
+    //             ),
+    //             Text(
+    //               'Senin, 12 Maret 2021',
+    //               style:
+    //                   greyTextStyle.copyWith(fontSize: 18, fontWeight: reguler),
+    //             )
+    //           ],
+    //         ),
+    //       ),
+    //     ),
+    //   );
+    // }
 
     Future _openScanner(BuildContext context) async {
       double lat = currentposition!.latitude;
@@ -141,10 +164,12 @@ class _VisitingPageState extends State<VisitingPage> {
     }
 
     Future _getPhoto(BuildContext context) async {
-      // double lat = currentposition!.latitude;
-      // double long = currentposition!.longitude;
+      double lat = currentposition!.latitude;
+      double long = currentposition!.longitude;
       final picker = await Navigator.push(
-          context, MaterialPageRoute(builder: (c) => ShopListPage()));
+          context,
+          MaterialPageRoute(
+              builder: (c) => ShopListPage(lat, long, currentAddress)));
       _picker = picker;
     }
 
@@ -158,6 +183,148 @@ class _VisitingPageState extends State<VisitingPage> {
 
     //   setState(() {});
     // }
+    Widget barcode() {
+      return InkWell(
+        onTap: () {
+          _openScanner(context);
+          // Navigator.push(
+          //     context, MaterialPageRoute(builder: (context) => GuideOption()));
+        },
+        child: Padding(
+          padding: const EdgeInsets.only(top: 20),
+          child: Container(
+            height: MediaQuery.of(context).size.height * 0.1,
+            width: MediaQuery.of(context).size.width * 0.9,
+            decoration: BoxDecoration(
+                color: whiteColor,
+                borderRadius: BorderRadius.circular(8),
+                boxShadow: [
+                  BoxShadow(
+                    color: blackColor,
+                    blurRadius: 1,
+                  )
+                ]),
+            child: Padding(
+              padding: const EdgeInsets.only(
+                left: 10,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Image.asset(
+                          'assets/barcode.png',
+                          width: 50,
+                          height: 50,
+                        ),
+                        Image.asset(
+                          'assets/vertical.png',
+                          width: 50,
+                          height: 50,
+                        ),
+                        Text(
+                          'Scan Barcode',
+                          style: trueBlackTextStyle.copyWith(
+                              fontSize: 16, fontWeight: bold),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.1,
+                    child: Row(
+                      children: [
+                        Image.asset(
+                          'assets/rightButton.png',
+                          width: 20,
+                          height: 20,
+                          color: blackColor,
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+        ),
+      );
+    }
+
+    Widget selfie() {
+      return InkWell(
+        onTap: () {
+          shopProvider.getShops(authProvider.user.access_token);
+          _getPhoto(context);
+          // Navigator.push(
+          //     context, MaterialPageRoute(builder: (context) => GuideOption()));
+        },
+        child: Padding(
+          padding: const EdgeInsets.only(top: 12),
+          child: Container(
+            height: MediaQuery.of(context).size.height * 0.1,
+            width: MediaQuery.of(context).size.width * 0.9,
+            decoration: BoxDecoration(
+                color: whiteColor,
+                borderRadius: BorderRadius.circular(8),
+                boxShadow: [
+                  BoxShadow(
+                    color: trueBlack,
+                    blurRadius: 1,
+                  )
+                ]),
+            child: Padding(
+              padding: const EdgeInsets.only(
+                left: 10,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Image.asset(
+                          'assets/selfie.png',
+                          width: 50,
+                          height: 50,
+                        ),
+                        Image.asset(
+                          'assets/vertical.png',
+                          width: 50,
+                          height: 50,
+                        ),
+                        Text(
+                          'Take a Selfie',
+                          style: trueBlackTextStyle.copyWith(
+                              fontSize: 16, fontWeight: bold),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.1,
+                    child: Row(
+                      children: [
+                        Image.asset(
+                          'assets/rightButton.png',
+                          width: 20,
+                          height: 20,
+                          color: blackColor,
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+        ),
+      );
+    }
 
     Widget tap() {
       return Row(
@@ -315,10 +482,10 @@ class _VisitingPageState extends State<VisitingPage> {
             backgroundColor: Colors.white,
             bottomOpacity: 0.0,
             elevation: 0.0,
-            title: Text(
-              'Visiting',
-              style: TextStyle(color: Colors.black),
-            ),
+            // title: Text(
+            //   'Visiting',
+            //   style: TextStyle(color: Colors.black),
+            // ),
             actions: <Widget>[
               Container(
                 child: Image(image: AssetImage('assets/rounded.png')),
@@ -328,7 +495,7 @@ class _VisitingPageState extends State<VisitingPage> {
         ),
         backgroundColor: whiteColor,
         body: Column(
-          children: [day(), tap(), location(), history()],
+          children: [text(), barcode(), selfie()],
         ),
       ),
     );

@@ -130,45 +130,28 @@ class _StockListPageState extends State<StockListPage> {
       return Container(
         width: double.infinity,
         // decoration: BoxDecoration(color: blackColor),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              '$addressUser',
-              style: trueBlackTextStyle.copyWith(
-                fontSize: 14,
-                fontWeight: medium,
+        child: Center(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TextButton(
+                style: TextButton.styleFrom(backgroundColor: blueColor),
+                onPressed: () async {
+                  // await getPhoto();
+                  handleUploadScanner();
+                },
+                child: Text(
+                  'Upload',
+                  style: whiteTextStyle,
+                ),
               ),
-              textAlign: TextAlign.start,
-            ),
-            SizedBox(
-              height: 6,
-            ),
-            Text(
-              '$barcode',
-              style: trueBlackTextStyle.copyWith(
-                fontSize: 14,
-                fontWeight: medium,
-              ),
-              textAlign: TextAlign.start,
-            ),
-            TextButton(
-              style: TextButton.styleFrom(backgroundColor: blueColor),
-              onPressed: () async {
-                // await getPhoto();
-                handleUploadScanner();
-              },
-              child: Text(
-                'Upload',
-                style: whiteTextStyle,
-              ),
-            ),
-            // Column(
-            //   children: productProvider.showProduct
-            //       .map((products) => ItemCard(products))
-            //       .toList(),
-            // )
-          ],
+              // Column(
+              //   children: productProvider.showProduct
+              //       .map((products) => ItemCard(products))
+              //       .toList(),
+              // )
+            ],
+          ),
         ),
       );
     }
@@ -186,6 +169,8 @@ class _StockListPageState extends State<StockListPage> {
             ),
           ),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               detail_shop(),
               line(),
@@ -225,7 +210,7 @@ class _StockListPageState extends State<StockListPage> {
               bottomOpacity: 0.0,
               elevation: 0.0,
               title: new Text(
-                'Stock List',
+                'Shop Detail',
                 style: trueBlackTextStyle.copyWith(fontWeight: FontWeight.w600),
               ),
             ),

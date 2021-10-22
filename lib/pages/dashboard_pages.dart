@@ -131,6 +131,8 @@ class _DashboardPageState extends State<DashboardPage> {
     ShopProvider shopProvider =
         Provider.of<ShopProvider>(context, listen: false);
 
+    List list = attedanceProvider.attendances.reversed.toList();
+
     // bool isLoading = false;
 
     // void initState() {
@@ -268,9 +270,84 @@ class _DashboardPageState extends State<DashboardPage> {
 
     Widget attencance_history() {
       return Container(
-        width: MediaQuery.of(context).size.width * 0.85,
-        margin: EdgeInsets.only(top: 22, bottom: 10),
+        // width: MediaQuery.of(context).size.width * 0.85,
+        margin: EdgeInsets.only(top: 10, bottom: 10),
         // height: 195,
+        child: Column(
+          children: [
+            Column(
+              children: List.generate(2, (index) => ClockOutCard(list[index])),
+              // children:
+              //     shopProvider.shops.map((shop) => ShopCard(shop)).toList(),
+            ),
+            // SizedBox(
+            //   height: 6,
+            // ),
+            // ClockOutCard(),
+            // // SizedBox(
+            // //   height: 6,
+            // // ),
+            // ClockInCard(),
+          ],
+        ),
+      );
+    }
+
+    Widget visiting_list() {
+      return Container(
+        // width: MediaQuery.of(context).size.width * 0.85,
+        margin: EdgeInsets.only(top: 10, bottom: 10),
+        // height: 195,
+        child: Column(
+          children: [
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: [
+            //     Text(
+            //       'Today Visiting List',
+            //       style: trueBlackTextStyle.copyWith(
+            //           fontSize: 16, fontWeight: semiBold),
+            //     ),
+            //     InkWell(
+            //       child: Text(
+            //         'See All',
+            //         style: trueBlackTextStyle.copyWith(
+            //             fontSize: 14, fontWeight: light),
+            //       ),
+            //       onTap: () {
+            //         Navigator.push(
+            //             context,
+            //             MaterialPageRoute(
+            //                 builder: (context) => VisitingListPage()));
+            //       },
+            //     )
+            //   ],
+            // ),
+            // Column(
+            //   children: visitingAllProvider.showAll
+            //       .map((visiting) => VisitingCard(visiting))
+            //       .toList(),
+            // ),
+            Column(
+              children: List.generate(
+                3,
+                (index) => VisitingCard(
+                  visitingAllProvider.showAll[index],
+                ),
+              ),
+              // children:
+              //     shopProvider.shops.map((shop) => ShopCard(shop)).toList(),
+            ),
+          ],
+        ),
+      );
+    }
+
+    Widget body() {
+      return Container(
+        width: MediaQuery.of(context).size.width * 0.85,
+        margin: EdgeInsets.only(top: 20, bottom: 10),
+        // transform: Matrix4.translationValues(0.0, -115.0, 0.0),
         child: Column(
           children: [
             Row(
@@ -300,39 +377,13 @@ class _DashboardPageState extends State<DashboardPage> {
                 )
               ],
             ),
-            Column(
-              children: List.generate(
-                  2,
-                  (index) =>
-                      ClockOutCard(attedanceProvider.attendances[index])),
-              // children:
-              //     shopProvider.shops.map((shop) => ShopCard(shop)).toList(),
-            ),
-            // SizedBox(
-            //   height: 6,
-            // ),
-            // ClockOutCard(),
-            // // SizedBox(
-            // //   height: 6,
-            // // ),
-            // ClockInCard(),
-          ],
-        ),
-      );
-    }
 
-    Widget visiting_list() {
-      return Container(
-        width: MediaQuery.of(context).size.width * 0.85,
-        margin: EdgeInsets.only(top: 12, bottom: 10),
-        // height: 195,
-        child: Column(
-          children: [
+            isLoading ? LoadingDefault() : attencance_history(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Today Visiting List',
+                  'Visiting List',
                   style: trueBlackTextStyle.copyWith(
                       fontSize: 16, fontWeight: semiBold),
                 ),
@@ -351,29 +402,8 @@ class _DashboardPageState extends State<DashboardPage> {
                 )
               ],
             ),
-            // Column(
-            //   children: visitingAllProvider.showAll
-            //       .map((visiting) => VisitingCard(visiting))
-            //       .toList(),
-            // ),
-            Column(
-              children: List.generate(3,
-                  (index) => VisitingCard(visitingAllProvider.showAll[index])),
-              // children:
-              //     shopProvider.shops.map((shop) => ShopCard(shop)).toList(),
-            ),
-          ],
-        ),
-      );
-    }
 
-    Widget body() {
-      return Container(
-        // transform: Matrix4.translationValues(0.0, -115.0, 0.0),
-        child: Column(
-          children: [
-            isLoading ? LoadingButton() : attencance_history(),
-            isLoading ? LoadingButton() : visiting_list(),
+            isLoading ? LoadingDefault() : visiting_list(),
             // visiting_list(),
           ],
         ),
