@@ -14,11 +14,9 @@ import 'package:dio/dio.dart';
 class CameraPages extends StatefulWidget {
   int? id;
   String? name;
-  double? latUser;
-  double? longUser;
+
   String? addressUser;
-  CameraPages(
-      this.id, this.name, this.latUser, this.longUser, this.addressUser);
+  CameraPages(this.id, this.name, this.addressUser);
   // const CameraPages({Key? key}) : super(key: key);
 
   @override

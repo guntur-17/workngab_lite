@@ -11,10 +11,10 @@ class ShopCard extends StatelessWidget {
   // final VisistingAllModel visiting;
   // VisitingCard(this.visiting);
   final ShopModel shop;
-  double? latUser;
-  double? longUser;
+  // double? latUser;
+  // double? longUser;
   String? addressUser;
-  ShopCard(this.shop, this.latUser, this.longUser, this.addressUser);
+  ShopCard(this.shop, this.addressUser);
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +25,8 @@ class ShopCard extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => CameraPages(
-                    shop.id, shop.name, latUser, longUser, addressUser),
+                builder: (context) =>
+                    CameraPages(shop.id, shop.name, addressUser),
               ),
             );
           },

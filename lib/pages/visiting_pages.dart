@@ -166,10 +166,8 @@ class _VisitingPageState extends State<VisitingPage> {
     Future _getPhoto(BuildContext context) async {
       double lat = currentposition!.latitude;
       double long = currentposition!.longitude;
-      final picker = await Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (c) => ShopListPage(lat, long, currentAddress)));
+      final picker = await Navigator.push(context,
+          MaterialPageRoute(builder: (c) => ShopListPage(currentAddress)));
       _picker = picker;
     }
 

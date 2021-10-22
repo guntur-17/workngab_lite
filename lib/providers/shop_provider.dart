@@ -13,7 +13,7 @@ class ShopProvider with ChangeNotifier {
 
   Future<bool> getShops(String? token) async {
     try {
-      List<ShopModel> shops = await ShopService().getShops(token);
+      List<ShopModel> shops = await ShopService().getShops(token: token);
       _shops = shops;
       return true;
     } catch (e) {
