@@ -13,66 +13,6 @@ class GuideOption extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget absen() {
-      return InkWell(
-        onTap: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => GuidePermission()));
-        },
-        child: ClipPath(
-          clipper: ShapeBorderClipper(
-              shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          )),
-          child: Padding(
-            padding: const EdgeInsets.only(top: 10),
-            child: Container(
-              height: MediaQuery.of(context).size.height * 0.07,
-              width: MediaQuery.of(context).size.width * 0.9,
-              decoration: BoxDecoration(
-                  color: whiteColor,
-                  // borderRadius: BorderRadius.circular(10),
-                  border: Border(left: BorderSide(color: blueColor, width: 5)),
-                  boxShadow: [
-                    BoxShadow(
-                      color: blackColor,
-                      blurRadius: 2,
-                    )
-                  ]),
-              child: Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      left: 10,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Text(
-                          'Bagaimana cara melakukan absen?',
-                          style: blackTextStyle.copyWith(
-                              fontSize: 12, fontWeight: bold),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 60),
-                          child: Image.asset(
-                            'assets/rightButton.png',
-                            width: 20,
-                            height: 20,
-                            color: blackColor,
-                          ),
-                        )
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ),
-        ),
-      );
-    }
-
     Widget absen2() {
       return Container(
         margin: EdgeInsets.only(top: 10),
@@ -105,33 +45,16 @@ class GuideOption extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          left: 10,
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Text(
-                              'Bagaimana cara melakukan absen?',
-                              style: blackTextStyle.copyWith(
-                                  fontSize: 12, fontWeight: bold),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 60),
-                              child: Image.asset(
-                                'assets/rightButton.png',
-                                width: 20,
-                                height: 20,
-                                color: blackColor,
-                              ),
-                            )
-                          ],
-                        ),
-                      )
-                    ],
+                  Text(
+                    'Bagaimana cara melakukan absen?',
+                    style:
+                        blackTextStyle.copyWith(fontSize: 12, fontWeight: bold),
+                  ),
+                  Image.asset(
+                    'assets/rightButton.png',
+                    width: 20,
+                    height: 20,
+                    color: blackColor,
                   ),
                 ],
               ),
@@ -173,33 +96,16 @@ class GuideOption extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          left: 10,
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Text(
-                              'Bagaimana cara melakukan absen\nkunjungan?',
-                              style: blackTextStyle.copyWith(
-                                  fontSize: 12, fontWeight: bold),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 60),
-                              child: Image.asset(
-                                'assets/rightButton.png',
-                                width: 20,
-                                height: 20,
-                                color: blackColor,
-                              ),
-                            )
-                          ],
-                        ),
-                      )
-                    ],
+                  Text(
+                    'Bagaimana cara melakukan absen\nkunjungan?',
+                    style:
+                        blackTextStyle.copyWith(fontSize: 12, fontWeight: bold),
+                  ),
+                  Image.asset(
+                    'assets/rightButton.png',
+                    width: 20,
+                    height: 20,
+                    color: blackColor,
                   ),
                 ],
               ),

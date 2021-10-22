@@ -93,33 +93,31 @@ class _ShopListPageState extends State<ShopListPage> {
     // AuthProvider authProvider = Provider.of<AuthProvider>(context);
 
     Widget card() {
-      return Center(
-        child: Container(
-          width: MediaQuery.of(context).size.width * 0.95,
-          // margin: EdgeInsets.only(top: 20),
-          child: SingleChildScrollView(
-            child: Center(
-              child: Container(
-                margin: EdgeInsets.only(bottom: 20),
-                width: MediaQuery.of(context).size.width * 0.90,
-                child:
-                    // FutureBuilder<List<ShopModel>>(
-                    //     future: _shopList.getShops(
-                    //         token: authProvider.user.access_token),
-                    //     builder: (context, snapshot) {
-                    //       return
-                    ListView.builder(
-                  itemCount: shops.length,
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemBuilder: (context, index) {
-                    final shop = shops[index];
+      return Container(
+        width: MediaQuery.of(context).size.width * 0.95,
+        // margin: EdgeInsets.only(top: 20),
+        child: SingleChildScrollView(
+          child: Center(
+            child: Container(
+              margin: EdgeInsets.only(bottom: 20),
+              width: MediaQuery.of(context).size.width * 0.90,
+              child:
+                  // FutureBuilder<List<ShopModel>>(
+                  //     future: _shopList.getShops(
+                  //         token: authProvider.user.access_token),
+                  //     builder: (context, snapshot) {
+                  //       return
+                  ListView.builder(
+                itemCount: shops.length,
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemBuilder: (context, index) {
+                  final shop = shops[index];
 
-                    return cardShop(shop: shop);
-                  },
-                ),
-                // }),
+                  return cardShop(shop: shop);
+                },
               ),
+              // }),
             ),
           ),
         ),
@@ -147,7 +145,7 @@ class _ShopListPageState extends State<ShopListPage> {
             bottomOpacity: 0.0,
             elevation: 0.0,
             title: new Text(
-              'TShop',
+              'Shop',
               style: trueBlackTextStyle.copyWith(fontWeight: FontWeight.w600),
             ),
             // actions: [
@@ -212,29 +210,32 @@ class _ShopListPageState extends State<ShopListPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
+                  Image.asset(
+                    'assets/toko.png',
+                    width: sy(40),
+                    height: sy(40),
+                  ),
+                  SizedBox(
+                    width: 16,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Image.asset(
-                        'assets/toko.png',
-                        width: sy(40),
-                        height: sy(40),
-                      ),
-                      SizedBox(
-                        width: 16,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      Row(
                         children: [
-                          Text(
-                            shop!.name,
-                            overflow: TextOverflow.ellipsis,
-                            textAlign: TextAlign.center,
-                            style: trueBlackTextStyle.copyWith(
-                                fontSize: 18, fontWeight: FontWeight.w500),
-                          )
+                          Container(
+                            width: 256,
+                            child: Text(
+                              shop!.name,
+                              overflow: TextOverflow.ellipsis,
+                              textAlign: TextAlign.left,
+                              style: trueBlackTextStyle.copyWith(
+                                  fontSize: 18, fontWeight: FontWeight.w500),
+                            ),
+                          ),
                         ],
-                      ),
+                      )
                     ],
                   ),
                   Image.asset(

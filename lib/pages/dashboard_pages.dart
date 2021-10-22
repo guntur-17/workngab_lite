@@ -344,7 +344,7 @@ class _DashboardPageState extends State<DashboardPage> {
 
     Widget body() {
       return Container(
-        width: MediaQuery.of(context).size.width * 0.85,
+        width: MediaQuery.of(context).size.width * 0.90,
         margin: EdgeInsets.only(top: 20, bottom: 10),
         // transform: Matrix4.translationValues(0.0, -115.0, 0.0),
         child: Column(

@@ -80,7 +80,7 @@ class GuidePermission extends StatelessWidget {
                 Text('Bagaimana Cara Melakukan Absen',
                     style: trueBlackTextStyle.copyWith(
                         fontSize: 16, fontWeight: bold)),
-                Image.asset('assets/question.png', width: 17, height: 17)
+                // Image.asset('assets/question.png', width: 17, height: 17)
               ],
             ),
             GuidePermissionTable(),

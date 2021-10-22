@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:absen_lite/pages/dashboard_pages.dart';
 import 'package:absen_lite/pages/home.dart';
+import 'package:absen_lite/pages/success_pages.dart';
 import 'package:absen_lite/providers/scanner_provider.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
@@ -43,6 +44,16 @@ class _ScannerState extends State<Scanner> {
     // double latUser = currentposition!.latitude;
     // double longUser = currentposition!.longitude;
     ScannerProvider scannerProvider = Provider.of<ScannerProvider>(context);
+
+    handleUploadScanner(String? shopName) async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      var token = prefs.getString('token');
+      if (await scannerProvider.visitingScanner(
+          token, addressUser, result!.code, latUser, longUser)) {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => SuccessPages(shopName)));
+      }
+    }
 
     // var userLocation = Provider.of<GeoLocation>(context);
     // userLocation.radiuscentermeters = 1000; //1000 = 100 meters
@@ -88,11 +99,12 @@ class _ScannerState extends State<Scanner> {
                           latUser!, longUser!, shop.lat!, shop.long!);
                       int? id = shop.id;
                       if (radius >= 300) {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => StockListPage(latUser,
-                                    longUser, id, result!.code, addressUser)));
+                        handleUploadScanner(shop.name);
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (context) => StockListPage(latUser,
+                        //             longUser, id, result!.code, addressUser)));
                       } else {
                         print('not in range');
                       }

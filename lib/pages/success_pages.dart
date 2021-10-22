@@ -1,4 +1,5 @@
 import 'package:absen_lite/models/shop_model.dart';
+import 'package:absen_lite/pages/home.dart';
 import 'package:absen_lite/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:relative_scale/relative_scale.dart';
@@ -7,13 +8,15 @@ class SuccessPages extends StatelessWidget {
   // const SuccessPages({Key? key}) : super(key: key);
   // final ShopModel shop;
   // SuccessPages(this.shop);
+  String? shopName;
+  SuccessPages(this.shopName);
 
   @override
   Widget build(BuildContext context) {
     Widget title() {
       return RelativeBuilder(builder: (context, height, width, sy, sx) {
         return Container(
-          margin: EdgeInsets.only(top: sy(150)),
+          margin: EdgeInsets.only(top: sy(30)),
           child: Text(
             'Visiting Success',
             style: trueBlackTextStyle.copyWith(fontSize: 24, fontWeight: bold),
@@ -59,11 +62,13 @@ class SuccessPages extends StatelessWidget {
     Widget shop() {
       return RelativeBuilder(builder: (context, height, width, sy, sx) {
         return Container(
-          margin: EdgeInsets.only(top: sy(25)),
-          width: MediaQuery.of(context).size.width - 130,
+          // margin: EdgeInsets.only(top: sy(25)),
+          // width: MediaQuery.of(context).size.width - ,
           height: sy(60),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.center,
+            // crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Row(
                 children: [
@@ -80,7 +85,7 @@ class SuccessPages extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text(
-                        'Toko Super Murah',
+                        '${shopName}',
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.center,
                         style: trueBlackTextStyle.copyWith(
@@ -105,26 +110,34 @@ class SuccessPages extends StatelessWidget {
 
     Widget button() {
       return RelativeBuilder(builder: (context, height, width, sy, sx) {
-        return Container(
-          margin: EdgeInsets.only(top: sy(8)),
-          width: MediaQuery.of(context).size.width * 0.8,
-          height: MediaQuery.of(context).size.height * 0.07,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10), color: blueColor),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Text(
-                'Kembali ke Menu Utama',
-                style:
-                    whiteTextStyle.copyWith(fontSize: 14, fontWeight: reguler),
-              ),
-              Image.asset(
-                'assets/kanan.png',
-                width: sx(20),
-                height: sy(20),
-              ),
-            ],
+        return InkWell(
+          onTap: () {
+            Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => HomePage()),
+                (route) => false);
+          },
+          child: Container(
+            margin: EdgeInsets.only(top: sy(8)),
+            width: MediaQuery.of(context).size.width * 0.8,
+            height: MediaQuery.of(context).size.height * 0.07,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10), color: blueColor),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text(
+                  'Kembali ke Menu Utama',
+                  style: whiteTextStyle.copyWith(
+                      fontSize: 14, fontWeight: reguler),
+                ),
+                Image.asset(
+                  'assets/kanan.png',
+                  width: sx(20),
+                  height: sy(20),
+                ),
+              ],
+            ),
           ),
         );
       });
@@ -139,6 +152,8 @@ class SuccessPages extends StatelessWidget {
                   image: AssetImage('assets/successScan.png'),
                   fit: BoxFit.fill)),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [title(), subtitle(), time(), shop(), button()],
           ),
         ),

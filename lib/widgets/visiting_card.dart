@@ -33,11 +33,14 @@ class VisitingCard extends StatelessWidget {
                           Image.asset('assets/toko.png',
                               width: sx(60), height: sx(60)),
                           SizedBox(
-                            width: 3,
+                            width: 6,
                           ),
-                          Text('${visiting.shop_name}',
-                              style: trueBlackTextStyle.copyWith(
-                                  fontSize: 18, fontWeight: FontWeight.w500))
+                          Expanded(
+                            child: Text('${visiting.shop_name}',
+                                overflow: TextOverflow.ellipsis,
+                                style: trueBlackTextStyle.copyWith(
+                                    fontSize: 18, fontWeight: FontWeight.w500)),
+                          )
                         ],
                       ),
                     ),
@@ -61,6 +64,7 @@ class VisitingCard extends StatelessWidget {
                         padding: EdgeInsets.all(10),
                         width: sx(400),
                         child: Text('${visiting.shop_address}',
+                            overflow: TextOverflow.ellipsis,
                             style: trueBlackTextStyle.copyWith(
                                 fontSize: 14, fontWeight: FontWeight.w400))),
                   ],
@@ -88,12 +92,30 @@ class VisitingCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Text('${visiting.shop_name}',
-                            style: trueBlackTextStyle.copyWith(
-                                fontSize: 18, fontWeight: FontWeight.w500)),
-                        Text('${visiting.shop_address}',
-                            style: trueBlackTextStyle.copyWith(
-                                fontSize: 14, fontWeight: FontWeight.w300)),
+                        Row(
+                          children: [
+                            Container(
+                              width: 240,
+                              child: Text('${visiting.shop_name}',
+                                  overflow: TextOverflow.ellipsis,
+                                  style: trueBlackTextStyle.copyWith(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w500)),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Container(
+                              width: 240,
+                              child: Text('${visiting.shop_address}',
+                                  overflow: TextOverflow.ellipsis,
+                                  style: trueBlackTextStyle.copyWith(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w300)),
+                            ),
+                          ],
+                        ),
                       ],
                     ),
                   ],

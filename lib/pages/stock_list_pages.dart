@@ -69,15 +69,15 @@ class _StockListPageState extends State<StockListPage> {
     //         context, MaterialPageRoute(builder: (context) => HomePage()));
     //   }
 
-    handleUploadScanner() async {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      var token = prefs.getString('token');
-      if (await scannerProvider.visitingScanner(
-          token, addressUser, barcode, latUser, longUser)) {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => SuccessPages()));
-      }
-    }
+    // handleUploadScanner() async {
+    //   SharedPreferences prefs = await SharedPreferences.getInstance();
+    //   var token = prefs.getString('token');
+    //   if (await scannerProvider.visitingScanner(
+    //       token, addressUser, barcode, latUser, longUser)) {
+    //     Navigator.push(
+    //         context, MaterialPageRoute(builder: (context) => SuccessPages()));
+    //   }
+    // }
 
     Widget detail_shop() {
       return Container(
@@ -139,7 +139,7 @@ class _StockListPageState extends State<StockListPage> {
                 style: TextButton.styleFrom(backgroundColor: blueColor),
                 onPressed: () async {
                   // await getPhoto();
-                  handleUploadScanner();
+                  // handleUploadScanner();
                 },
                 child: Text(
                   'Upload',
