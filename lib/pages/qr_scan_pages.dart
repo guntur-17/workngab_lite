@@ -55,6 +55,38 @@ class _ScannerState extends State<Scanner> {
       }
     }
 
+    handleDiluarJangkauanScanner() {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        backgroundColor: redColor,
+        content: Text(
+          'Not in Range..',
+          textAlign: TextAlign.center,
+        ),
+        // duration: Duration(seconds: 2),
+      ));
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => HomePage()),
+          (route) => false);
+      // ScaffoldMessenger.of(context).removeCurrentSnackBar();
+    }
+
+    handleSalahScanner() {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        backgroundColor: redColor,
+        content: Text(
+          'wrong barcode',
+          textAlign: TextAlign.center,
+        ),
+        // duration: Duration(seconds: 2),
+      ));
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => HomePage()),
+          (route) => false);
+      // ScaffoldMessenger.of(context).removeCurrentSnackBar();
+    }
+
     // var userLocation = Provider.of<GeoLocation>(context);
     // userLocation.radiuscentermeters = 1000; //1000 = 100 meters
     // userLocation.setPointCenter(dummyCenterLatitude, dummyCenterLongitude);
@@ -106,11 +138,13 @@ class _ScannerState extends State<Scanner> {
                         //         builder: (context) => StockListPage(latUser,
                         //             longUser, id, result!.code, addressUser)));
                       } else {
+                        handleDiluarJangkauanScanner();
                         print('not in range');
                       }
                       print(latUser);
                       print(longUser);
                     } else {
+                      handleSalahScanner();
                       print('wrong barcode');
                     }
                   }

@@ -71,21 +71,40 @@ class _CameraPagesState extends State<CameraPages> {
     //     ),
     //   );   }
     handleUploadPhoto(String? name) async {
-      setState(() {
-        isLoading = true;
-      });
+      // setState(() {
+      //   isLoading = true;
+      // });
 
       SharedPreferences prefs = await SharedPreferences.getInstance();
       var token = prefs.getString('token');
       if (await scannerProvider.visitingPhoto(
           widget.id, token, widget.addressUser, image)) {
+        // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        //     backgroundColor: greenColor,
+        //     content: Text(
+        //       'Loading...',
+        //       textAlign: TextAlign.center,
+        //     )));
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => SuccessPages(name)));
+        ScaffoldMessenger.of(context).removeCurrentSnackBar();
       }
 
-      setState(() {
-        isLoading = false;
-      });
+      // setState(() {
+      //   isLoading = false;
+      // });
+    }
+
+    wait(String? name) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        backgroundColor: greenColor,
+        content: Text(
+          'Loading...',
+          textAlign: TextAlign.center,
+        ),
+        // duration: Duration(seconds: 2),
+      ));
+      handleUploadPhoto(name);
     }
 
     Widget title() {
@@ -98,11 +117,11 @@ class _CameraPagesState extends State<CameraPages> {
               children: [
                 Image.asset('assets/toko.png', width: sx(60), height: sy(60)),
                 SizedBox(
-                  width: 3,
+                  width: 5,
                 ),
                 Text('${widget.name}',
                     style: trueBlackTextStyle.copyWith(
-                        fontSize: 18, fontWeight: FontWeight.w500))
+                        fontSize: 18, fontWeight: FontWeight.w600))
               ],
             ),
           ),
@@ -128,8 +147,8 @@ class _CameraPagesState extends State<CameraPages> {
                 ),
                 Text(
                   'Alamat',
-                  style: blackTextStyle.copyWith(
-                      fontSize: 14, fontWeight: reguler),
+                  style: trueBlackTextStyle.copyWith(
+                      fontSize: 14, fontWeight: semiBold),
                 )
               ],
             ),
@@ -141,17 +160,18 @@ class _CameraPagesState extends State<CameraPages> {
     Widget fullalamat() {
       return RelativeBuilder(builder: (context, height, width, sy, sx) {
         return Padding(
-          padding: const EdgeInsets.only(top: 10, left: 45, right: 45),
+          padding:
+              const EdgeInsets.only(top: 10, left: 45, right: 45, bottom: 10),
           child: Container(
             child: Expanded(
               child: Text(
                 '${widget.addressUser}',
                 // maxLines: 3,
-                overflow: TextOverflow.ellipsis,
+                // overflow: TextOverflow.ellipsis,
                 // textDirection: TextDirection.rtl,
                 textAlign: TextAlign.justify,
-                style:
-                    blackTextStyle.copyWith(fontSize: 14, fontWeight: reguler),
+                style: trueBlackTextStyle.copyWith(
+                    fontSize: 14, fontWeight: reguler),
               ),
             ),
           ),
@@ -185,24 +205,33 @@ class _CameraPagesState extends State<CameraPages> {
       );
     }
 
-    Widget retakeSelfie() {
-      return Column(
-        children: [
-          TextButton(
-            style: TextButton.styleFrom(backgroundColor: blueColor),
-            onPressed: () async {
-              // Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //         builder: (context) => testPage(image)));
-              handleUploadPhoto(widget.name);
-            },
-            child: Text(
-              'next',
-              style: whiteTextStyle,
+    Widget next() {
+      return Padding(
+        padding: EdgeInsets.only(top: 10),
+        child: Column(
+          children: [
+            SizedBox(
+              height: 50,
+              width: 170,
+              child: TextButton(
+                style: TextButton.styleFrom(backgroundColor: blueColor),
+                onPressed: () async {
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //         builder: (context) => testPage(image)));
+                  wait(widget.name);
+                  // handleUploadPhoto(widget.name);
+                },
+                child: Text(
+                  'Upload',
+                  style:
+                      whiteTextStyle.copyWith(fontSize: 18, fontWeight: bold),
+                ),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       );
     }
 
@@ -224,15 +253,20 @@ class _CameraPagesState extends State<CameraPages> {
                   ? Container(
                       // height: 50,
                       // width: 50,
+                      margin: EdgeInsets.only(bottom: 10),
                       child: Image.file(
                         image!,
                         fit: BoxFit.cover,
-                        height: 150,
-                        width: 150,
+                        height: 230,
+                        width: 230,
                       ),
                     )
                   // nextpage()
-                  : Container(),
+                  : Container(
+                      margin: EdgeInsets.only(bottom: 10),
+                      height: 230,
+                      width: 230,
+                    ),
 
               image != null
                   ? TextButton(
@@ -242,7 +276,8 @@ class _CameraPagesState extends State<CameraPages> {
                       },
                       child: Text(
                         'retake a photo',
-                        style: whiteTextStyle,
+                        style: whiteTextStyle.copyWith(
+                            fontSize: 18, fontWeight: bold),
                       ),
                     )
                   : TextButton(
@@ -252,82 +287,84 @@ class _CameraPagesState extends State<CameraPages> {
                       },
                       child: Text(
                         'Take a photo',
-                        style: whiteTextStyle,
+                        style: whiteTextStyle.copyWith(
+                            fontSize: 18, fontWeight: bold),
                       ),
                     ),
-              image != null
-                  ? isLoading
-                      ? LoadingDefault()
-                      : retakeSelfie()
-                  : Container(),
+              image != null ? next() : Container(),
             ],
           ),
         ),
       );
     }
 
-    return Container(
-      color: whiteColor,
-      height: 200,
-      width: MediaQuery.of(context).size.width,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          // Text(
-          //   '${widget.id}',
-          //   style: trueBlackTextStyle.copyWith(fontSize: 14, fontWeight: light),
-          // ),
-          // Text(
-          //   '${widget.name}',
-          //   style: trueBlackTextStyle.copyWith(fontSize: 14, fontWeight: light),
-          // ),
-          // Text(
-          //   '${widget.latUser}',
-          //   style: trueBlackTextStyle.copyWith(fontSize: 14, fontWeight: light),
-          // ),
-          // Text(
-          //   '${widget.longUser}',
-          //   style: trueBlackTextStyle.copyWith(fontSize: 14, fontWeight: light),
-          // ),
-          // Text(
-          //   '${widget.addressUser}',
-          //   style: trueBlackTextStyle.copyWith(fontSize: 14, fontWeight: light),
-          // ),
-          kotak(),
-          // image != null
-          //     ? Container(
-          //         height: MediaQuery.of(context).size.width,
-          //         width: MediaQuery.of(context).size.width,
-          //         child: Image.file(
-          //           image!,
-          //           fit: BoxFit.cover,
-          //         ),
-          //       )
-          //     // nextpage()
-          //     : Container(),
-          // image != null
-          //     ? TextButton(
-          //         style: TextButton.styleFrom(backgroundColor: blueColor),
-          //         onPressed: () async {
-          //           await getPhoto();
-          //         },
-          //         child: Text(
-          //           'retake a photo',
-          //           style: whiteTextStyle,
-          //         ),
-          //       )
-          //     : TextButton(
-          //         style: TextButton.styleFrom(backgroundColor: blueColor),
-          //         onPressed: () async {
-          //           await getPhoto();
-          //         },
-          //         child: Text(
-          //           'Take a photo',
-          //           style: whiteTextStyle,
-          //         ),
-          //       ),
-        ],
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: whiteColor,
+        body: Container(
+          color: whiteColor,
+          // height: 200,
+          width: MediaQuery.of(context).size.width,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // Text(
+              //   '${widget.id}',
+              //   style: trueBlackTextStyle.copyWith(fontSize: 14, fontWeight: light),
+              // ),
+              // Text(
+              //   '${widget.name}',
+              //   style: trueBlackTextStyle.copyWith(fontSize: 14, fontWeight: light),
+              // ),
+              // Text(
+              //   '${widget.latUser}',
+              //   style: trueBlackTextStyle.copyWith(fontSize: 14, fontWeight: light),
+              // ),
+              // Text(
+              //   '${widget.longUser}',
+              //   style: trueBlackTextStyle.copyWith(fontSize: 14, fontWeight: light),
+              // ),
+              // Text(
+              //   '${widget.addressUser}',
+              //   style: trueBlackTextStyle.copyWith(fontSize: 14, fontWeight: light),
+              // ),
+              kotak(),
+              // image != null
+              //     ? Container(
+              //         height: MediaQuery.of(context).size.width,
+              //         width: MediaQuery.of(context).size.width,
+              //         child: Image.file(
+              //           image!,
+              //           fit: BoxFit.cover,
+              //         ),
+              //       )
+              //     // nextpage()
+              //     : Container(),
+              // image != null
+              //     ? TextButton(
+              //         style: TextButton.styleFrom(backgroundColor: blueColor),
+              //         onPressed: () async {
+              //           await getPhoto();
+              //         },
+              //         child: Text(
+              //           'retake a photo',
+              //           style: whiteTextStyle,
+              //         ),
+              //       )
+              //     : TextButton(
+              //         style: TextButton.styleFrom(backgroundColor: blueColor),
+              //         onPressed: () async {
+              //           await getPhoto();
+              //         },
+              //         child: Text(
+              //           'Take a photo',
+              //           style: whiteTextStyle,
+              //         ),
+              //       ),
+            ],
+          ),
+        ),
       ),
     );
   }
