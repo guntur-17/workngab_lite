@@ -467,7 +467,7 @@ class _ClockInPageState extends State<ClockInPage> {
               day(),
               tap(),
               isLoading ? Loadinglocation() : location(),
-              clock(),
+              // clock(),
             ],
           ),
         ),
