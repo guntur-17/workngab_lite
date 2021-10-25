@@ -2,22 +2,19 @@ import 'dart:async';
 
 import 'package:absen_lite/models/shop_model.dart';
 import 'package:absen_lite/pages/camera_pages.dart';
-// import 'package:absen_lite/pages/search_list_pages.dart';
-import 'package:absen_lite/providers/auth_provider.dart';
+
 import 'package:absen_lite/providers/shop_provider.dart';
 import 'package:absen_lite/services/shop_service.dart';
 import 'package:absen_lite/theme.dart';
 import 'package:absen_lite/widgets/loading_button.dart';
 import 'package:absen_lite/widgets/search_widget.dart';
-import 'package:absen_lite/widgets/shop_card.dart';
+
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+
 import 'package:relative_scale/relative_scale.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ShopListPage extends StatefulWidget {
-  // const ShopListPage({Key? key}) : super(key: key);
-
   String? addressUser;
 
   ShopListPage(this.addressUser);
@@ -27,7 +24,6 @@ class ShopListPage extends StatefulWidget {
 }
 
 class _ShopListPageState extends State<ShopListPage> {
-  // ShopService _shopList = ShopService();
   List<ShopModel> shops = [];
   String query = '';
   Timer? debouncer;
@@ -42,23 +38,11 @@ class _ShopListPageState extends State<ShopListPage> {
   }
 
   shopListHandler() async {
-    // if (!mounted) return;
-    // setState(() {
-    //   isLoading = true;
-    // });
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var token = prefs.getString('token');
-    // await AttedanceProvider().getAttendances(token);
+
     await ShopProvider().getShops(token);
     if (!mounted) return;
-    // setState(() {
-    //   isLoading = false;
-    // });
-
-    // Navigator.push(
-    //   context,
-    //   MaterialPageRoute(builder: (context) => AttendanceHistoryPage()),
-    // );
   }
 
   @override
@@ -89,25 +73,15 @@ class _ShopListPageState extends State<ShopListPage> {
 
   @override
   Widget build(BuildContext context) {
-    // ShopProvider shopProvider = Provider.of<ShopProvider>(context);
-    // AuthProvider authProvider = Provider.of<AuthProvider>(context);
-
     Widget card() {
       return Container(
         width: MediaQuery.of(context).size.width * 0.95,
-        // margin: EdgeInsets.only(top: 20),
         child: SingleChildScrollView(
           child: Center(
             child: Container(
               margin: EdgeInsets.only(bottom: 20),
               width: MediaQuery.of(context).size.width * 0.90,
-              child:
-                  // FutureBuilder<List<ShopModel>>(
-                  //     future: _shopList.getShops(
-                  //         token: authProvider.user.access_token),
-                  //     builder: (context, snapshot) {
-                  //       return
-                  ListView.builder(
+              child: ListView.builder(
                 itemCount: shops.length,
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
@@ -117,7 +91,6 @@ class _ShopListPageState extends State<ShopListPage> {
                   return cardShop(shop: shop);
                 },
               ),
-              // }),
             ),
           ),
         ),
@@ -148,14 +121,6 @@ class _ShopListPageState extends State<ShopListPage> {
               'Shop',
               style: trueBlackTextStyle.copyWith(fontWeight: FontWeight.w600),
             ),
-            // actions: [
-            //   IconButton(
-            //     onPressed: () {
-            //       showSearch(context: context, delegate: SearchShopList());
-            //     },
-            //     icon: Icon(Icons.search),
-            //   )
-            // ],
           ),
         ),
         backgroundColor: whiteColor,
@@ -164,7 +129,6 @@ class _ShopListPageState extends State<ShopListPage> {
             children: <Widget>[
               buildSearch(),
               isLoading ? const LoadingDefault() : card(),
-              // card(),
             ],
           ),
         ),
@@ -224,7 +188,7 @@ class _ShopListPageState extends State<ShopListPage> {
                     children: [
                       Row(
                         children: [
-                          Container(
+                          SizedBox(
                             width: MediaQuery.of(context).size.width * 0.6,
                             child: Text(
                               shop!.name,

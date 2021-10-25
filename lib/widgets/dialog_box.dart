@@ -2,7 +2,7 @@ import 'package:absen_lite/pages/login_pages.dart';
 import 'package:absen_lite/providers/auth_provider.dart';
 import 'package:absen_lite/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:relative_scale/relative_scale.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider/provider.dart';
 
@@ -42,12 +42,10 @@ class _LogoutDialogState extends State<LogoutDialog> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
-                  child: Column(
-                    children: [
-                      Image.asset('assets/run.png', width: 46, height: 46)
-                    ],
-                  ),
+                Column(
+                  children: [
+                    Image.asset('assets/run.png', width: 46, height: 46)
+                  ],
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: 10, left: 10, right: 10),

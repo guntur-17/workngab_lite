@@ -1,5 +1,5 @@
 import 'package:absen_lite/providers/visiting_all_provider.dart';
-import 'package:absen_lite/widgets/shop_card.dart';
+
 import 'package:absen_lite/widgets/visiting_card.dart';
 import 'package:flutter/material.dart';
 import 'package:absen_lite/theme.dart';
@@ -32,9 +32,8 @@ class _VisitingListPageState extends State<VisitingListPage> {
         Provider.of<VisitingAllProvider>(context);
     Widget card() {
       return Center(
-        child: Container(
+        child: SizedBox(
           width: MediaQuery.of(context).size.width * 0.95,
-          // margin: EdgeInsets.only(top: 20),
           child: SingleChildScrollView(
             child: Center(
               child: Container(
@@ -72,7 +71,7 @@ class _VisitingListPageState extends State<VisitingListPage> {
             backgroundColor: Colors.white,
             bottomOpacity: 0.0,
             elevation: 0.0,
-            title: new Text(
+            title: Text(
               'Visiting List',
               style: trueBlackTextStyle.copyWith(fontWeight: FontWeight.w600),
             ),

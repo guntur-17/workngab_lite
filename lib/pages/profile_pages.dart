@@ -34,16 +34,8 @@ class _ProfilePageState extends State<ProfilePage> {
                     decoration: BoxDecoration(
                         shape: BoxShape.rectangle,
                         image: DecorationImage(
-                            image: new NetworkImage('${data.photo}'),
+                            image: NetworkImage('${data.photo}'),
                             fit: BoxFit.fill)),
-                    // child: Column(
-                    //   children: [
-                    //     Image.asset(
-                    //       '${data.photo}',
-                    //       fit: BoxFit.fill,
-                    //     )
-                    //   ],
-                    // ),
                   )
                 ],
               ),
@@ -83,27 +75,21 @@ class _ProfilePageState extends State<ProfilePage> {
     }
 
     Widget menu() {
-      return Container(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 40,
-            ),
-            UserCard(),
-            SizedBox(
-              height: 22,
-            ),
-            // SettingCard(),
-            // SizedBox(
-            //   height: 22,
-            // ),
-            GuideCard(),
-            SizedBox(
-              height: 22,
-            ),
-            AboutCard(),
-          ],
-        ),
+      return Column(
+        children: [
+          SizedBox(
+            height: 40,
+          ),
+          UserCard(),
+          SizedBox(
+            height: 22,
+          ),
+          GuideCard(),
+          SizedBox(
+            height: 22,
+          ),
+          AboutCard(),
+        ],
       );
     }
 
@@ -115,33 +101,33 @@ class _ProfilePageState extends State<ProfilePage> {
       );
     }
 
-    Widget button() {
-      return Center(
-        child: Container(
-          margin: EdgeInsets.only(top: 30),
-          width: MediaQuery.of(context).size.width * 0.9,
-          height: 40,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10), color: borderPink),
-          child: InkWell(
-            onTap: () {
-              // Navigator.push(context,
-              //     MaterialPageRoute(builder: (context) => ProfilePage()));
-            },
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'Logout',
-                  style:
-                      whiteTextStyle.copyWith(fontSize: 16, fontWeight: medium),
-                )
-              ],
-            ),
-          ),
-        ),
-      );
-    }
+    // Widget button() {
+    //   return Center(
+    //     child: Container(
+    //       margin: EdgeInsets.only(top: 30),
+    //       width: MediaQuery.of(context).size.width * 0.9,
+    //       height: 40,
+    //       decoration: BoxDecoration(
+    //           borderRadius: BorderRadius.circular(10), color: borderPink),
+    //       child: InkWell(
+    //         onTap: () {
+    //           // Navigator.push(context,
+    //           //     MaterialPageRoute(builder: (context) => ProfilePage()));
+    //         },
+    //         child: Column(
+    //           mainAxisAlignment: MainAxisAlignment.center,
+    //           children: [
+    //             Text(
+    //               'Logout',
+    //               style:
+    //                   whiteTextStyle.copyWith(fontSize: 16, fontWeight: medium),
+    //             )
+    //           ],
+    //         ),
+    //       ),
+    //     ),
+    //   );
+    // }
 
     return SafeArea(
       child: Scaffold(

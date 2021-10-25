@@ -1,7 +1,7 @@
 import 'package:absen_lite/pages/splash_pages.dart';
 import 'package:absen_lite/providers/attendance_provider.dart';
 import 'package:absen_lite/providers/auth_provider.dart';
-import 'package:absen_lite/providers/product_provider.dart';
+
 import 'package:absen_lite/providers/scanner_provider.dart';
 import 'package:absen_lite/providers/shop_provider.dart';
 import 'package:absen_lite/providers/visiting_all_provider.dart';

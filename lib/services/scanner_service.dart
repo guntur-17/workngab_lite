@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:absen_lite/models/scanner_model.dart';
-import 'package:absen_lite/providers/scanner_provider.dart';
+
 import 'package:http_parser/http_parser.dart';
 import 'package:path/path.dart';
 import 'package:dio/dio.dart' as dio;

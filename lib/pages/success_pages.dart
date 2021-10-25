@@ -1,4 +1,3 @@
-import 'package:absen_lite/models/shop_model.dart';
 import 'package:absen_lite/pages/home.dart';
 import 'package:absen_lite/theme.dart';
 import 'package:flutter/material.dart';
@@ -7,11 +6,8 @@ import 'package:intl/intl.dart';
 import 'package:relative_scale/relative_scale.dart';
 
 class SuccessPages extends StatefulWidget {
-  // const SuccessPages({Key? key}) : super(key: key);
-  // final ShopModel shop;
-  // SuccessPages(this.shop);
   String? shopName;
-  SuccessPages(this.shopName);
+  SuccessPages(this.shopName, {Key? key}) : super(key: key);
 
   @override
   State<SuccessPages> createState() => _SuccessPagesState();
@@ -27,8 +23,7 @@ class _SuccessPagesState extends State<SuccessPages> {
 
     initializeDateFormatting();
 
-    dateFormat = new DateFormat.yMMMMd('id_ID');
-    // timeFormat = new DateFormat.Hms('id_ID');
+    dateFormat = DateFormat.yMMMMd('id_ID');
   }
 
   @override
@@ -47,12 +42,10 @@ class _SuccessPagesState extends State<SuccessPages> {
 
     Widget subtitle() {
       return RelativeBuilder(builder: (context, height, width, sy, sx) {
-        return Container(
-          child: Text(
-            'You have successfully made\nattendance visit',
-            style: blackTextStyle.copyWith(fontSize: 14, fontWeight: reguler),
-            textAlign: TextAlign.center,
-          ),
+        return Text(
+          'You have successfully made\nattendance visit',
+          style: blackTextStyle.copyWith(fontSize: 14, fontWeight: reguler),
+          textAlign: TextAlign.center,
         );
       });
     }
@@ -81,14 +74,10 @@ class _SuccessPagesState extends State<SuccessPages> {
 
     Widget shop() {
       return RelativeBuilder(builder: (context, height, width, sy, sx) {
-        return Container(
-          // margin: EdgeInsets.only(top: sy(25)),
-          // width: MediaQuery.of(context).size.width - ,
+        return SizedBox(
           height: sy(60),
           child: Row(
-            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
             mainAxisAlignment: MainAxisAlignment.center,
-            // crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Row(
                 children: [
@@ -167,7 +156,7 @@ class _SuccessPagesState extends State<SuccessPages> {
       child: Scaffold(
         body: Container(
           width: MediaQuery.of(context).size.width,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
               image: DecorationImage(
                   image: AssetImage('assets/successScan.png'),
                   fit: BoxFit.fill)),

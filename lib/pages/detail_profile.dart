@@ -2,7 +2,7 @@ import 'package:absen_lite/models/user_model.dart';
 import 'package:absen_lite/providers/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:relative_scale/relative_scale.dart';
+
 import '../theme.dart';
 
 class DetailProfile extends StatelessWidget {
@@ -24,16 +24,7 @@ class DetailProfile extends StatelessWidget {
               decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   image: DecorationImage(
-                      image: new NetworkImage('${data.photo}'),
-                      fit: BoxFit.fill)),
-              // child: Column(
-              //   children: [
-              //     Image.asset(
-              //       '${data.photo}',
-              //       fit: BoxFit.fill,
-              //     )
-              //   ],
-              // ),
+                      image: NetworkImage('${data.photo}'), fit: BoxFit.fill)),
             )
           ],
         ),
@@ -273,7 +264,7 @@ class DetailProfile extends StatelessWidget {
             backgroundColor: Colors.white,
             bottomOpacity: 0.0,
             elevation: 0.0,
-            title: new Text(
+            title: Text(
               'Profile',
               style: trueBlackTextStyle.copyWith(fontWeight: FontWeight.w600),
             ),

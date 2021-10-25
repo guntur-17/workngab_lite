@@ -1,26 +1,21 @@
 import 'dart:io';
-import 'package:absen_lite/pages/camera_pages.dart';
 import 'package:absen_lite/pages/shop_list_pages.dart';
 import 'package:absen_lite/providers/auth_provider.dart';
 import 'package:absen_lite/providers/shop_provider.dart';
-// import 'package:absen_lite/providers/visiting_all_provider.dart';
+
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:absen_lite/pages/qr_scan_pages.dart';
-import 'package:absen_lite/pages/stock_list_pages.dart';
+
 import 'package:flutter/material.dart';
 import 'package:absen_lite/theme.dart';
-import 'package:absen_lite/widgets/shop_card.dart';
-import 'package:image_picker/image_picker.dart';
+
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:relative_scale/relative_scale.dart';
 
 class VisitingPage extends StatefulWidget {
-  // const VisitingPage({Key? key}) : super(key: key);
-
   static const String _title = 'Visiting';
 
   @override
@@ -28,7 +23,6 @@ class VisitingPage extends StatefulWidget {
 }
 
 class _VisitingPageState extends State<VisitingPage> {
-  // bool _isClockIn = false;
   DateFormat? dateFormat;
   DateFormat? timeFormat;
   File? image;
@@ -44,8 +38,8 @@ class _VisitingPageState extends State<VisitingPage> {
     super.initState();
     _determinePosition();
     initializeDateFormatting();
-    dateFormat = new DateFormat.yMMMMd('id_ID');
-    timeFormat = new DateFormat.Hms('id_ID');
+    dateFormat = DateFormat.yMMMMd('id_ID');
+    timeFormat = DateFormat.Hms('id_ID');
   }
 
   Future<Position?> _determinePosition() async {
@@ -100,8 +94,7 @@ class _VisitingPageState extends State<VisitingPage> {
     ShopProvider shopProvider =
         Provider.of<ShopProvider>(context, listen: false);
     AuthProvider authProvider = Provider.of<AuthProvider>(context);
-    // VisitingAllProvider visitingAllProvider =
-    // Provider.of<VisitingAllProvider>(context, listen: false);
+
     Widget text() {
       return Container(
         width: MediaQuery.of(context).size.width,
@@ -125,34 +118,6 @@ class _VisitingPageState extends State<VisitingPage> {
       );
     }
 
-    // Widget day() {
-    //   return Container(
-    //     margin: EdgeInsets.only(top: 30),
-    //     child: Center(
-    //       child: Container(
-    //         child: Column(
-    //           crossAxisAlignment: CrossAxisAlignment.center,
-    //           children: [
-    //             Text(
-    //               '07:30',
-    //               style: trueBlackTextStyle.copyWith(
-    //                   fontSize: 28, fontWeight: semiBold),
-    //             ),
-    //             SizedBox(
-    //               height: 3,
-    //             ),
-    //             Text(
-    //               'Senin, 12 Maret 2021',
-    //               style:
-    //                   greyTextStyle.copyWith(fontSize: 18, fontWeight: reguler),
-    //             )
-    //           ],
-    //         ),
-    //       ),
-    //     ),
-    //   );
-    // }
-
     Future _openScanner(BuildContext context) async {
       double lat = currentposition!.latitude;
       double long = currentposition!.longitude;
@@ -164,29 +129,17 @@ class _VisitingPageState extends State<VisitingPage> {
     }
 
     Future _getPhoto(BuildContext context) async {
-      double lat = currentposition!.latitude;
-      double long = currentposition!.longitude;
+      // double lat = currentposition!.latitude;
+      // double long = currentposition!.longitude;
       final picker = await Navigator.push(context,
           MaterialPageRoute(builder: (c) => ShopListPage(currentAddress)));
       _picker = picker;
     }
 
-    // Future getPhoto() async {
-    //   final ImagePicker _picker = ImagePicker();
-
-    //   // Capture a photo
-    //   final XFile? photo = await _picker.pickImage(source: ImageSource.camera);
-    //   //mengubah Xfile jadi file
-    //   image = File(photo!.path);
-
-    //   setState(() {});
-    // }
     Widget barcode() {
       return InkWell(
         onTap: () {
           _openScanner(context);
-          // Navigator.push(
-          //     context, MaterialPageRoute(builder: (context) => GuideOption()));
         },
         child: Padding(
           padding: const EdgeInsets.only(top: 20),
@@ -209,29 +162,27 @@ class _VisitingPageState extends State<VisitingPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Image.asset(
-                          'assets/barcode.png',
-                          width: 50,
-                          height: 50,
-                        ),
-                        Image.asset(
-                          'assets/vertical.png',
-                          width: 50,
-                          height: 50,
-                        ),
-                        Text(
-                          'Scan Barcode',
-                          style: trueBlackTextStyle.copyWith(
-                              fontSize: 16, fontWeight: bold),
-                        ),
-                      ],
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Image.asset(
+                        'assets/barcode.png',
+                        width: 50,
+                        height: 50,
+                      ),
+                      Image.asset(
+                        'assets/vertical.png',
+                        width: 50,
+                        height: 50,
+                      ),
+                      Text(
+                        'Scan Barcode',
+                        style: trueBlackTextStyle.copyWith(
+                            fontSize: 16, fontWeight: bold),
+                      ),
+                    ],
                   ),
-                  Container(
+                  SizedBox(
                     width: MediaQuery.of(context).size.width * 0.1,
                     child: Row(
                       children: [
@@ -257,8 +208,6 @@ class _VisitingPageState extends State<VisitingPage> {
         onTap: () {
           shopProvider.getShops(authProvider.user.access_token);
           _getPhoto(context);
-          // Navigator.push(
-          //     context, MaterialPageRoute(builder: (context) => GuideOption()));
         },
         child: Padding(
           padding: const EdgeInsets.only(top: 12),
@@ -281,29 +230,27 @@ class _VisitingPageState extends State<VisitingPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Image.asset(
-                          'assets/selfie.png',
-                          width: 50,
-                          height: 50,
-                        ),
-                        Image.asset(
-                          'assets/vertical.png',
-                          width: 50,
-                          height: 50,
-                        ),
-                        Text(
-                          'Take a Selfie',
-                          style: trueBlackTextStyle.copyWith(
-                              fontSize: 16, fontWeight: bold),
-                        ),
-                      ],
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Image.asset(
+                        'assets/selfie.png',
+                        width: 50,
+                        height: 50,
+                      ),
+                      Image.asset(
+                        'assets/vertical.png',
+                        width: 50,
+                        height: 50,
+                      ),
+                      Text(
+                        'Take a Selfie',
+                        style: trueBlackTextStyle.copyWith(
+                            fontSize: 16, fontWeight: bold),
+                      ),
+                    ],
                   ),
-                  Container(
+                  SizedBox(
                     width: MediaQuery.of(context).size.width * 0.1,
                     child: Row(
                       children: [
@@ -320,142 +267,6 @@ class _VisitingPageState extends State<VisitingPage> {
               ),
             ),
           ),
-        ),
-      );
-    }
-
-    Widget tap() {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          InkWell(
-            onTap: () {
-              _openScanner(context);
-            },
-            child: Container(
-              margin: EdgeInsets.only(top: 30),
-              child: Column(
-                children: [
-                  Center(
-                    child: Image.asset(
-                      'assets/scan.png',
-                      width: 80,
-                      height: 80,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          InkWell(
-            onTap: () {
-              //  attedanceProvider
-              //           .getAttendances(authProvider.user.access_token);
-              shopProvider.getShops(authProvider.user.access_token);
-              _getPhoto(context);
-            },
-            child: Container(
-              margin: EdgeInsets.only(top: 30),
-              child: Column(
-                children: [
-                  Center(
-                    child: Image.asset(
-                      'assets/scan.png',
-                      width: 80,
-                      height: 80,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      );
-    }
-
-    Widget location() {
-      return RelativeBuilder(builder: (context, height, width, sy, sx) {
-        return Column(
-          children: [
-            Center(
-              child: Container(
-                margin: EdgeInsets.only(top: 27),
-                width: MediaQuery.of(context).size.width * 0.75,
-                height: MediaQuery.of(context).size.width * 0.20,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    color: lightgreyColor),
-                //isi dari kotak berupa location
-                child: Container(
-                  margin: EdgeInsets.all(5),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Row(
-                        children: [
-                          Icon(Icons.location_on_outlined),
-                          Expanded(
-                            child: InkWell(
-                              child: Text(
-                                currentAddress,
-                                overflow: TextOverflow.ellipsis,
-                                textAlign: TextAlign.center,
-                                style: trueBlackTextStyle.copyWith(
-                                    fontSize: 12, fontWeight: medium),
-                              ),
-
-                              // onTap: () {
-                              //   _determinePosition();
-                              // },
-                            ),
-                          ),
-                          // Text('latitude = ' +
-                          //     currentposition!.latitude.toString()),
-                          // Text('Longitude = ' +
-                          //     currentposition!.longitude.toString()),
-                        ],
-                      ),
-                      // TextButton(
-                      //   onPressed: () {
-                      //     _determinePosition();
-                      //   },
-                      //   child: Text('locate me'),
-                      // )
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ],
-        );
-      });
-    }
-
-    Widget history() {
-      return Container(
-        width: MediaQuery.of(context).size.width * 0.91,
-        margin: EdgeInsets.only(top: 40, bottom: 10, left: 20, right: 20),
-        // height: 195,
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('History',
-                    style: trueBlackTextStyle.copyWith(
-                        fontSize: 16, fontWeight: FontWeight.w600)),
-              ],
-            ),
-            Divider(
-              thickness: 1,
-              height: 20,
-            ),
-            Column(
-                // children: visitingAllProvider.showAll
-                // .map((showAll) => ShopCard(showAll))
-                // .toList(),
-                ),
-          ],
         ),
       );
     }
@@ -485,9 +296,7 @@ class _VisitingPageState extends State<VisitingPage> {
             //   style: TextStyle(color: Colors.black),
             // ),
             actions: <Widget>[
-              Container(
-                child: Image(image: AssetImage('assets/rounded.png')),
-              ),
+              Image(image: AssetImage('assets/rounded.png')),
             ],
           ),
         ),

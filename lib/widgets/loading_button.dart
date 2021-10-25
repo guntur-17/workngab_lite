@@ -21,7 +21,7 @@ class LoadingButton extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
+                  SizedBox(
                     width: 18,
                     height: 18,
                     child: CircularProgressIndicator(
@@ -68,7 +68,7 @@ class Loadinglocation extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Container(
+                    SizedBox(
                       width: 18,
                       height: 18,
                       child: CircularProgressIndicator(
@@ -100,14 +100,12 @@ class LoadingDefault extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Container(
-        width: 18,
-        height: 18,
-        child: CircularProgressIndicator(
-          strokeWidth: 3,
-          valueColor: AlwaysStoppedAnimation(blueColor),
-        ),
+    return SizedBox(
+      width: 18,
+      height: 18,
+      child: CircularProgressIndicator(
+        strokeWidth: 3,
+        valueColor: AlwaysStoppedAnimation(blueColor),
       ),
     );
   }
@@ -134,7 +132,7 @@ class LoadingClockCard extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Container(
+                    SizedBox(
                       width: 18,
                       height: 18,
                       child: CircularProgressIndicator(

@@ -9,7 +9,7 @@ class PayrollCard extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(bottom: 10),
       height: 60,
-      padding: EdgeInsets.only(right: 13, left: 19),
+      padding: const EdgeInsets.only(right: 13, left: 19),
       decoration: BoxDecoration(
         color: whiteColor,
         borderRadius: BorderRadius.circular(8),
@@ -18,7 +18,7 @@ class PayrollCard extends StatelessWidget {
             color: blueShadow,
             spreadRadius: 0,
             blurRadius: 4,
-            offset: Offset(0, 1), // changes position of shadow
+            offset: const Offset(0, 1), // changes position of shadow
           ),
         ],
       ),

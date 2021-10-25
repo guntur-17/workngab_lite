@@ -7,7 +7,7 @@ class ClockOutCard extends StatelessWidget {
   // const ClockOutCard({Key? key}) : super(key: key);
 
   final AttendanceModel attendance;
-  ClockOutCard(this.attendance);
+  const ClockOutCard(this.attendance, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,25 +27,23 @@ class ClockOutCard extends StatelessWidget {
               title: Center(
                 child: Column(
                   children: [
-                    Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            'assets/clockOutsmol.png',
-                            width: sx(60),
-                            height: sx(60),
-                          ),
-                          SizedBox(
-                            width: 3,
-                          ),
-                          Text(
-                            'Clock ${attendance.type}',
-                            style: trueBlackTextStyle.copyWith(
-                                fontSize: 22, fontWeight: FontWeight.w500),
-                          )
-                        ],
-                      ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          'assets/clockOutsmol.png',
+                          width: sx(60),
+                          height: sx(60),
+                        ),
+                        SizedBox(
+                          width: 3,
+                        ),
+                        Text(
+                          'Clock ${attendance.type}',
+                          style: trueBlackTextStyle.copyWith(
+                              fontSize: 22, fontWeight: FontWeight.w500),
+                        )
+                      ],
                     ),
                     Padding(
                       padding: EdgeInsets.only(top: 10),
@@ -61,7 +59,7 @@ class ClockOutCard extends StatelessWidget {
                             width: 3,
                           ),
                           Text(
-                            'Senin, ${formattedDate}',
+                            'Senin, $formattedDate',
                             style: trueBlackTextStyle.copyWith(
                                 fontSize: 18, fontWeight: FontWeight.w400),
                           ),
@@ -102,7 +100,7 @@ class ClockOutCard extends StatelessWidget {
               ),
             ),
           ),
-          child: Container(
+          child: SizedBox(
             width: sx(430),
             height: sy(40),
             child: Row(
@@ -132,7 +130,7 @@ class ClockOutCard extends StatelessWidget {
                               fontSize: 18, fontWeight: FontWeight.w500),
                         ),
                         Text(
-                          '${formattedDate} (${attendance.time})',
+                          '$formattedDate (${attendance.time})',
                           style: trueBlackTextStyle.copyWith(
                               fontSize: 14, fontWeight: FontWeight.w300),
                         ),

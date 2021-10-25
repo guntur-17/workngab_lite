@@ -12,16 +12,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // int _currentIndex = 0;
   int _selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     Widget costumBottomNavBar() {
       return ClipRRect(
-        // borderRadius: BorderRadius.only(
-        //     topLeft: Radius.circular(18), topRight: Radius.circular(18)),
-
         child: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           backgroundColor: whiteColor,
@@ -51,11 +47,10 @@ class _HomePageState extends State<HomePage> {
       switch (_selectedIndex) {
         case 0:
           return DashboardPage();
-          break;
 
         case 1:
           return ProfilePage();
-          break;
+
         default:
           return DashboardPage();
       }

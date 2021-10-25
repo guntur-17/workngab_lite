@@ -6,8 +6,6 @@ import 'package:absen_lite/widgets/clip_shadow.dart';
 import 'package:flutter/material.dart';
 import 'package:absen_lite/theme.dart';
 
-import 'package:absen_lite/widgets/guide_permission_table.dart';
-
 class GuideOption extends StatelessWidget {
   const GuideOption({Key? key}) : super(key: key);
 
@@ -81,8 +79,6 @@ class GuideOption extends StatelessWidget {
             child: Container(
               height: MediaQuery.of(context).size.height * 0.08,
               width: MediaQuery.of(context).size.width * 0.9,
-              // margin: EdgeInsets.only(top: 10, ),
-              // width: 335,
               padding: EdgeInsets.only(left: 11, right: 25, top: 5, bottom: 5),
               decoration: BoxDecoration(
                 color: whiteColor,
@@ -140,19 +136,15 @@ class GuideOption extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset('assets/guide2.png', width: 23, height: 23),
-                  Container(
-                    child: Text(
-                      'Panduan',
-                      style: trueBlackTextStyle,
-                    ),
+                  Text(
+                    'Panduan',
+                    style: trueBlackTextStyle,
                   )
                 ],
               ),
             ),
             actions: <Widget>[
-              Container(
-                child: Image(image: AssetImage('assets/rounded.png')),
-              ),
+              Image(image: AssetImage('assets/rounded.png')),
             ],
           ),
         ),

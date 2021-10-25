@@ -16,6 +16,8 @@ import '../theme.dart';
 String? finalUsername;
 
 class SplashPage extends StatefulWidget {
+  const SplashPage({Key? key}) : super(key: key);
+
   @override
   _SplashPageState createState() => _SplashPageState();
 }
@@ -25,27 +27,8 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   void initState() {
-    // Timer(
-    //   Duration(seconds: 1),
-    //   () => Navigator.of(context).pushReplacement(
-    //     MaterialPageRoute(builder: (BuildContext context) => LoginPage()),
-    //   ),
-    // );
-    // clear();
     validator();
 
-    //perubahan
-    // getValidationData().whenComplete(() async {
-    // Timer(
-    //   Duration(seconds: 3),
-    //   () => Navigator.of(context).pushReplacement(
-    //     MaterialPageRoute(
-    //         builder: (BuildContext context) =>
-    //             (finalUsername == null ? LoginPage() : DashboardPage())),
-    //   ),
-    // );
-    // }
-    // );
     super.initState();
   }
 
@@ -56,8 +39,7 @@ class _SplashPageState extends State<SplashPage> {
 
   getUser() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    // var username = prefs.getString('username');
-    // var password = prefs.getString('password');
+
     var token = prefs.getString('token');
     if (await Provider.of<AuthProvider>(context, listen: false)
         .getUser(token: token)) {
@@ -75,19 +57,10 @@ class _SplashPageState extends State<SplashPage> {
 
   validator() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    // var username = prefs.getString('username');
-    // var password = prefs.getString('password');
+
     var token = prefs.getString('token');
     if (token != null) {
-      // Timer(
-      //   Duration(seconds: 2),
-      //   () => Navigator.of(context).pushReplacement(
-      //     MaterialPageRoute(builder: (BuildContext context) => LoginPage()),
-      //   ),
-      // );
       setState(() {
-        // print(username);
-        // print(password);
         print(token);
         getUser();
         getattendance();
@@ -109,16 +82,12 @@ class _SplashPageState extends State<SplashPage> {
     var token = prefs.getString('token');
     await Provider.of<AttedanceProvider>(context, listen: false)
         .getAttendances(token);
-    // await AttedanceProvider().getAttendances(token);
-    // Navigator.pushReplacement(context, route);
   }
 
   getshop() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var token = prefs.getString('token');
     await Provider.of<ShopProvider>(context, listen: false).getShops(token);
-    // await AttedanceProvider().getAttendances(token);
-    // Navigator.pushReplacement(context, route);
   }
 
   getvisiting() async {
@@ -127,16 +96,6 @@ class _SplashPageState extends State<SplashPage> {
     await Provider.of<VisitingAllProvider>(context, listen: false)
         .getAllVisit(token);
   }
-
-  //perubahan
-  // Future getValidationData() async {
-  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   var obtainedUsername = prefs.getString('username');
-  //   setState(() {
-  //     finalUsername = obtainedUsername;
-  //   });
-  //   print(finalUsername);
-  // }
 
   @override
   Widget build(BuildContext context) {

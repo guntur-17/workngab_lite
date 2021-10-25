@@ -1,6 +1,6 @@
 import 'package:absen_lite/pages/detail_profile.dart';
 import 'package:absen_lite/pages/guide_option.dart';
-import 'package:absen_lite/pages/guide_permission.dart';
+
 import 'package:absen_lite/theme.dart';
 import 'package:flutter/material.dart';
 
@@ -9,7 +9,7 @@ class UserCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: MediaQuery.of(context).size.width - 60,
       child: InkWell(
         onTap: () {
@@ -26,7 +26,7 @@ class UserCard extends StatelessWidget {
                   width: 40,
                   height: 40,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 20,
                 ),
                 Text(
@@ -53,7 +53,7 @@ class SettingCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: MediaQuery.of(context).size.width - 60,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -91,7 +91,7 @@ class GuideCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: MediaQuery.of(context).size.width - 60,
       child: InkWell(
         onTap: () {
@@ -135,7 +135,7 @@ class AboutCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: MediaQuery.of(context).size.width - 60,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -9,7 +9,7 @@ class GuideVisitingTable extends StatelessWidget {
     return Container(
       margin: EdgeInsets.all(10),
       child: Table(
-        columnWidths: {0: FlexColumnWidth(1), 1: FlexColumnWidth(19)},
+        columnWidths: const {0: FlexColumnWidth(1), 1: FlexColumnWidth(19)},
         children: [
           TableRow(children: [
             Text(

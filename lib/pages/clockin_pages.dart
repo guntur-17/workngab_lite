@@ -1,7 +1,6 @@
-import 'package:absen_lite/pages/attendance_history_pages.dart';
 import 'package:absen_lite/pages/home.dart';
 import 'package:absen_lite/providers/attendance_provider.dart';
-import 'package:absen_lite/providers/auth_provider.dart';
+
 import 'package:absen_lite/widgets/loading_button.dart';
 import 'package:flutter/material.dart';
 import 'package:absen_lite/theme.dart';
@@ -11,7 +10,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
-// import 'package:intl/intl_browser.dart';
+
 import 'package:relative_scale/relative_scale.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -33,7 +32,6 @@ class _ClockInPageState extends State<ClockInPage> {
   DateFormat? timeFormat;
 
   dynamic currentTime = DateFormat.Hm().format(DateTime.now());
-  // dynamic date = DateFormat.yMMMMEEEEd('id_ID').format(DateTime.now());
 
   String currentAddress = 'My Address';
   Position? currentposition;
@@ -45,18 +43,16 @@ class _ClockInPageState extends State<ClockInPage> {
     _determinePosition();
     initializeDateFormatting();
     checkhasil();
-    dateFormat = new DateFormat.yMMMMd('id_ID');
-    timeFormat = new DateFormat.Hms('id_ID');
+    dateFormat = DateFormat.yMMMMd('id_ID');
+    timeFormat = DateFormat.Hms('id_ID');
   }
 
   Future checkhasil() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     bool? clockIn = prefs.getBool('checkClock');
-    // AttedanceProvider().checkConditionClock = clockIn as bool;
-    if (clockIn == null) {
-      clockIn = true;
-    }
-    // print(AttedanceProvider().checkConditionClock);
+
+    clockIn ??= true;
+
     print('ini clockin hasil ' + clockIn.toString());
 
     if (clockIn == true) {
@@ -111,19 +107,15 @@ class _ClockInPageState extends State<ClockInPage> {
 
   @override
   Widget build(BuildContext context) {
-    AuthProvider authProvider = Provider.of<AuthProvider>(context);
     AttedanceProvider attedanceProvider =
         Provider.of<AttedanceProvider>(context);
-    // bool _isClockIn = false;
 
     _attendance() async {
       final SharedPreferences prefs = await SharedPreferences.getInstance();
-      bool? clockIn = await prefs.getBool('checkClock');
+      bool? clockIn = prefs.getBool('checkClock');
       print('ini clockin attend ' + clockIn.toString());
-      if (clockIn == null) {
-        clockIn = true;
-      }
-      _isClockIn = clockIn as bool;
+      clockIn ??= true;
+      _isClockIn = clockIn;
       if (_isClockIn == true) {
         _isClockIn = false;
       } else {
@@ -131,23 +123,20 @@ class _ClockInPageState extends State<ClockInPage> {
       }
 
       print('ini isclockin ' + _isClockIn.toString());
-      prefs.setBool('checkClock', _isClockIn as bool);
+      prefs.setBool('checkClock', _isClockIn);
     }
 
     handleCheckin() async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       var token = prefs.getString('token');
       _attendance();
-      // Navigator.pop(context);
-      // Navigator.push(
-      //     context, MaterialPageRoute(builder: (context) => HomePage()));
+
       if (await attedanceProvider.attendanceIn(
         token,
         currentTime,
         currentposition!.latitude,
         currentposition!.longitude,
       )) {
-        // _isClockIn = true;
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => HomePage()));
       }
@@ -173,27 +162,23 @@ class _ClockInPageState extends State<ClockInPage> {
       return Container(
         margin: EdgeInsets.only(top: 30),
         child: Center(
-          child: Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  '${currentTime}',
-                  style: trueBlackTextStyle.copyWith(
-                      fontSize: 28, fontWeight: semiBold),
-                ),
-                SizedBox(
-                  height: 3,
-                ),
-                Text(
-                  // 'Senin, 12 Maret 2021 ${}',
-                  '${DateFormat.yMMMMEEEEd('id_ID').format(DateTime.now())}',
-
-                  style:
-                      greyTextStyle.copyWith(fontSize: 18, fontWeight: reguler),
-                )
-              ],
-            ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                '$currentTime',
+                style: trueBlackTextStyle.copyWith(
+                    fontSize: 28, fontWeight: semiBold),
+              ),
+              SizedBox(
+                height: 3,
+              ),
+              Text(
+                DateFormat.yMMMMEEEEd('id_ID').format(DateTime.now()),
+                style:
+                    greyTextStyle.copyWith(fontSize: 18, fontWeight: reguler),
+              )
+            ],
           ),
         ),
       );
@@ -212,12 +197,10 @@ class _ClockInPageState extends State<ClockInPage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
-                    child: Column(
-                      children: [
-                        Image.asset('assets/warning.png', width: 46, height: 46)
-                      ],
-                    ),
+                  Column(
+                    children: [
+                      Image.asset('assets/warning.png', width: 46, height: 46)
+                    ],
                   ),
                   Padding(
                     padding: EdgeInsets.only(top: 10, left: 10, right: 10),
@@ -264,9 +247,7 @@ class _ClockInPageState extends State<ClockInPage> {
                         final SharedPreferences prefs =
                             await SharedPreferences.getInstance();
                         bool? clockIn = prefs.getBool('checkClock');
-                        if (clockIn == null) {
-                          clockIn = true;
-                        }
+                        clockIn ??= true;
                         print(clockIn);
                         if (clockIn == true) {
                           handleCheckin();
@@ -326,33 +307,6 @@ class _ClockInPageState extends State<ClockInPage> {
       );
     }
 
-    // Widget tap() {
-    //   return Container(
-    //     margin: EdgeInsets.only(top: 30),
-    //     child: Column(
-    //       children: [
-    //         Center(
-    //           child: IconButton(
-    //             icon: Image.asset(
-    //                 (attedanceProvider.checkConditionClock == true)
-    //                     ? 'assets/clockIn.png'
-    //                     : 'assets/clockOut.png'),
-    //             iconSize: 160,
-    //             onPressed: () {
-    //               (attedanceProvider.checkConditionClock == true)
-    //                   ? handleCheckin()
-    //                   : handleCheckout();
-    //               // setState(() {
-    //               //   _isClockIn = !_isClockIn;
-    //               // });
-    //             },
-    //           ),
-    //         ),
-    //       ],
-    //     ),
-    //   );
-    // }
-
     Widget location() {
       return RelativeBuilder(builder: (context, height, width, sy, sx) {
         return Column(
@@ -383,20 +337,10 @@ class _ClockInPageState extends State<ClockInPage> {
                                 style: trueBlackTextStyle.copyWith(
                                     fontSize: 12, fontWeight: medium),
                               ),
-
-                              // onTap: () {
-                              //   _determinePosition();
-                              // },
                             ),
                           ),
                         ],
                       ),
-                      // TextButton(
-                      //   onPressed: () {
-                      //     _determinePosition();
-                      //   },
-                      //   child: Text('locate me'),
-                      // )
                     ],
                   ),
                 ),
@@ -405,28 +349,6 @@ class _ClockInPageState extends State<ClockInPage> {
           ],
         );
       });
-    }
-
-    Widget clock() {
-      return Column(
-        children: [
-          Center(
-            child: Container(
-              margin: EdgeInsets.only(top: 40),
-              width: MediaQuery.of(context).size.width * 0.8,
-              height: 95,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  HourCard(),
-                  ClockOut(),
-                  FullHour(),
-                ],
-              ),
-            ),
-          ),
-        ],
-      );
     }
 
     return SafeArea(
@@ -454,9 +376,7 @@ class _ClockInPageState extends State<ClockInPage> {
               style: TextStyle(color: Colors.black),
             ),
             actions: <Widget>[
-              Container(
-                child: Image(image: AssetImage('assets/rounded.png')),
-              ),
+              Image(image: AssetImage('assets/rounded.png')),
             ],
           ),
         ),

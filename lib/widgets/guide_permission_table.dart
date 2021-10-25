@@ -8,7 +8,7 @@ class GuidePermissionTable extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         margin: EdgeInsets.all(10),
-        child: Table(columnWidths: {
+        child: Table(columnWidths: const {
           0: FlexColumnWidth(1),
           1: FlexColumnWidth(19)
         }, children: [

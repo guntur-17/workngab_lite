@@ -10,63 +10,6 @@ class GuidePermission extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Widget header() {
-    //   return Container(
-    //     child: Column(
-    //       children: [
-    //         Padding(
-    //           padding: EdgeInsets.only(left: 20),
-    //           child: Row(
-    //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    //             children: [
-    //               Padding(
-    //                 padding: EdgeInsets.only(top: 57),
-    //                 child: Row(
-    //                   children: [
-    //                     InkWell(
-    //                       onTap: () {
-    //                         Navigator.pop(context);
-    //                       },
-    //                       child: Image.asset(
-    //                         'assets/back.png',
-    //                         width: 26,
-    //                         height: 26,
-    //                       ),
-    //                     ),
-    //                   ],
-    //                 ),
-    //               ),
-    //               Padding(
-    //                   padding: EdgeInsets.only(top: 57),
-    //                   child: Row(
-    //                     children: [
-    //                       SizedBox(
-    //                         width: MediaQuery.of(context).size.width * 0.15,
-    //                       ),
-    //                       Image.asset('assets/guide2.png',
-    //                           width: 18, height: 18),
-    //                       SizedBox(width: 8),
-    //                       Text(
-    //                         'Panduan',
-    //                         style: blackTextStyle.copyWith(
-    //                             fontSize: 20, fontWeight: semiBold),
-    //                       ),
-    //                     ],
-    //                   )),
-    //               Container(
-    //                 child: Image.asset(
-    //                   'assets/rounded.png',
-    //                   width: 130,
-    //                 ),
-    //               ),
-    //             ],
-    //           ),
-    //         ),
-    //       ],
-    //     ),
-    //   );
-    // }
-
     Widget panduan() {
       return Container(
         width: MediaQuery.of(context).size.width * 0.9,
@@ -114,19 +57,15 @@ class GuidePermission extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset('assets/guide2.png', width: 23, height: 23),
-                  Container(
-                    child: Text(
-                      'Panduan',
-                      style: trueBlackTextStyle,
-                    ),
+                  Text(
+                    'Panduan',
+                    style: trueBlackTextStyle,
                   )
                 ],
               ),
             ),
             actions: <Widget>[
-              Container(
-                child: Image(image: AssetImage('assets/rounded.png')),
-              ),
+              Image(image: AssetImage('assets/rounded.png')),
             ],
           ),
         ),
@@ -135,7 +74,6 @@ class GuidePermission extends StatelessWidget {
           child: Center(
             child: Column(
               children: [
-                // header(),
                 panduan(),
               ],
             ),

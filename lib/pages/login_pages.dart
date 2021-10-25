@@ -1,6 +1,5 @@
-import 'package:absen_lite/pages/dashboard_pages.dart';
 import 'package:absen_lite/pages/home.dart';
-import 'package:absen_lite/providers/attendance_provider.dart';
+
 import 'package:absen_lite/providers/auth_provider.dart';
 import 'package:absen_lite/providers/visiting_all_provider.dart';
 import 'package:absen_lite/widgets/loading_button.dart';
@@ -11,7 +10,7 @@ import 'package:provider/provider.dart';
 import 'package:relative_scale/relative_scale.dart';
 
 class LoginPage extends StatefulWidget {
-  // const LoginPage({Key? key}) : super(key: key);
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -38,8 +37,7 @@ class _LoginPageState extends State<LoginPage> {
           username: usernameController.text,
           password: passwordController.text)) {
         final SharedPreferences prefs = await SharedPreferences.getInstance();
-        // prefs.setString('username', authProvider.user.username as String);
-        // prefs.setString('password', passwordController.text);
+
         prefs.setString('token', authProvider.user.access_token as String);
 
         var token = prefs.getString('token');
@@ -63,19 +61,13 @@ class _LoginPageState extends State<LoginPage> {
     Widget header() {
       return RelativeBuilder(
         builder: (context, height, width, sy, sx) {
-          return Container(
-            // width: MediaQuery.of(context).size.width,
-            // margin: EdgeInsets.only(right: 78, top: 115, left: 78),
-            child: Column(
-              // mainAxisAlignment: MainAxisAlignment.start,
-              // mainAxisSize: MainAxisSize.max,
-              children: [
-                Image.asset(
-                  'assets/headerLogo.png',
-                  width: sy(182),
-                ),
-              ],
-            ),
+          return Column(
+            children: [
+              Image.asset(
+                'assets/headerLogo.png',
+                width: sy(182),
+              ),
+            ],
           );
         },
       );
@@ -85,12 +77,9 @@ class _LoginPageState extends State<LoginPage> {
       return RelativeBuilder(
         builder: (context, height, width, sy, sx) {
           return Container(
-            // width: MediaQuery.of(context).size.width,
             margin: EdgeInsets.only(top: 155),
             child: Center(
               child: Column(
-                // mainAxisAlignment: MainAxisAlignment.center,
-                // mainAxisSize: MainAxisSize.max,
                 children: [
                   // Align(
                   //   child: Image.asset(
@@ -113,24 +102,19 @@ class _LoginPageState extends State<LoginPage> {
     }
 
     Widget text() {
-      return Container(
-        // margin: EdgeInsets.only(left: 26),
-        child: Column(
-          children: [
-            Text(
-              'Login',
-              style:
-                  blackTextStyle.copyWith(fontSize: 26, fontWeight: semiBold),
-            )
-          ],
-        ),
+      return Column(
+        children: [
+          Text(
+            'Login',
+            style: blackTextStyle.copyWith(fontSize: 26, fontWeight: semiBold),
+          )
+        ],
       );
     }
 
     Widget input() {
       return RelativeBuilder(builder: (context, height, width, sy, sx) {
         return Container(
-          // margin: EdgeInsets.only(top: 380),
           padding: EdgeInsets.all(30.0),
           child: Column(
             children: [
@@ -164,7 +148,6 @@ class _LoginPageState extends State<LoginPage> {
     Widget button() {
       return Center(
         child: Container(
-          // margin: EdgeInsets.only(top: 590),
           width: 315,
           height: 57,
           decoration: BoxDecoration(
@@ -187,16 +170,13 @@ class _LoginPageState extends State<LoginPage> {
     }
 
     Widget body() {
-      return Container(
-        child: Column(
-          children: [
-            logo(),
-            // setlogo(),
-            text(),
-            input(),
-            isLoading ? LoadingButton() : button(),
-          ],
-        ),
+      return Column(
+        children: [
+          logo(),
+          text(),
+          input(),
+          isLoading ? LoadingButton() : button(),
+        ],
       );
     }
 

@@ -1,20 +1,15 @@
 import 'package:absen_lite/models/shop_model.dart';
 import 'package:absen_lite/pages/camera_pages.dart';
-import 'package:absen_lite/pages/test_pages.dart';
+
 import 'package:absen_lite/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:relative_scale/relative_scale.dart';
 
 class ShopCard extends StatelessWidget {
-  // const ShopCard({Key? key}) : super(key: key);
-
-  // final VisistingAllModel visiting;
-  // VisitingCard(this.visiting);
   final ShopModel shop;
-  // double? latUser;
-  // double? longUser;
+
   String? addressUser;
-  ShopCard(this.shop, this.addressUser);
+  ShopCard(this.shop, this.addressUser, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +26,7 @@ class ShopCard extends StatelessWidget {
             );
           },
           child: Container(
-            margin: EdgeInsets.only(bottom: 15),
+            margin: const EdgeInsets.only(bottom: 15),
             width: MediaQuery.of(context).size.width - 30,
             height: sy(40),
             child: Row(
@@ -44,33 +39,23 @@ class ShopCard extends StatelessWidget {
                       width: sy(20),
                       height: sy(20),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 7,
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Flexible(
-                          child: Container(
-                            child: Text(
-                              '${shop.name}',
-                              overflow: TextOverflow.fade,
-                              textAlign: TextAlign.center,
-                              style: trueBlackTextStyle.copyWith(
-                                  fontSize: 18, fontWeight: FontWeight.w500),
-                            ),
-                          ),
+                        Text(
+                          shop.name,
+                          textAlign: TextAlign.center,
+                          style: trueBlackTextStyle.copyWith(
+                              fontSize: 18, fontWeight: FontWeight.w500),
                         ),
                       ],
                     ),
                   ],
                 ),
-                // Image.asset(
-                //   'assets/rightButton.png',
-                //   width: sx(20),
-                //   height: sx(20),
-                // ),
               ],
             ),
           ),

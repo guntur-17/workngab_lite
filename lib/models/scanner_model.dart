@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class ScannerModel {
   int? id;
   double? lat;
