@@ -206,96 +206,104 @@ class _CameraPagesState extends State<CameraPages> {
     }
 
     Widget next() {
-      return Padding(
-        padding: EdgeInsets.only(top: 10),
-        child: Column(
-          children: [
-            SizedBox(
-              height: 50,
-              width: 170,
-              child: TextButton(
-                style: TextButton.styleFrom(backgroundColor: blueColor),
-                onPressed: () async {
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //         builder: (context) => testPage(image)));
-                  wait(widget.name);
-                  // handleUploadPhoto(widget.name);
-                },
-                child: Text(
-                  'Upload',
-                  style:
-                      whiteTextStyle.copyWith(fontSize: 18, fontWeight: bold),
+      return RelativeBuilder(builder: (contex, height, width, sy, sx) {
+        return Padding(
+          padding: EdgeInsets.only(top: 10),
+          child: Column(
+            children: [
+              SizedBox(
+                height: sx(60),
+                width: sx(150),
+                child: TextButton(
+                  style: TextButton.styleFrom(backgroundColor: blueColor),
+                  onPressed: () async {
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //         builder: (context) => testPage(image)));
+                    wait(widget.name);
+                    // handleUploadPhoto(widget.name);
+                  },
+                  child: Text(
+                    'Upload',
+                    style:
+                        whiteTextStyle.copyWith(fontSize: 18, fontWeight: bold),
+                  ),
                 ),
               ),
-            ),
-          ],
-        ),
-      );
+            ],
+          ),
+        );
+      });
     }
 
     Widget kotak() {
-      return Padding(
-        padding: const EdgeInsets.only(left: 22, right: 22, top: 10),
-        child: Container(
-          height: MediaQuery.of(context).size.height * 0.8,
-          width: MediaQuery.of(context).size.width * 0.9,
-          decoration: BoxDecoration(
-              color: yellowColor, borderRadius: BorderRadius.circular(15)),
-          child: Column(
-            children: [
-              title(),
-              alamat(),
-              fullalamat(),
-              // image != null ? retakeSelfie() : buttonSelfie(),
-              image != null
-                  ? Container(
-                      // height: 50,
-                      // width: 50,
-                      margin: EdgeInsets.only(bottom: 10),
-                      child: Image.file(
-                        image!,
-                        fit: BoxFit.cover,
-                        height: 230,
-                        width: 230,
-                      ),
-                    )
-                  // nextpage()
-                  : Container(
-                      margin: EdgeInsets.only(bottom: 10),
-                      height: 230,
-                      width: 230,
-                    ),
-
-              image != null
-                  ? TextButton(
-                      style: TextButton.styleFrom(backgroundColor: blueColor),
-                      onPressed: () async {
-                        await getPhoto();
-                      },
-                      child: Text(
-                        'retake a photo',
-                        style: whiteTextStyle.copyWith(
-                            fontSize: 18, fontWeight: bold),
-                      ),
-                    )
-                  : TextButton(
-                      style: TextButton.styleFrom(backgroundColor: blueColor),
-                      onPressed: () async {
-                        await getPhoto();
-                      },
-                      child: Text(
-                        'Take a photo',
-                        style: whiteTextStyle.copyWith(
-                            fontSize: 18, fontWeight: bold),
-                      ),
-                    ),
-              image != null ? next() : Container(),
-            ],
+      return RelativeBuilder(builder: (context, height, widht, sy, sx) {
+        return Padding(
+          padding: const EdgeInsets.only(
+            left: 22,
+            right: 22,
+            top: 10,
           ),
-        ),
-      );
+          child: Container(
+            height: sy(450),
+            width: sx(500),
+            decoration: BoxDecoration(
+                color: yellowColor, borderRadius: BorderRadius.circular(15)),
+            child: Column(
+              children: [
+                title(),
+                alamat(),
+                fullalamat(),
+                // image != null ? retakeSelfie() : buttonSelfie(),
+                image != null
+                    ? Container(
+                        // height: 50,
+                        // width: 50,
+                        margin: EdgeInsets.only(bottom: 10),
+                        child: Image.file(
+                          image!,
+                          fit: BoxFit.cover,
+                          height: sx(230),
+                          width: sx(230),
+                        ),
+                      )
+                    // nextpage()
+                    : Container(
+                        margin: EdgeInsets.only(bottom: 10),
+                        height: sy(130),
+                        width: sx(130),
+                      ),
+
+                image != null
+                    ? TextButton(
+                        style: TextButton.styleFrom(backgroundColor: blueColor),
+                        onPressed: () async {
+                          await getPhoto();
+                        },
+                        child: Text(
+                          'Retake a photo',
+                          style: whiteTextStyle.copyWith(
+                              fontSize: 18, fontWeight: bold),
+                        ),
+                      )
+                    : TextButton(
+                        style: TextButton.styleFrom(backgroundColor: blueColor),
+                        onPressed: () async {
+                          await getPhoto();
+                        },
+                        child: Text(
+                          'Take a photo',
+                          style: whiteTextStyle.copyWith(
+                              fontSize: 18, fontWeight: bold),
+                        ),
+                      ),
+                image != null ? next() : Container(),
+              ],
+            ),
+          ),
+        );
+      });
     }
 
     return SafeArea(

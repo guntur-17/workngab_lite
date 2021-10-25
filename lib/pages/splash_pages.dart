@@ -8,6 +8,7 @@ import 'package:absen_lite/providers/shop_provider.dart';
 import 'package:absen_lite/providers/visiting_all_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:relative_scale/relative_scale.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../theme.dart';
@@ -139,13 +140,18 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: blueColor,
-      body: Center(
-          child: GestureDetector(
-              child: Image.asset(
-        "assets/workab_logo.png",
-      ))),
-    );
+    return RelativeBuilder(builder: (context, height, width, sy, sx) {
+      return Scaffold(
+        backgroundColor: blueColor,
+        body: Center(
+            child: GestureDetector(
+          child: Image.asset(
+            "assets/logos.png",
+            width: sx(200),
+            height: sy(200),
+          ),
+        )),
+      );
+    });
   }
 }
