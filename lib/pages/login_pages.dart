@@ -1,4 +1,5 @@
 import 'package:absen_lite/pages/home.dart';
+import 'package:absen_lite/providers/attendance_provider.dart';
 
 import 'package:absen_lite/providers/auth_provider.dart';
 import 'package:absen_lite/providers/visiting_all_provider.dart';
@@ -43,6 +44,8 @@ class _LoginPageState extends State<LoginPage> {
         var token = prefs.getString('token');
         await Provider.of<VisitingAllProvider>(context, listen: false)
             .getAllVisit(token);
+        await Provider.of<AttedanceProvider>(context, listen: false)
+            .getAttendances(token);
         Navigator.pushReplacement(context, route);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(

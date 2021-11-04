@@ -118,13 +118,11 @@ class _CameraPagesState extends State<CameraPages> {
         return Padding(
           padding:
               const EdgeInsets.only(top: 10, left: 45, right: 45, bottom: 10),
-          child: Expanded(
-            child: Text(
-              '${widget.addressUser}',
-              textAlign: TextAlign.justify,
-              style: trueBlackTextStyle.copyWith(
-                  fontSize: 14, fontWeight: reguler),
-            ),
+          child: Text(
+            '${widget.addressUser}',
+            textAlign: TextAlign.justify,
+            style:
+                trueBlackTextStyle.copyWith(fontSize: 14, fontWeight: reguler),
           ),
         );
       });
@@ -159,63 +157,56 @@ class _CameraPagesState extends State<CameraPages> {
 
     Widget kotak() {
       return RelativeBuilder(builder: (context, height, widht, sy, sx) {
-        return Padding(
-          padding: const EdgeInsets.only(
-            left: 22,
-            right: 22,
-            top: 10,
-          ),
-          child: Container(
-            height: sy(450),
-            width: sx(500),
-            decoration: BoxDecoration(
-                color: yellowColor, borderRadius: BorderRadius.circular(15)),
-            child: Column(
-              children: [
-                title(),
-                alamat(),
-                fullalamat(),
-                image != null
-                    ? Container(
-                        margin: EdgeInsets.only(bottom: 10),
-                        child: Image.file(
-                          image!,
-                          fit: BoxFit.cover,
-                          height: sx(230),
-                          width: sx(230),
-                        ),
-                      )
-                    : Container(
-                        margin: EdgeInsets.only(bottom: 10),
-                        height: sy(130),
+        return Container(
+          height: sy(450),
+          width: sx(500),
+          decoration: BoxDecoration(
+              color: yellowColor, borderRadius: BorderRadius.circular(15)),
+          child: Column(
+            children: [
+              title(),
+              alamat(),
+              fullalamat(),
+              image != null
+                  ? Container(
+                      margin: EdgeInsets.only(bottom: 10),
+                      child: Image.file(
+                        image!,
+                        fit: BoxFit.cover,
+                        height: sx(130),
                         width: sx(130),
                       ),
-                image != null
-                    ? TextButton(
-                        style: TextButton.styleFrom(backgroundColor: blueColor),
-                        onPressed: () async {
-                          await getPhoto();
-                        },
-                        child: Text(
-                          'Retake a photo',
-                          style: whiteTextStyle.copyWith(
-                              fontSize: 18, fontWeight: bold),
-                        ),
-                      )
-                    : TextButton(
-                        style: TextButton.styleFrom(backgroundColor: blueColor),
-                        onPressed: () async {
-                          await getPhoto();
-                        },
-                        child: Text(
-                          'Take a photo',
-                          style: whiteTextStyle.copyWith(
-                              fontSize: 18, fontWeight: bold),
-                        ),
+                    )
+                  : Container(
+                      margin: EdgeInsets.only(bottom: 10),
+                      height: sy(130),
+                      width: sx(130),
+                    ),
+              image != null
+                  ? TextButton(
+                      style: TextButton.styleFrom(backgroundColor: blueColor),
+                      onPressed: () async {
+                        await getPhoto();
+                      },
+                      child: Text(
+                        'Retake a photo',
+                        style: whiteTextStyle.copyWith(
+                            fontSize: 18, fontWeight: bold),
                       ),
-                image != null ? next() : Container(),
-              ],
-            ),
+                    )
+                  : TextButton(
+                      style: TextButton.styleFrom(backgroundColor: blueColor),
+                      onPressed: () async {
+                        await getPhoto();
+                      },
+                      child: Text(
+                        'Take a photo',
+                        style: whiteTextStyle.copyWith(
+                            fontSize: 18, fontWeight: bold),
+                      ),
+                    ),
+              image != null ? next() : Container(),
+            ],
           ),
         );
       });

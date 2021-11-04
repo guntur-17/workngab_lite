@@ -4,6 +4,7 @@ import 'package:absen_lite/pages/visiting_list_pages.dart';
 import 'package:absen_lite/providers/attendance_provider.dart';
 
 import 'package:absen_lite/providers/visiting_all_provider.dart';
+import 'package:absen_lite/services/shop_service.dart';
 import 'package:absen_lite/theme.dart';
 import 'package:absen_lite/widgets/clock_card.dart';
 import 'package:absen_lite/widgets/loading_button.dart';
@@ -26,16 +27,18 @@ class DashboardPage extends StatefulWidget {
 
 class _DashboardPageState extends State<DashboardPage> {
   bool isLoading = false;
+  String query = '';
 
   @override
   void initState() {
     attendanceHandler();
     getvisiting();
+    // shophandle();
 
     super.initState();
   }
 
-  attendanceHandler() async {
+  Future attendanceHandler() async {
     setState(() {
       isLoading = true;
     });
@@ -48,7 +51,7 @@ class _DashboardPageState extends State<DashboardPage> {
     });
   }
 
-  getvisiting() async {
+  Future getvisiting() async {
     setState(() {
       isLoading = true;
     });
@@ -60,6 +63,12 @@ class _DashboardPageState extends State<DashboardPage> {
       isLoading = false;
     });
   }
+
+  // shophandle() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   var token = prefs.getString('token');
+  //   final shops = await ShopService().getShops(token: token, query: query);
+  // }
 
   Widget build(BuildContext context) {
     AuthProvider authProvider = Provider.of<AuthProvider>(context);

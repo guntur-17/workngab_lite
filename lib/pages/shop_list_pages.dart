@@ -28,21 +28,18 @@ class _ShopListPageState extends State<ShopListPage> {
   String query = '';
   Timer? debouncer;
 
-  bool isLoading = false;
+  // bool isLoading = false;
   @override
   void initState() {
-    shopListHandler();
     super.initState();
-
+    shopListHandler();
     init();
   }
 
-  shopListHandler() async {
+  Future shopListHandler() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var token = prefs.getString('token');
-
-    await ShopProvider().getShops(token);
-    if (!mounted) return;
+    shops = await ShopService().getShops(token: token, query: query);
   }
 
   @override
@@ -53,7 +50,7 @@ class _ShopListPageState extends State<ShopListPage> {
 
   void debounce(
     VoidCallback callback, {
-    Duration duration = const Duration(milliseconds: 250),
+    Duration duration = const Duration(milliseconds: 1000),
   }) {
     if (debouncer != null) {
       debouncer!.cancel();
@@ -128,7 +125,8 @@ class _ShopListPageState extends State<ShopListPage> {
           child: Column(
             children: <Widget>[
               buildSearch(),
-              isLoading ? const LoadingDefault() : card(),
+              // isLoading ? const LoadingDefault() :
+              card(),
             ],
           ),
         ),
