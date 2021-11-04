@@ -40,7 +40,7 @@ class _VisitingListPageState extends State<VisitingListPage> {
                 margin: EdgeInsets.only(bottom: 20),
                 width: MediaQuery.of(context).size.width * 0.90,
                 child: Column(
-                  children: visitingAllProvider.showAll
+                  children: visitingAllProvider.showAll.reversed
                       .map((visiting) => VisitingCard(visiting))
                       .toList(),
                 ),

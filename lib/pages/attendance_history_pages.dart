@@ -41,7 +41,7 @@ class _AttendanceHistoryPageState extends State<AttendanceHistoryPage> {
                 margin: const EdgeInsets.only(bottom: 20),
                 width: MediaQuery.of(context).size.width * 0.90,
                 child: Column(
-                  children: attedanceProvider.attendances
+                  children: attedanceProvider.attendances.reversed
                       .map((attendance) => ClockOutCard(attendance))
                       .toList(),
                 ),

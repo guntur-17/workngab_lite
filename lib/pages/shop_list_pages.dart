@@ -31,6 +31,7 @@ class _ShopListPageState extends State<ShopListPage> {
   // bool isLoading = false;
   @override
   void initState() {
+    // shopListHandler();
     super.initState();
     shopListHandler();
     init();
