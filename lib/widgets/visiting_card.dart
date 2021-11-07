@@ -69,6 +69,7 @@ class VisitingCard extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             height: sy(40),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Image.asset(
                   'assets/toko.png',

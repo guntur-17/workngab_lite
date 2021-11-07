@@ -101,7 +101,7 @@ class ClockOutCard extends StatelessWidget {
             ),
           ),
           child: SizedBox(
-            width: sx(430),
+            width: MediaQuery.of(context).size.width,
             height: sy(40),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
