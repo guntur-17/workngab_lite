@@ -9,10 +9,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   _MyAppState createState() => _MyAppState();
 }
@@ -29,7 +31,7 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (context) => VisitingAllProvider()),
         ChangeNotifierProvider(create: (context) => ShopProvider())
       ],
-      child: MaterialApp(
+      child: const MaterialApp(
         debugShowCheckedModeBanner: false,
         home: SplashPage(),
       ),

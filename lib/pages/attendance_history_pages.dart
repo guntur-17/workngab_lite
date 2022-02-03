@@ -1,5 +1,4 @@
 import 'package:absen_lite/providers/attendance_provider.dart';
-import 'package:absen_lite/providers/auth_provider.dart';
 import 'package:absen_lite/widgets/clock_card.dart';
 import 'package:flutter/material.dart';
 import 'package:absen_lite/theme.dart';
@@ -26,6 +25,7 @@ class _AttendanceHistoryPageState extends State<AttendanceHistoryPage> {
     await AttedanceProvider().getAttendances(token);
   }
 
+  @override
   Widget build(BuildContext context) {
     AttedanceProvider attedanceProvider =
         Provider.of<AttedanceProvider>(context, listen: false);
@@ -55,10 +55,10 @@ class _AttendanceHistoryPageState extends State<AttendanceHistoryPage> {
     return SafeArea(
       child: Scaffold(
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(80.0),
+          preferredSize: const Size.fromHeight(80.0),
           child: AppBar(
             toolbarHeight: 120,
-            iconTheme: IconThemeData(color: Colors.black),
+            iconTheme: const IconThemeData(color: Colors.black),
             centerTitle: true,
             backgroundColor: Colors.white,
             bottomOpacity: 0.0,

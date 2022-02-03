@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:absen_lite/pages/guide_permission.dart';
 import 'package:absen_lite/pages/guide_visiting.dart';
 import 'package:absen_lite/widgets/clip_shadow.dart';
@@ -13,16 +11,18 @@ class GuideOption extends StatelessWidget {
   Widget build(BuildContext context) {
     Widget absen2() {
       return Container(
-        margin: EdgeInsets.only(top: 10),
+        margin: const EdgeInsets.only(top: 10),
         child: InkWell(
           onTap: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => GuidePermission()));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const GuidePermission()));
           },
           child: ClipShadowPath(
-            shadow:
-                Shadow(blurRadius: 3, color: blackColor, offset: Offset(0, 1)),
-            clipper: ShapeBorderClipper(
+            shadow: Shadow(
+                blurRadius: 3, color: blackColor, offset: const Offset(0, 1)),
+            clipper: const ShapeBorderClipper(
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(8)))),
             child: Container(
@@ -30,7 +30,8 @@ class GuideOption extends StatelessWidget {
               width: MediaQuery.of(context).size.width * 0.9,
               // margin: EdgeInsets.only(top: 10, ),
               // width: 335,
-              padding: EdgeInsets.only(left: 11, right: 25, top: 5, bottom: 5),
+              padding:
+                  const EdgeInsets.only(left: 11, right: 25, top: 5, bottom: 5),
               decoration: BoxDecoration(
                 color: whiteColor,
                 border: Border(
@@ -64,22 +65,23 @@ class GuideOption extends StatelessWidget {
 
     Widget visit2() {
       return Container(
-        margin: EdgeInsets.only(top: 10),
+        margin: const EdgeInsets.only(top: 10),
         child: InkWell(
           onTap: () {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => GuideVisiting()));
+                MaterialPageRoute(builder: (context) => const GuideVisiting()));
           },
           child: ClipShadowPath(
-            shadow:
-                Shadow(blurRadius: 3, color: blackColor, offset: Offset(0, 1)),
-            clipper: ShapeBorderClipper(
+            shadow: Shadow(
+                blurRadius: 3, color: blackColor, offset: const Offset(0, 1)),
+            clipper: const ShapeBorderClipper(
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(8)))),
             child: Container(
               height: MediaQuery.of(context).size.height * 0.08,
               width: MediaQuery.of(context).size.width * 0.9,
-              padding: EdgeInsets.only(left: 11, right: 25, top: 5, bottom: 5),
+              padding:
+                  const EdgeInsets.only(left: 11, right: 25, top: 5, bottom: 5),
               decoration: BoxDecoration(
                 color: whiteColor,
                 border: Border(
@@ -114,7 +116,7 @@ class GuideOption extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(80.0),
+          preferredSize: const Size.fromHeight(80.0),
           child: AppBar(
             toolbarHeight: 120,
             leading: IconButton(
@@ -126,7 +128,7 @@ class GuideOption extends StatelessWidget {
                 Navigator.pop(context);
               },
             ),
-            iconTheme: IconThemeData(color: Colors.black),
+            iconTheme: const IconThemeData(color: Colors.black),
             centerTitle: true,
             backgroundColor: Colors.white,
             bottomOpacity: 0.0,
@@ -143,7 +145,7 @@ class GuideOption extends StatelessWidget {
                 ],
               ),
             ),
-            actions: <Widget>[
+            actions: const <Widget>[
               Image(image: AssetImage('assets/rounded.png')),
             ],
           ),

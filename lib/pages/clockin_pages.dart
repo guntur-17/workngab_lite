@@ -4,7 +4,7 @@ import 'package:absen_lite/providers/attendance_provider.dart';
 import 'package:absen_lite/widgets/loading_button.dart';
 import 'package:flutter/material.dart';
 import 'package:absen_lite/theme.dart';
-import 'package:absen_lite/widgets/hour_card.dart';
+
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
@@ -37,6 +37,7 @@ class _ClockInPageState extends State<ClockInPage> {
   Position? currentposition;
   bool isLoading = false;
 
+  @override
   void initState() {
     super.initState();
     img = imgIn;
@@ -138,7 +139,7 @@ class _ClockInPageState extends State<ClockInPage> {
         currentposition!.longitude,
       )) {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => HomePage()));
+            context, MaterialPageRoute(builder: (context) => const HomePage()));
       }
     }
 
@@ -154,13 +155,13 @@ class _ClockInPageState extends State<ClockInPage> {
       )) {
         // _isClockIn = true;
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => HomePage()));
+            context, MaterialPageRoute(builder: (context) => const HomePage()));
       }
     }
 
     Widget day() {
       return Container(
-        margin: EdgeInsets.only(top: 30),
+        margin: const EdgeInsets.only(top: 30),
         child: Center(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -170,7 +171,7 @@ class _ClockInPageState extends State<ClockInPage> {
                 style: trueBlackTextStyle.copyWith(
                     fontSize: 28, fontWeight: semiBold),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 3,
               ),
               Text(
@@ -203,7 +204,8 @@ class _ClockInPageState extends State<ClockInPage> {
                     ],
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: 10, left: 10, right: 10),
+                    padding:
+                        const EdgeInsets.only(top: 10, left: 10, right: 10),
                     child: Text('Are you sure to do it now?',
                         style: trueBlackTextStyle.copyWith(
                             fontSize: 16, fontWeight: semiBold)),
@@ -220,7 +222,7 @@ class _ClockInPageState extends State<ClockInPage> {
                       Navigator.pop(context);
                     },
                     child: Container(
-                      margin: EdgeInsets.only(bottom: 20),
+                      margin: const EdgeInsets.only(bottom: 20),
                       width: 70,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
@@ -229,7 +231,7 @@ class _ClockInPageState extends State<ClockInPage> {
                         child: Wrap(
                           children: [
                             Padding(
-                              padding: EdgeInsets.all(3),
+                              padding: const EdgeInsets.all(3),
                               child: Text(
                                 'NO',
                                 style: whiteTextStyle.copyWith(
@@ -261,7 +263,7 @@ class _ClockInPageState extends State<ClockInPage> {
                       });
                     },
                     child: Container(
-                      margin: EdgeInsets.only(bottom: 20),
+                      margin: const EdgeInsets.only(bottom: 20),
                       width: 70,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
@@ -271,7 +273,8 @@ class _ClockInPageState extends State<ClockInPage> {
                             color: blueShadow.withOpacity(0.2),
                             spreadRadius: 1,
                             blurRadius: 4,
-                            offset: Offset(0, 2), // changes position of shadow
+                            offset: const Offset(
+                                0, 2), // changes position of shadow
                           ),
                         ],
                       ),
@@ -279,7 +282,7 @@ class _ClockInPageState extends State<ClockInPage> {
                         child: Wrap(
                           children: [
                             Padding(
-                              padding: EdgeInsets.all(3),
+                              padding: const EdgeInsets.all(3),
                               child: Text(
                                 'YES',
                                 style: blueTextStyle.copyWith(
@@ -297,7 +300,7 @@ class _ClockInPageState extends State<ClockInPage> {
           ),
         ),
         child: Container(
-          margin: EdgeInsets.only(top: 30),
+          margin: const EdgeInsets.only(top: 30),
           child: Column(
             children: [
               Center(child: img),
@@ -313,7 +316,7 @@ class _ClockInPageState extends State<ClockInPage> {
           children: [
             Center(
               child: Container(
-                margin: EdgeInsets.only(top: 27),
+                margin: const EdgeInsets.only(top: 27),
                 width: MediaQuery.of(context).size.width * 0.75,
                 height: MediaQuery.of(context).size.width * 0.20,
                 decoration: BoxDecoration(
@@ -321,13 +324,13 @@ class _ClockInPageState extends State<ClockInPage> {
                     color: lightgreyColor),
                 //isi dari kotak berupa location
                 child: Container(
-                  margin: EdgeInsets.all(5),
+                  margin: const EdgeInsets.all(5),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Row(
                         children: [
-                          Icon(Icons.location_on_outlined),
+                          const Icon(Icons.location_on_outlined),
                           Expanded(
                             child: InkWell(
                               child: Text(
@@ -354,7 +357,7 @@ class _ClockInPageState extends State<ClockInPage> {
     return SafeArea(
       child: Scaffold(
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(80.0),
+          preferredSize: const Size.fromHeight(80.0),
           child: AppBar(
             toolbarHeight: 120,
             leading: IconButton(
@@ -366,16 +369,16 @@ class _ClockInPageState extends State<ClockInPage> {
                 Navigator.pop(context);
               },
             ),
-            iconTheme: IconThemeData(color: Colors.black),
+            iconTheme: const IconThemeData(color: Colors.black),
             centerTitle: true,
             backgroundColor: Colors.white,
             bottomOpacity: 0.0,
             elevation: 0.0,
-            title: Text(
+            title: const Text(
               'Attendance',
               style: TextStyle(color: Colors.black),
             ),
-            actions: <Widget>[
+            actions: const <Widget>[
               Image(image: AssetImage('assets/rounded.png')),
             ],
           ),
@@ -386,7 +389,7 @@ class _ClockInPageState extends State<ClockInPage> {
             children: [
               day(),
               tap(),
-              isLoading ? Loadinglocation() : location(),
+              isLoading ? const Loadinglocation() : location(),
               // clock(),
             ],
           ),

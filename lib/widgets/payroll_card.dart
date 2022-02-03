@@ -7,7 +7,7 @@ class PayrollCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 10),
+      margin: const EdgeInsets.only(bottom: 10),
       height: 60,
       padding: const EdgeInsets.only(right: 13, left: 19),
       decoration: BoxDecoration(
@@ -29,7 +29,7 @@ class PayrollCard extends StatelessWidget {
             children: [
               Image.asset('assets/payroll.png',
                   width: 30, height: 30, color: trueBlack),
-              SizedBox(
+              const SizedBox(
                 width: 6,
               ),
               Text('Desember 2021',

@@ -2,7 +2,6 @@ import 'dart:io';
 import 'package:absen_lite/pages/shop_list_pages.dart';
 import 'package:absen_lite/providers/auth_provider.dart';
 import 'package:absen_lite/providers/shop_provider.dart';
-import 'package:absen_lite/widgets/loading_button.dart';
 
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
@@ -15,10 +14,11 @@ import 'package:absen_lite/theme.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:relative_scale/relative_scale.dart';
 
 class VisitingPage extends StatefulWidget {
-  static const String _title = 'Visiting';
+  // static const String _title = 'Visiting';
+
+  const VisitingPage({Key? key}) : super(key: key);
 
   @override
   State<VisitingPage> createState() => _VisitingPageState();
@@ -30,12 +30,13 @@ class _VisitingPageState extends State<VisitingPage> {
   File? image;
 
   dynamic currentTime = DateFormat.Hm().format(DateTime.now());
-  String currentAddress = 'My Address';
+  String? currentAddress;
 
   Position? currentposition;
 
   bool isLoading = false;
 
+  @override
   void initState() {
     super.initState();
     _determinePosition();
@@ -97,52 +98,52 @@ class _VisitingPageState extends State<VisitingPage> {
         Provider.of<ShopProvider>(context, listen: false);
     AuthProvider authProvider = Provider.of<AuthProvider>(context);
 
-    Widget location() {
-      return RelativeBuilder(builder: (context, height, width, sy, sx) {
-        return Column(
-          children: [
-            Container(
-              margin: EdgeInsets.only(top: 27),
-              // width: MediaQuery.of(context).size.width * 0.75,
-              height: MediaQuery.of(context).size.width * 0.10,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: lightgreyColor),
-              //isi dari kotak berupa location
-              child: Container(
-                margin: EdgeInsets.all(5),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Row(
-                      children: [
-                        Icon(Icons.location_on_outlined),
-                        Expanded(
-                          child: InkWell(
-                            child: Text(
-                              currentAddress,
-                              overflow: TextOverflow.ellipsis,
-                              textAlign: TextAlign.center,
-                              style: trueBlackTextStyle.copyWith(
-                                  fontSize: 12, fontWeight: medium),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        );
-      });
-    }
+    // Widget location() {
+    //   return RelativeBuilder(builder: (context, height, width, sy, sx) {
+    //     return Column(
+    //       children: [
+    //         Container(
+    //           margin: EdgeInsets.only(top: 27),
+    //           // width: MediaQuery.of(context).size.width * 0.75,
+    //           height: MediaQuery.of(context).size.width * 0.10,
+    //           decoration: BoxDecoration(
+    //               borderRadius: BorderRadius.circular(5),
+    //               color: lightgreyColor),
+    //           //isi dari kotak berupa location
+    //           child: Container(
+    //             margin: EdgeInsets.all(5),
+    //             child: Column(
+    //               mainAxisAlignment: MainAxisAlignment.center,
+    //               children: [
+    //                 Row(
+    //                   children: [
+    //                     Icon(Icons.location_on_outlined),
+    //                     Expanded(
+    //                       child: InkWell(
+    //                         child: Text(
+    //                           currentAddress,
+    //                           overflow: TextOverflow.ellipsis,
+    //                           textAlign: TextAlign.center,
+    //                           style: trueBlackTextStyle.copyWith(
+    //                               fontSize: 12, fontWeight: medium),
+    //                         ),
+    //                       ),
+    //                     ),
+    //                   ],
+    //                 ),
+    //               ],
+    //             ),
+    //           ),
+    //         ),
+    //       ],
+    //     );
+    //   });
+    // }
 
     Widget text() {
       return Container(
         width: MediaQuery.of(context).size.width,
-        margin: EdgeInsets.only(left: 22,right:22),
+        margin: const EdgeInsets.only(left: 22, right: 22),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -157,7 +158,7 @@ class _VisitingPageState extends State<VisitingPage> {
               style:
                   trueBlackTextStyle.copyWith(fontSize: 14, fontWeight: light),
             ),
-             isLoading ? Loadinglocation2() : location(),
+            // isLoading ? Loadinglocation2() : location(),
           ],
         ),
       );
@@ -176,6 +177,7 @@ class _VisitingPageState extends State<VisitingPage> {
     Future _getPhoto(BuildContext context) async {
       // double lat = currentposition!.latitude;
       // double long = currentposition!.longitude;
+
       final picker = await Navigator.push(context,
           MaterialPageRoute(builder: (c) => ShopListPage(currentAddress)));
       _picker = picker;
@@ -252,6 +254,10 @@ class _VisitingPageState extends State<VisitingPage> {
       return InkWell(
         onTap: () {
           shopProvider.getShops(authProvider.user.access_token);
+          if (currentAddress == null) {
+            // _determinePosition();
+          }
+
           _getPhoto(context);
         },
         child: Padding(
@@ -316,12 +322,10 @@ class _VisitingPageState extends State<VisitingPage> {
       );
     }
 
-    
-
     return SafeArea(
       child: Scaffold(
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(80.0),
+          preferredSize: const Size.fromHeight(80.0),
           child: AppBar(
             toolbarHeight: 120,
             leading: IconButton(
@@ -333,7 +337,7 @@ class _VisitingPageState extends State<VisitingPage> {
                 Navigator.pop(context);
               },
             ),
-            iconTheme: IconThemeData(color: Colors.black),
+            iconTheme: const IconThemeData(color: Colors.black),
             centerTitle: true,
             backgroundColor: Colors.white,
             bottomOpacity: 0.0,
@@ -342,7 +346,7 @@ class _VisitingPageState extends State<VisitingPage> {
             //   'Visiting',
             //   style: TextStyle(color: Colors.black),
             // ),
-            actions: <Widget>[
+            actions: const <Widget>[
               Image(image: AssetImage('assets/rounded.png')),
             ],
           ),

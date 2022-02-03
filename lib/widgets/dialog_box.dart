@@ -25,7 +25,7 @@ class _LogoutDialogState extends State<LogoutDialog> {
         prefs.clear();
         Navigator.pushAndRemoveUntil(
             context,
-            MaterialPageRoute(builder: (context) => LoginPage()),
+            MaterialPageRoute(builder: (context) => const LoginPage()),
             (route) => false);
       }
     }
@@ -48,7 +48,7 @@ class _LogoutDialogState extends State<LogoutDialog> {
                   ],
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 10, left: 10, right: 10),
+                  padding: const EdgeInsets.only(top: 10, left: 10, right: 10),
                   child: Text('Are You Sure to Logout?',
                       style: trueBlackTextStyle.copyWith(
                           fontSize: 16, fontWeight: semiBold)),
@@ -65,7 +65,7 @@ class _LogoutDialogState extends State<LogoutDialog> {
                     Navigator.pop(context);
                   },
                   child: Container(
-                    margin: EdgeInsets.only(bottom: 20),
+                    margin: const EdgeInsets.only(bottom: 20),
                     width: 70,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
@@ -74,7 +74,7 @@ class _LogoutDialogState extends State<LogoutDialog> {
                       child: Wrap(
                         children: [
                           Padding(
-                            padding: EdgeInsets.all(3),
+                            padding: const EdgeInsets.all(3),
                             child: Text(
                               'NO',
                               style: whiteTextStyle.copyWith(
@@ -91,7 +91,7 @@ class _LogoutDialogState extends State<LogoutDialog> {
                     handleLogout();
                   },
                   child: Container(
-                    margin: EdgeInsets.only(bottom: 20),
+                    margin: const EdgeInsets.only(bottom: 20),
                     width: 70,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
@@ -101,7 +101,8 @@ class _LogoutDialogState extends State<LogoutDialog> {
                           color: blueShadow.withOpacity(0.2),
                           spreadRadius: 1,
                           blurRadius: 4,
-                          offset: Offset(0, 2), // changes position of shadow
+                          offset:
+                              const Offset(0, 2), // changes position of shadow
                         ),
                       ],
                     ),
@@ -109,7 +110,7 @@ class _LogoutDialogState extends State<LogoutDialog> {
                       child: Wrap(
                         children: [
                           Padding(
-                            padding: EdgeInsets.all(3),
+                            padding: const EdgeInsets.all(3),
                             child: Text(
                               'YES',
                               style: blueTextStyle.copyWith(
@@ -127,7 +128,7 @@ class _LogoutDialogState extends State<LogoutDialog> {
         ),
       ),
       child: Container(
-        margin: EdgeInsets.only(top: 30),
+        margin: const EdgeInsets.only(top: 30),
         width: MediaQuery.of(context).size.width * 0.9,
         height: 48,
         decoration: BoxDecoration(

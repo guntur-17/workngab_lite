@@ -14,6 +14,7 @@ class VisitingListPage extends StatefulWidget {
 }
 
 class _VisitingListPageState extends State<VisitingListPage> {
+  @override
   void initState() {
     getvisiting();
     super.initState();
@@ -37,7 +38,7 @@ class _VisitingListPageState extends State<VisitingListPage> {
           child: SingleChildScrollView(
             child: Center(
               child: Container(
-                margin: EdgeInsets.only(bottom: 20),
+                margin: const EdgeInsets.only(bottom: 20),
                 width: MediaQuery.of(context).size.width * 0.90,
                 child: Column(
                   children: visitingAllProvider.showAll.reversed
@@ -54,7 +55,7 @@ class _VisitingListPageState extends State<VisitingListPage> {
     return SafeArea(
       child: Scaffold(
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(80.0),
+          preferredSize: const Size.fromHeight(80.0),
           child: AppBar(
             toolbarHeight: 120,
             leading: IconButton(
@@ -66,7 +67,7 @@ class _VisitingListPageState extends State<VisitingListPage> {
                 Navigator.pop(context);
               },
             ),
-            iconTheme: IconThemeData(color: Colors.black),
+            iconTheme: const IconThemeData(color: Colors.black),
             centerTitle: true,
             backgroundColor: Colors.white,
             bottomOpacity: 0.0,

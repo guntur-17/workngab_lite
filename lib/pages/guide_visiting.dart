@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:absen_lite/theme.dart';
 
@@ -14,7 +12,7 @@ class GuideVisiting extends StatelessWidget {
       return Container(
         width: MediaQuery.of(context).size.width * 0.9,
         height: MediaQuery.of(context).size.height * 0.75,
-        margin: EdgeInsets.only(top: 25),
+        margin: const EdgeInsets.only(top: 25),
         child: Column(
           children: [
             Row(
@@ -26,7 +24,7 @@ class GuideVisiting extends StatelessWidget {
                 // Image.asset('assets/question.png', width: 17, height: 17)
               ],
             ),
-            GuidePermissionTable(),
+            const GuidePermissionTable(),
           ],
         ),
       );
@@ -35,7 +33,7 @@ class GuideVisiting extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(80.0),
+          preferredSize: const Size.fromHeight(80.0),
           child: AppBar(
             toolbarHeight: 120,
             leading: IconButton(
@@ -47,7 +45,7 @@ class GuideVisiting extends StatelessWidget {
                 Navigator.pop(context);
               },
             ),
-            iconTheme: IconThemeData(color: Colors.black),
+            iconTheme: const IconThemeData(color: Colors.black),
             centerTitle: true,
             backgroundColor: Colors.white,
             bottomOpacity: 0.0,
@@ -64,7 +62,7 @@ class GuideVisiting extends StatelessWidget {
                 ],
               ),
             ),
-            actions: <Widget>[
+            actions: const <Widget>[
               Image(image: AssetImage('assets/rounded.png')),
             ],
           ),

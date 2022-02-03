@@ -22,7 +22,7 @@ class _ProfilePageState extends State<ProfilePage> {
     Widget head() {
       return Center(
         child: Container(
-          margin: EdgeInsets.only(top: 50),
+          margin: const EdgeInsets.only(top: 50),
           width: MediaQuery.of(context).size.width - 40,
           child: Row(
             children: [
@@ -39,7 +39,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   )
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
               Column(
@@ -50,7 +50,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     style:
                         blackTextStyle.copyWith(fontSize: 18, fontWeight: bold),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 4,
                   ),
                   Text(
@@ -68,7 +68,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
     Widget line() {
       return Container(
-        margin: EdgeInsets.only(top: 40),
+        margin: const EdgeInsets.only(top: 40),
         width: MediaQuery.of(context).size.width * 0.9,
         child: Image.asset('assets/line.png'),
       );
@@ -76,7 +76,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
     Widget menu() {
       return Column(
-        children: [
+        children: const [
           SizedBox(
             height: 40,
           ),
@@ -95,7 +95,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
     Widget line2() {
       return Container(
-        margin: EdgeInsets.only(top: 40),
+        margin: const EdgeInsets.only(top: 40),
         width: MediaQuery.of(context).size.width * 0.9,
         child: Image.asset('assets/line.png'),
       );
@@ -133,7 +133,13 @@ class _ProfilePageState extends State<ProfilePage> {
       child: Scaffold(
         backgroundColor: whiteColor,
         body: Column(
-          children: [head(), line(), menu(), line2(), LogoutDialog()],
+          children: [
+            head(),
+            line(),
+            menu(),
+            line2(),
+            const LogoutDialog(),
+          ],
         ),
       ),
     );

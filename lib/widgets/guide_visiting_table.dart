@@ -7,7 +7,7 @@ class GuideVisitingTable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(10),
+      margin: const EdgeInsets.all(10),
       child: Table(
         columnWidths: const {0: FlexColumnWidth(1), 1: FlexColumnWidth(19)},
         children: [

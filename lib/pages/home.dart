@@ -27,7 +27,7 @@ class _HomePageState extends State<HomePage> {
               print(_selectedIndex);
             });
           },
-          items: [
+          items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
               label: 'Home',
@@ -46,13 +46,13 @@ class _HomePageState extends State<HomePage> {
     Widget body() {
       switch (_selectedIndex) {
         case 0:
-          return DashboardPage();
+          return const DashboardPage();
 
         case 1:
-          return ProfilePage();
+          return const ProfilePage();
 
         default:
-          return DashboardPage();
+          return const DashboardPage();
       }
     }
 

@@ -6,8 +6,8 @@ import 'package:intl/intl.dart';
 import 'package:relative_scale/relative_scale.dart';
 
 class SuccessPages extends StatefulWidget {
-  String? shopName;
-  SuccessPages(this.shopName, {Key? key}) : super(key: key);
+  final String? shopName;
+  const SuccessPages(this.shopName, {Key? key}) : super(key: key);
 
   @override
   State<SuccessPages> createState() => _SuccessPagesState();

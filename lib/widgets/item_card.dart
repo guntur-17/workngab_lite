@@ -64,14 +64,16 @@ class _ItemCardState extends State<ItemCard> {
                         )),
 
                     Container(
-                      margin: EdgeInsets.symmetric(horizontal: 3),
-                      padding: EdgeInsets.symmetric(horizontal: 3, vertical: 2),
+                      margin: const EdgeInsets.symmetric(horizontal: 3),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 3, vertical: 2),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(3),
                           color: Colors.white),
                       child: Text(
                         hitung.toString(),
-                        style: TextStyle(color: Colors.black, fontSize: 16),
+                        style:
+                            const TextStyle(color: Colors.black, fontSize: 16),
                       ),
                     ),
                     // IconButton(

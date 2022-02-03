@@ -14,7 +14,7 @@ class UserCard extends StatelessWidget {
       child: InkWell(
         onTap: () {
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => DetailProfile()));
+              MaterialPageRoute(builder: (context) => const DetailProfile()));
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -65,7 +65,7 @@ class SettingCard extends StatelessWidget {
                 width: 40,
                 height: 40,
               ),
-              SizedBox(
+              const SizedBox(
                 width: 20,
               ),
               Text(
@@ -95,8 +95,8 @@ class GuideCard extends StatelessWidget {
       width: MediaQuery.of(context).size.width - 60,
       child: InkWell(
         onTap: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => GuideOption()));
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const GuideOption()));
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -108,7 +108,7 @@ class GuideCard extends StatelessWidget {
                   width: 40,
                   height: 40,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 20,
                 ),
                 Text(
@@ -147,7 +147,7 @@ class AboutCard extends StatelessWidget {
                 width: 40,
                 height: 40,
               ),
-              SizedBox(
+              const SizedBox(
                 width: 20,
               ),
               Text(

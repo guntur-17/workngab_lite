@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:absen_lite/models/user_model.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService {
   String baseUrl = 'http://decoy.sakataguna-dev.com/api';

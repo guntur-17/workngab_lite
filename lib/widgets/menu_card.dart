@@ -16,7 +16,7 @@ class AttendanceCard extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => ClockInPage(),
+              builder: (context) => const ClockInPage(),
             ),
           );
         },
@@ -33,7 +33,7 @@ class AttendanceCard extends StatelessWidget {
                 color: Colors.grey.withOpacity(0.2),
                 spreadRadius: 1,
                 blurRadius: 7,
-                offset: Offset(0, 5), // changes position of shadow
+                offset: const Offset(0, 5), // changes position of shadow
               ),
             ],
           ),
@@ -51,12 +51,12 @@ class AttendanceCard extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ClockInPage(),
+                        builder: (context) => const ClockInPage(),
                       ),
                     );
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 2,
                 ),
                 Text(
@@ -85,7 +85,7 @@ class VisitCard extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => VisitingPage(),
+                builder: (context) => const VisitingPage(),
               ),
             );
           },
@@ -102,7 +102,7 @@ class VisitCard extends StatelessWidget {
                   color: Colors.grey.withOpacity(0.2),
                   spreadRadius: 1,
                   blurRadius: 7,
-                  offset: Offset(0, 5), // changes position of shadow
+                  offset: const Offset(0, 5), // changes position of shadow
                 ),
               ],
             ),
@@ -120,12 +120,12 @@ class VisitCard extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => VisitingPage(),
+                          builder: (context) => const VisitingPage(),
                         ),
                       );
                     },
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 2,
                   ),
                   Text(

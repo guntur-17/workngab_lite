@@ -15,7 +15,7 @@ class HourCard extends StatelessWidget {
           border: Border.all(color: blueColor, width: 1)),
       child: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 4,
           ),
           Image.asset(
@@ -23,14 +23,14 @@ class HourCard extends StatelessWidget {
             width: 30,
             height: 30,
           ),
-          SizedBox(
+          const SizedBox(
             height: 4,
           ),
           Text(
             '09:10',
             style: blackTextStyle.copyWith(fontSize: 16, fontWeight: medium),
           ),
-          SizedBox(
+          const SizedBox(
             height: 2,
           ),
           Text(
@@ -57,7 +57,7 @@ class ClockOut extends StatelessWidget {
           border: Border.all(color: blueColor, width: 1)),
       child: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 6,
           ),
           Image.asset(
@@ -65,14 +65,14 @@ class ClockOut extends StatelessWidget {
             width: 30,
             height: 30,
           ),
-          SizedBox(
+          const SizedBox(
             height: 4,
           ),
           Text(
             '--:--',
             style: blackTextStyle.copyWith(fontSize: 16, fontWeight: medium),
           ),
-          SizedBox(
+          const SizedBox(
             height: 2,
           ),
           Text(
@@ -99,7 +99,7 @@ class FullHour extends StatelessWidget {
           border: Border.all(color: blueColor, width: 1)),
       child: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 4,
           ),
           Image.asset(
@@ -107,14 +107,14 @@ class FullHour extends StatelessWidget {
             width: 30,
             height: 30,
           ),
-          SizedBox(
+          const SizedBox(
             height: 4,
           ),
           Text(
             '12:20',
             style: blackTextStyle.copyWith(fontSize: 16, fontWeight: medium),
           ),
-          SizedBox(
+          const SizedBox(
             height: 2,
           ),
           Text(

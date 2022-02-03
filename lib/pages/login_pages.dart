@@ -27,7 +27,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     AuthProvider authProvider = Provider.of<AuthProvider>(context);
-    Route route = MaterialPageRoute(builder: (context) => HomePage());
+    Route route = MaterialPageRoute(builder: (context) => const HomePage());
 
     handleLogin() async {
       setState(() {
@@ -50,7 +50,7 @@ class _LoginPageState extends State<LoginPage> {
       } else {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             backgroundColor: redColor,
-            content: Text(
+            content: const Text(
               'Anda Gagal Login',
               textAlign: TextAlign.center,
             )));
@@ -80,7 +80,7 @@ class _LoginPageState extends State<LoginPage> {
       return RelativeBuilder(
         builder: (context, height, width, sy, sx) {
           return Container(
-            margin: EdgeInsets.only(top: 155),
+            margin: const EdgeInsets.only(top: 155),
             child: Center(
               child: Column(
                 children: [
@@ -118,17 +118,17 @@ class _LoginPageState extends State<LoginPage> {
     Widget input() {
       return RelativeBuilder(builder: (context, height, width, sy, sx) {
         return Container(
-          padding: EdgeInsets.all(30.0),
+          padding: const EdgeInsets.all(30.0),
           child: Column(
             children: [
               //username
               TextField(
                 controller: usernameController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     hintText: 'username',
                     prefixIcon: Icon(Icons.account_circle_outlined)),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               //password
@@ -137,10 +137,10 @@ class _LoginPageState extends State<LoginPage> {
                 obscureText: hiddenPassword,
                 decoration: InputDecoration(
                     hintText: 'password',
-                    prefixIcon: Icon(Icons.lock_outline_sharp),
+                    prefixIcon: const Icon(Icons.lock_outline_sharp),
                     suffixIcon: InkWell(
                         onTap: _tooglePasswordView,
-                        child: Icon(Icons.visibility))),
+                        child: const Icon(Icons.visibility))),
               ),
             ],
           ),
@@ -178,7 +178,7 @@ class _LoginPageState extends State<LoginPage> {
           logo(),
           text(),
           input(),
-          isLoading ? LoadingButton() : button(),
+          isLoading ? const LoadingButton() : button(),
         ],
       );
     }

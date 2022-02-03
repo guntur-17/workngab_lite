@@ -15,7 +15,7 @@ class DetailProfile extends StatelessWidget {
 
     Widget photo() {
       return Container(
-        margin: EdgeInsets.only(top: 15, bottom: 9),
+        margin: const EdgeInsets.only(top: 15, bottom: 9),
         child: Column(
           children: [
             Container(
@@ -34,7 +34,7 @@ class DetailProfile extends StatelessWidget {
     Widget nama() {
       return Container(
         width: MediaQuery.of(context).size.width * 0.9,
-        margin: EdgeInsets.only(top: 9, bottom: 9),
+        margin: const EdgeInsets.only(top: 9, bottom: 9),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -43,7 +43,7 @@ class DetailProfile extends StatelessWidget {
               style: blackTextStyle.copyWith(fontSize: 14, fontWeight: reguler),
             ),
             Padding(
-              padding: EdgeInsets.only(top: 5),
+              padding: const EdgeInsets.only(top: 5),
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height * 0.05,
@@ -71,7 +71,7 @@ class DetailProfile extends StatelessWidget {
     Widget jabatan() {
       return Container(
         width: MediaQuery.of(context).size.width * 0.9,
-        margin: EdgeInsets.only(top: 9, bottom: 9),
+        margin: const EdgeInsets.only(top: 9, bottom: 9),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -80,7 +80,7 @@ class DetailProfile extends StatelessWidget {
               style: blackTextStyle.copyWith(fontSize: 14, fontWeight: reguler),
             ),
             Padding(
-              padding: EdgeInsets.only(top: 5),
+              padding: const EdgeInsets.only(top: 5),
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height * 0.05,
@@ -108,7 +108,7 @@ class DetailProfile extends StatelessWidget {
     Widget nik() {
       return Container(
         width: MediaQuery.of(context).size.width * 0.9,
-        margin: EdgeInsets.only(top: 9, bottom: 9),
+        margin: const EdgeInsets.only(top: 9, bottom: 9),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -117,7 +117,7 @@ class DetailProfile extends StatelessWidget {
               style: blackTextStyle.copyWith(fontSize: 14, fontWeight: reguler),
             ),
             Padding(
-              padding: EdgeInsets.only(top: 5),
+              padding: const EdgeInsets.only(top: 5),
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height * 0.05,
@@ -145,7 +145,7 @@ class DetailProfile extends StatelessWidget {
     Widget username() {
       return Container(
         width: MediaQuery.of(context).size.width * 0.9,
-        margin: EdgeInsets.only(top: 9, bottom: 9),
+        margin: const EdgeInsets.only(top: 9, bottom: 9),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -154,7 +154,7 @@ class DetailProfile extends StatelessWidget {
               style: blackTextStyle.copyWith(fontSize: 14, fontWeight: reguler),
             ),
             Padding(
-              padding: EdgeInsets.only(top: 5),
+              padding: const EdgeInsets.only(top: 5),
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height * 0.05,
@@ -182,7 +182,7 @@ class DetailProfile extends StatelessWidget {
     Widget email() {
       return Container(
         width: MediaQuery.of(context).size.width * 0.9,
-        margin: EdgeInsets.only(top: 9, bottom: 9),
+        margin: const EdgeInsets.only(top: 9, bottom: 9),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -191,7 +191,7 @@ class DetailProfile extends StatelessWidget {
               style: blackTextStyle.copyWith(fontSize: 14, fontWeight: reguler),
             ),
             Padding(
-              padding: EdgeInsets.only(top: 5, bottom: 5),
+              padding: const EdgeInsets.only(top: 5, bottom: 5),
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height * 0.05,
@@ -219,7 +219,7 @@ class DetailProfile extends StatelessWidget {
     Widget gender() {
       return Container(
         width: MediaQuery.of(context).size.width * 0.9,
-        margin: EdgeInsets.only(top: 9, bottom: 18),
+        margin: const EdgeInsets.only(top: 9, bottom: 18),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -228,7 +228,7 @@ class DetailProfile extends StatelessWidget {
               style: blackTextStyle.copyWith(fontSize: 14, fontWeight: reguler),
             ),
             Padding(
-              padding: EdgeInsets.only(top: 5),
+              padding: const EdgeInsets.only(top: 5),
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height * 0.05,
@@ -256,10 +256,10 @@ class DetailProfile extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(80.0),
+          preferredSize: const Size.fromHeight(80.0),
           child: AppBar(
             toolbarHeight: 120,
-            iconTheme: IconThemeData(color: Colors.black),
+            iconTheme: const IconThemeData(color: Colors.black),
             centerTitle: true,
             backgroundColor: Colors.white,
             bottomOpacity: 0.0,

@@ -12,11 +12,12 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Scanner extends StatefulWidget {
-  double? lat;
-  double? long;
-  String? addressUser;
+  final double? lat;
+  final double? long;
+  final String? addressUser;
 
-  Scanner(this.lat, this.long, this.addressUser, {Key? key}) : super(key: key);
+  const Scanner(this.lat, this.long, this.addressUser, {Key? key})
+      : super(key: key);
 
   @override
   _ScannerState createState() => _ScannerState();
@@ -50,28 +51,28 @@ class _ScannerState extends State<Scanner> {
     handleDiluarJangkauanScanner() {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         backgroundColor: redColor,
-        content: Text(
+        content: const Text(
           'Not in Range..',
           textAlign: TextAlign.center,
         ),
       ));
       Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (context) => HomePage()),
+          MaterialPageRoute(builder: (context) => const HomePage()),
           (route) => false);
     }
 
     handleSalahScanner() {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         backgroundColor: redColor,
-        content: Text(
+        content: const Text(
           'wrong barcode',
           textAlign: TextAlign.center,
         ),
       ));
       Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (context) => HomePage()),
+          MaterialPageRoute(builder: (context) => const HomePage()),
           (route) => false);
     }
 
@@ -104,7 +105,7 @@ class _ScannerState extends State<Scanner> {
                       ScannerModel shop = scannerProvider.data;
                       double radius = Geolocator.distanceBetween(
                           latUser!, longUser!, shop.lat!, shop.long!);
-                      int? id = shop.id;
+                      // int? id = shop.id;
                       if (radius <= 300) {
                         handleUploadScanner(shop.name);
                       } else {
@@ -124,7 +125,7 @@ class _ScannerState extends State<Scanner> {
           Align(
             alignment: Alignment.topCenter,
             child: Container(
-              margin: EdgeInsets.only(top: 60),
+              margin: const EdgeInsets.only(top: 60),
               child: Text(
                 'Scanner',
                 style: TextStyle(
@@ -156,7 +157,7 @@ class _ScannerState extends State<Scanner> {
                         _frontCam ? Icons.camera_front : Icons.camera_rear)),
                 IconButton(
                     onPressed: () => Navigator.pop(context),
-                    icon: Icon(Icons.close)),
+                    icon: const Icon(Icons.close)),
               ],
             ),
           ),

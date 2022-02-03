@@ -3,10 +3,8 @@ import 'dart:async';
 import 'package:absen_lite/models/shop_model.dart';
 import 'package:absen_lite/pages/camera_pages.dart';
 
-import 'package:absen_lite/providers/shop_provider.dart';
 import 'package:absen_lite/services/shop_service.dart';
 import 'package:absen_lite/theme.dart';
-import 'package:absen_lite/widgets/loading_button.dart';
 import 'package:absen_lite/widgets/search_widget.dart';
 
 import 'package:flutter/material.dart';
@@ -15,9 +13,9 @@ import 'package:relative_scale/relative_scale.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ShopListPage extends StatefulWidget {
-  String? addressUser;
+  final String? addressUser;
 
-  ShopListPage(this.addressUser);
+  const ShopListPage(this.addressUser, {Key? key}) : super(key: key);
 
   @override
   _ShopListPageState createState() => _ShopListPageState();
@@ -72,17 +70,17 @@ class _ShopListPageState extends State<ShopListPage> {
   @override
   Widget build(BuildContext context) {
     Widget card() {
-      return Container(
+      return SizedBox(
         width: MediaQuery.of(context).size.width * 0.95,
         child: SingleChildScrollView(
           child: Center(
             child: Container(
-              margin: EdgeInsets.only(bottom: 20),
+              margin: const EdgeInsets.only(bottom: 20),
               width: MediaQuery.of(context).size.width * 0.90,
               child: ListView.builder(
                 itemCount: shops.length,
                 shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
                   final shop = shops[index];
 
@@ -98,7 +96,7 @@ class _ShopListPageState extends State<ShopListPage> {
     return SafeArea(
       child: Scaffold(
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(80.0),
+          preferredSize: const Size.fromHeight(80.0),
           child: AppBar(
             toolbarHeight: 120,
             leading: IconButton(
@@ -110,12 +108,12 @@ class _ShopListPageState extends State<ShopListPage> {
                 Navigator.pop(context);
               },
             ),
-            iconTheme: IconThemeData(color: Colors.black),
+            iconTheme: const IconThemeData(color: Colors.black),
             centerTitle: true,
             backgroundColor: Colors.white,
             bottomOpacity: 0.0,
             elevation: 0.0,
-            title: new Text(
+            title: Text(
               'Shop',
               style: trueBlackTextStyle.copyWith(fontWeight: FontWeight.w600),
             ),
@@ -167,7 +165,7 @@ class _ShopListPageState extends State<ShopListPage> {
               );
             },
             child: Container(
-              margin: EdgeInsets.only(bottom: 15),
+              margin: const EdgeInsets.only(bottom: 15),
               width: MediaQuery.of(context).size.width - 60,
               height: sy(40),
               child: Row(
@@ -178,7 +176,7 @@ class _ShopListPageState extends State<ShopListPage> {
                     width: sy(40),
                     height: sy(40),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 16,
                   ),
                   Column(

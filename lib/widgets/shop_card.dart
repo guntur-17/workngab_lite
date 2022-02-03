@@ -8,8 +8,8 @@ import 'package:relative_scale/relative_scale.dart';
 class ShopCard extends StatelessWidget {
   final ShopModel shop;
 
-  String? addressUser;
-  ShopCard(this.shop, this.addressUser, {Key? key}) : super(key: key);
+  final String? addressUser;
+  const ShopCard(this.shop, this.addressUser, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -5,7 +5,7 @@ import 'package:relative_scale/relative_scale.dart';
 
 class VisitingCard extends StatelessWidget {
   final VisistingAllModel visiting;
-  VisitingCard(this.visiting, {Key? key}) : super(key: key);
+  const VisitingCard(this.visiting, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

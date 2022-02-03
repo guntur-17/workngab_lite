@@ -4,7 +4,6 @@ import 'package:absen_lite/pages/visiting_list_pages.dart';
 import 'package:absen_lite/providers/attendance_provider.dart';
 
 import 'package:absen_lite/providers/visiting_all_provider.dart';
-import 'package:absen_lite/services/shop_service.dart';
 import 'package:absen_lite/theme.dart';
 import 'package:absen_lite/widgets/clock_card.dart';
 import 'package:absen_lite/widgets/loading_button.dart';
@@ -70,6 +69,7 @@ class _DashboardPageState extends State<DashboardPage> {
   //   final shops = await ShopService().getShops(token: token, query: query);
   // }
 
+  @override
   Widget build(BuildContext context) {
     AuthProvider authProvider = Provider.of<AuthProvider>(context);
     AttedanceProvider attedanceProvider =
@@ -88,7 +88,7 @@ class _DashboardPageState extends State<DashboardPage> {
       return Column(
         children: [
           Padding(
-            padding: EdgeInsets.only(left: 30, right: 12, top: 10),
+            padding: const EdgeInsets.only(left: 30, right: 12, top: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -123,10 +123,10 @@ class _DashboardPageState extends State<DashboardPage> {
       return RelativeBuilder(
         builder: (context, height, width, sy, sx) {
           return Container(
-            margin: EdgeInsets.only(top: 18),
+            margin: const EdgeInsets.only(top: 18),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+              children: const [
                 AttendanceCard(),
                 SizedBox(
                   width: 10,
@@ -141,7 +141,7 @@ class _DashboardPageState extends State<DashboardPage> {
 
     Widget header() {
       return Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/header.png'),
             fit: BoxFit.cover,
@@ -150,7 +150,7 @@ class _DashboardPageState extends State<DashboardPage> {
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsets.only(left: 22, right: 22, top: 20),
+              padding: const EdgeInsets.only(left: 22, right: 22, top: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -160,7 +160,7 @@ class _DashboardPageState extends State<DashboardPage> {
                         'assets/dashboard_logo.png',
                         color: whiteColor,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 10,
                       ),
                       Text(
@@ -194,7 +194,7 @@ class _DashboardPageState extends State<DashboardPage> {
 
     Widget attencance_history() {
       return Container(
-        margin: EdgeInsets.only(top: 10, bottom: 10),
+        margin: const EdgeInsets.only(top: 10, bottom: 10),
         child: Column(
           children: [
             Column(
@@ -207,7 +207,7 @@ class _DashboardPageState extends State<DashboardPage> {
 
     Widget visiting_list() {
       return Container(
-        margin: EdgeInsets.only(top: 10, bottom: 10),
+        margin: const EdgeInsets.only(top: 10, bottom: 10),
         child: Column(
           children: [
             Column(
@@ -224,7 +224,7 @@ class _DashboardPageState extends State<DashboardPage> {
     Widget body() {
       return Container(
         width: MediaQuery.of(context).size.width * 0.90,
-        margin: EdgeInsets.only(top: 20, bottom: 10),
+        margin: const EdgeInsets.only(top: 20, bottom: 10),
         // transform: Matrix4.translationValues(0.0, -115.0, 0.0),
         child: Column(
           children: [
@@ -249,14 +249,15 @@ class _DashboardPageState extends State<DashboardPage> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => AttendanceHistoryPage()));
+                            builder: (context) =>
+                                const AttendanceHistoryPage()));
                     // attendanceHandler();
                   },
                 )
               ],
             ),
 
-            isLoading ? LoadingDefault() : attencance_history(),
+            isLoading ? const LoadingDefault() : attencance_history(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -275,13 +276,13 @@ class _DashboardPageState extends State<DashboardPage> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => VisitingListPage()));
+                            builder: (context) => const VisitingListPage()));
                   },
                 )
               ],
             ),
 
-            isLoading ? LoadingDefault() : visiting_list(),
+            isLoading ? const LoadingDefault() : visiting_list(),
             // visiting_list(),
           ],
         ),

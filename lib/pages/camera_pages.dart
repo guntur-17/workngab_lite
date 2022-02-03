@@ -12,11 +12,10 @@ import 'package:relative_scale/relative_scale.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CameraPages extends StatefulWidget {
-  int? id;
-  String? name;
-
-  String? addressUser;
-  CameraPages(this.id, this.name, this.addressUser, {Key? key})
+  final int? id;
+  final String? name;
+  final String? addressUser;
+  const CameraPages(this.id, this.name, this.addressUser, {Key? key})
       : super(key: key);
 
   @override
@@ -58,7 +57,7 @@ class _CameraPagesState extends State<CameraPages> {
     wait(String? name) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         backgroundColor: greenColor,
-        content: Text(
+        content: const Text(
           'Loading...',
           textAlign: TextAlign.center,
         ),
@@ -75,7 +74,7 @@ class _CameraPagesState extends State<CameraPages> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset('assets/toko.png', width: sx(60), height: sy(60)),
-              SizedBox(
+              const SizedBox(
                 width: 5,
               ),
               Text('${widget.name}',
@@ -131,7 +130,7 @@ class _CameraPagesState extends State<CameraPages> {
     Widget next() {
       return RelativeBuilder(builder: (contex, height, width, sy, sx) {
         return Padding(
-          padding: EdgeInsets.only(top: 10),
+          padding: const EdgeInsets.only(top: 10),
           child: Column(
             children: [
               SizedBox(
@@ -169,7 +168,7 @@ class _CameraPagesState extends State<CameraPages> {
               fullalamat(),
               image != null
                   ? Container(
-                      margin: EdgeInsets.only(bottom: 10),
+                      margin: const EdgeInsets.only(bottom: 10),
                       child: Image.file(
                         image!,
                         fit: BoxFit.cover,
@@ -178,7 +177,7 @@ class _CameraPagesState extends State<CameraPages> {
                       ),
                     )
                   : Container(
-                      margin: EdgeInsets.only(bottom: 10),
+                      margin: const EdgeInsets.only(bottom: 10),
                       height: sy(130),
                       width: sx(130),
                     ),

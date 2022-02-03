@@ -35,7 +35,7 @@ class ClockOutCard extends StatelessWidget {
                           width: sx(60),
                           height: sx(60),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 3,
                         ),
                         Text(
@@ -46,7 +46,7 @@ class ClockOutCard extends StatelessWidget {
                       ],
                     ),
                     Padding(
-                      padding: EdgeInsets.only(top: 10),
+                      padding: const EdgeInsets.only(top: 10),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -55,7 +55,7 @@ class ClockOutCard extends StatelessWidget {
                             height: sx(14),
                             width: sx(14),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 3,
                           ),
                           Text(
@@ -67,7 +67,7 @@ class ClockOutCard extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(top: 10),
+                      padding: const EdgeInsets.only(top: 10),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -78,7 +78,7 @@ class ClockOutCard extends StatelessWidget {
                                 height: sx(14),
                                 width: sx(14),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 3,
                               ),
                               Text('${attendance.time} WIB',
@@ -117,7 +117,7 @@ class ClockOutCard extends StatelessWidget {
                       width: sy(40),
                       height: sy(40),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 16,
                     ),
                     Column(

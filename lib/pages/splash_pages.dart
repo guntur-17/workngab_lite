@@ -23,7 +23,8 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
-  Route route = MaterialPageRoute(builder: (context) => HomePage());
+  Route route = MaterialPageRoute(builder: (context) => const HomePage());
+  bool isLoading = false;
 
   @override
   void initState() {
@@ -46,9 +47,10 @@ class _SplashPageState extends State<SplashPage> {
       Navigator.pushReplacement(context, route);
     } else {
       Timer(
-        Duration(seconds: 2),
+        const Duration(seconds: 2),
         () => Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (BuildContext context) => LoginPage()),
+          MaterialPageRoute(
+              builder: (BuildContext context) => const LoginPage()),
         ),
       );
     }
@@ -69,9 +71,10 @@ class _SplashPageState extends State<SplashPage> {
       });
     } else {
       Timer(
-        Duration(seconds: 2),
+        const Duration(seconds: 2),
         () => Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (BuildContext context) => LoginPage()),
+          MaterialPageRoute(
+              builder: (BuildContext context) => const LoginPage()),
         ),
       );
     }

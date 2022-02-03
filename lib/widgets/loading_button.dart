@@ -29,7 +29,7 @@ class LoadingButton extends StatelessWidget {
                       valueColor: AlwaysStoppedAnimation(whiteColor),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 5,
                   ),
                   Text(
@@ -56,7 +56,7 @@ class Loadinglocation extends StatelessWidget {
       children: [
         Center(
           child: Container(
-            margin: EdgeInsets.only(top: 27),
+            margin: const EdgeInsets.only(top: 27),
             width: MediaQuery.of(context).size.width * 0.6,
             height: MediaQuery.of(context).size.width * 0.20,
             decoration: BoxDecoration(
@@ -76,7 +76,7 @@ class Loadinglocation extends StatelessWidget {
                         valueColor: AlwaysStoppedAnimation(whiteColor),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 5,
                     ),
                     Text(
@@ -104,7 +104,7 @@ class Loadinglocation2 extends StatelessWidget {
       children: [
         Center(
           child: Container(
-            margin: EdgeInsets.only(top: 27),
+            margin: const EdgeInsets.only(top: 27),
             // width: MediaQuery.of(context).size.width * 0.6,
             height: MediaQuery.of(context).size.width * 0.10,
             decoration: BoxDecoration(
@@ -124,7 +124,7 @@ class Loadinglocation2 extends StatelessWidget {
                         valueColor: AlwaysStoppedAnimation(whiteColor),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 5,
                     ),
                     Text(
@@ -168,7 +168,7 @@ class LoadingClockCard extends StatelessWidget {
       children: [
         Center(
           child: Container(
-            margin: EdgeInsets.only(top: 27),
+            margin: const EdgeInsets.only(top: 27),
             width: MediaQuery.of(context).size.width * 0.6,
             height: MediaQuery.of(context).size.width * 0.20,
             decoration: BoxDecoration(
@@ -188,7 +188,7 @@ class LoadingClockCard extends StatelessWidget {
                         valueColor: AlwaysStoppedAnimation(whiteColor),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 5,
                     ),
                     Text(
