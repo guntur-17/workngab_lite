@@ -106,13 +106,12 @@ class _SplashPageState extends State<SplashPage> {
       return Scaffold(
         backgroundColor: blueColor,
         body: Center(
-            child: GestureDetector(
           child: Image.asset(
             "assets/logos.png",
             width: sx(200),
             height: sy(200),
           ),
-        )),
+        ),
       );
     });
   }
