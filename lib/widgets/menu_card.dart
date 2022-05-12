@@ -1,24 +1,34 @@
 import 'package:absen_lite/pages/clockin_pages.dart';
+import 'package:absen_lite/pages/clockout_pages.dart';
 import 'package:absen_lite/pages/visiting_pages.dart';
 import 'package:absen_lite/theme.dart';
+import 'package:absen_lite/widgets/clock_card.dart';
 
 import 'package:flutter/material.dart';
 import 'package:relative_scale/relative_scale.dart';
 
 class AttendanceCard extends StatelessWidget {
-  const AttendanceCard({Key? key}) : super(key: key);
+  bool? check;
+  AttendanceCard(this.check, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return RelativeBuilder(builder: (context, height, width, sy, sx) {
       return InkWell(
         onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const ClockInPage(),
-            ),
-          );
+          check == true
+              ? Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ClockInPage(),
+                  ),
+                )
+              : Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ClockOutPage(),
+                  ),
+                );
         },
         child: Container(
           // padding: EdgeInsets.all(25),
