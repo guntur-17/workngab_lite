@@ -78,6 +78,14 @@ class _DashboardPageState extends State<DashboardPage> {
     VisitingAllProvider visitingAllProvider =
         Provider.of<VisitingAllProvider>(context);
 
+    bool checkclock;
+    print(attedanceProvider.attendances.length);
+    print("checkk awal" + attedanceProvider.attendances.first.type!);
+
+    attedanceProvider.attendances.last.type == "Out"
+        ? checkclock = true
+        : checkclock = false;
+
     List list = attedanceProvider.attendances.reversed.toList();
     List list2 = visitingAllProvider.showAll.reversed.toList();
 
@@ -127,8 +135,8 @@ class _DashboardPageState extends State<DashboardPage> {
             margin: const EdgeInsets.only(top: 18),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                AttendanceCard(),
+              children: [
+                AttendanceCard(checkclock),
                 SizedBox(
                   width: 10,
                 ),

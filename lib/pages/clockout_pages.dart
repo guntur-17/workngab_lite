@@ -15,17 +15,17 @@ import 'package:relative_scale/relative_scale.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class ClockInPage extends StatefulWidget {
-  const ClockInPage({Key? key}) : super(key: key);
+class ClockOutPage extends StatefulWidget {
+  const ClockOutPage({Key? key}) : super(key: key);
 
   @override
-  _ClockInPageState createState() => _ClockInPageState();
+  _ClockOutPageState createState() => _ClockOutPageState();
 }
 
-class _ClockInPageState extends State<ClockInPage> {
+class _ClockOutPageState extends State<ClockOutPage> {
   late Image img;
-  Image imgIn = Image.asset('assets/clockIn.png', width: 160, height: 160);
-  // Image imgOut = Image.asset('assets/clockOut.png', width: 160, height: 160);
+  // Image imgIn = Image.asset('assets/clockIn.png', width: 160, height: 160);
+  Image imgOut = Image.asset('assets/clockOut.png', width: 160, height: 160);
 
   bool _isClockIn = true;
   DateFormat? dateFormat;
@@ -40,7 +40,7 @@ class _ClockInPageState extends State<ClockInPage> {
   @override
   void initState() {
     super.initState();
-    img = imgIn;
+    img = imgOut;
     _determinePosition();
     initializeDateFormatting();
     // checkhasil();
@@ -57,7 +57,7 @@ class _ClockInPageState extends State<ClockInPage> {
   //   print('ini clockin hasil ' + clockIn.toString());
 
   //   if (clockIn == true) {
-  //     img = imgIn;
+  //     img = imgOut;
   //   } else {
   //     img = imgOut;
   //   }
@@ -127,37 +127,37 @@ class _ClockInPageState extends State<ClockInPage> {
     //   prefs.setBool('checkClock', _isClockIn);
     // }
 
-    handleCheckin() async {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      var token = prefs.getString('token');
-      // _attendance();
-
-      if (await attedanceProvider.attendanceIn(
-        token,
-        currentTime,
-        currentposition!.latitude,
-        currentposition!.longitude,
-      )) {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => const HomePage()));
-      }
-    }
-
-    // handleCheckout() async {
+    // handleCheckin() async {
     //   SharedPreferences prefs = await SharedPreferences.getInstance();
     //   var token = prefs.getString('token');
-    //   _attendance();
-    //   if (await attedanceProvider.attendanceOut(
+    //   // _attendance();
+
+    //   if (await attedanceProvider.attendanceIn(
     //     token,
     //     currentTime,
     //     currentposition!.latitude,
     //     currentposition!.longitude,
     //   )) {
-    //     // _isClockIn = true;
     //     Navigator.push(
     //         context, MaterialPageRoute(builder: (context) => const HomePage()));
     //   }
     // }
+
+    handleCheckout() async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      var token = prefs.getString('token');
+      // _attendance();
+      if (await attedanceProvider.attendanceOut(
+        token,
+        currentTime,
+        currentposition!.latitude,
+        currentposition!.longitude,
+      )) {
+        // _isClockIn = true;
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => const HomePage()));
+      }
+    }
 
     Widget day() {
       return Container(
@@ -251,12 +251,7 @@ class _ClockInPageState extends State<ClockInPage> {
                         bool? clockIn = prefs.getBool('checkClock');
                         clockIn ??= true;
                         print(clockIn);
-                        handleCheckin();
-
-                        // if (clockIn == true) {
-                        // } else {
-                        //   handleCheckout();
-                        // }
+                        handleCheckout();
                       }
 
                       setState(() {
@@ -376,7 +371,7 @@ class _ClockInPageState extends State<ClockInPage> {
             bottomOpacity: 0.0,
             elevation: 0.0,
             title: const Text(
-              'Attendance IN',
+              'Attendance OUT',
               style: TextStyle(color: Colors.black),
             ),
             actions: const <Widget>[
