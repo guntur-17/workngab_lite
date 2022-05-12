@@ -23,7 +23,7 @@ class _ProfilePageState extends State<ProfilePage> {
       return Center(
         child: Container(
           margin: const EdgeInsets.only(top: 50),
-          width: MediaQuery.of(context).size.width - 40,
+          width: MediaQuery.of(context).size.width - 20,
           child: Row(
             children: [
               Column(
@@ -42,23 +42,26 @@ class _ProfilePageState extends State<ProfilePage> {
               const SizedBox(
                 width: 10,
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    '${data.name}',
-                    style:
-                        blackTextStyle.copyWith(fontSize: 18, fontWeight: bold),
-                  ),
-                  const SizedBox(
-                    height: 4,
-                  ),
-                  Text(
-                    'Sales',
-                    style: blackTextStyle.copyWith(
-                        fontSize: 14, fontWeight: reguler),
-                  )
-                ],
+              Flexible(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '${data.name}',
+                      overflow: TextOverflow.ellipsis,
+                      style: blackTextStyle.copyWith(
+                          fontSize: 18, fontWeight: bold),
+                    ),
+                    const SizedBox(
+                      height: 4,
+                    ),
+                    Text(
+                      'Sales',
+                      style: blackTextStyle.copyWith(
+                          fontSize: 14, fontWeight: reguler),
+                    )
+                  ],
+                ),
               )
             ],
           ),

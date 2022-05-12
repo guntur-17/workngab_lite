@@ -31,7 +31,7 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   void initState() {
     attendanceHandler();
-    getvisiting();
+    // getvisiting();
     // shophandle();
 
     super.initState();
@@ -44,25 +44,26 @@ class _DashboardPageState extends State<DashboardPage> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var token = prefs.getString('token');
     if (await Provider.of<AttedanceProvider>(context, listen: false)
-        .getAttendances(token)) setState(() {});
-    setState(() {
-      isLoading = false;
-    });
-  }
-
-  Future getvisiting() async {
-    setState(() {
-      isLoading = true;
-    });
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    var token = prefs.getString('token');
-    if (await Provider.of<VisitingAllProvider>(context, listen: false)
-        .getAllVisit(token)) if (!mounted) return;
+        .getAttendances(token)) if (!mounted) return;
     setState(() {});
     setState(() {
       isLoading = false;
     });
   }
+
+  // Future getvisiting() async {
+  //   setState(() {
+  //     isLoading = true;
+  //   });
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   var token = prefs.getString('token');
+  //   if (await Provider.of<VisitingAllProvider>(context, listen: false)
+  //       .getAllVisit(token)) if (!mounted) return;
+  //   // setState(() {});
+  //   setState(() {
+  //     isLoading = false;
+  //   });
+  // }
 
   // shophandle() async {
   //   SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -79,12 +80,19 @@ class _DashboardPageState extends State<DashboardPage> {
         Provider.of<VisitingAllProvider>(context);
 
     bool checkclock;
-    print(attedanceProvider.attendances.length);
-    print("checkk awal" + attedanceProvider.attendances.first.type!);
 
-    attedanceProvider.attendances.last.type == "Out"
-        ? checkclock = true
-        : checkclock = false;
+    // print(attedanceProvider.attendances.length);
+    // print("checkk awal" + attedanceProvider.attendances.first.type!);
+    if (attedanceProvider.attendances.isNotEmpty) {
+      attedanceProvider.attendances.last.type == "Out"
+          ? checkclock = true
+          : checkclock = false;
+    } else {
+      checkclock = true;
+    }
+    // attedanceProvider.attendances.last.type == "Out"
+    //     ? checkclock = true
+    //     : checkclock = false;
 
     List list = attedanceProvider.attendances.reversed.toList();
     List list2 = visitingAllProvider.showAll.reversed.toList();
@@ -140,7 +148,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 SizedBox(
                   width: 10,
                 ),
-                VisitCard(),
+                // VisitCard(),
               ],
             ),
           );
@@ -206,29 +214,34 @@ class _DashboardPageState extends State<DashboardPage> {
         margin: const EdgeInsets.only(top: 10, bottom: 10),
         child: Column(
           children: [
-            Column(
-              children: List.generate(2, (index) => ClockOutCard(list[index])),
-            ),
+            list.isEmpty
+                ? Column()
+                : Column(
+                    children:
+                        List.generate(1, (index) => ClockOutCard(list[index])),
+                  )
           ],
         ),
       );
     }
 
-    Widget visiting_list() {
-      return Container(
-        margin: const EdgeInsets.only(top: 10, bottom: 10),
-        child: Column(
-          children: [
-            Column(
-              children: List.generate(
-                3,
-                (index) => VisitingCard(list2[index]),
-              ),
-            ),
-          ],
-        ),
-      );
-    }
+    // Widget visiting_list() {
+    //   return Container(
+    //     margin: const EdgeInsets.only(top: 10, bottom: 10),
+    //     child: Column(
+    //       children: [
+    //         list.isEmpty
+    //             ? Column()
+    //             : Column(
+    //                 children: List.generate(
+    //                   1,
+    //                   (index) => VisitingCard(list2[index]),
+    //                 ),
+    //               ),
+    //       ],
+    //     ),
+    //   );
+    // }
 
     Widget body() {
       return Container(
@@ -267,31 +280,31 @@ class _DashboardPageState extends State<DashboardPage> {
             ),
 
             isLoading ? const LoadingDefault() : attencance_history(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Visiting List',
-                  style: trueBlackTextStyle.copyWith(
-                      fontSize: 16, fontWeight: semiBold),
-                ),
-                InkWell(
-                  child: Text(
-                    'See All',
-                    style: trueBlackTextStyle.copyWith(
-                        fontSize: 14, fontWeight: light),
-                  ),
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const VisitingListPage()));
-                  },
-                )
-              ],
-            ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: [
+            //     Text(
+            //       'Visiting List',
+            //       style: trueBlackTextStyle.copyWith(
+            //           fontSize: 16, fontWeight: semiBold),
+            //     ),
+            //     InkWell(
+            //       child: Text(
+            //         'See All',
+            //         style: trueBlackTextStyle.copyWith(
+            //             fontSize: 14, fontWeight: light),
+            //       ),
+            //       onTap: () {
+            //         Navigator.push(
+            //             context,
+            //             MaterialPageRoute(
+            //                 builder: (context) => const VisitingListPage()));
+            //       },
+            //     )
+            //   ],
+            // ),
 
-            isLoading ? const LoadingDefault() : visiting_list(),
+            // isLoading ? const LoadingDefault() : visiting_list(),
             // visiting_list(),
           ],
         ),

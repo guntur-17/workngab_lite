@@ -32,10 +32,10 @@ class AttendanceCard extends StatelessWidget {
         },
         child: Container(
           // padding: EdgeInsets.all(25),
-          height: sx(223),
-          width: sx(223),
+          height: sx(200),
+          width: sx(200),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
+            borderRadius: BorderRadius.circular(100),
             color: whiteColor,
             border: Border.all(color: whiteColor, width: 1),
             boxShadow: [
@@ -56,7 +56,7 @@ class AttendanceCard extends StatelessWidget {
                   icon: Image.asset(
                     'assets/attendance.png',
                   ),
-                  iconSize: 66,
+                  iconSize: 50,
                   onPressed: () {
                     Navigator.push(
                       context,

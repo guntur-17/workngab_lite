@@ -91,11 +91,7 @@ packages:
       name: dio
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
-    version: "4.0.4"
-=======
     version: "4.0.6"
->>>>>>> 69e9d21482336c23ba4232b5793b6912895b8c25
   fake_async:
     dependency: transitive
     description:
@@ -166,11 +162,7 @@ packages:
       name: geocoding
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
-    version: "2.0.2"
-=======
     version: "2.0.4"
->>>>>>> 69e9d21482336c23ba4232b5793b6912895b8c25
   geocoding_platform_interface:
     dependency: transitive
     description:
@@ -184,33 +176,21 @@ packages:
       name: geolocator
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "8.1.1"
-=======
-    version: "7.7.1"
->>>>>>> 69e9d21482336c23ba4232b5793b6912895b8c25
   geolocator_android:
     dependency: transitive
     description:
       name: geolocator_android
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "3.0.2"
-=======
-    version: "2.1.0"
->>>>>>> 69e9d21482336c23ba4232b5793b6912895b8c25
   geolocator_apple:
     dependency: transitive
     description:
       name: geolocator_apple
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
     version: "2.0.1"
-=======
-    version: "1.2.2"
->>>>>>> 69e9d21482336c23ba4232b5793b6912895b8c25
   geolocator_platform_interface:
     dependency: transitive
     description:
@@ -259,20 +239,13 @@ packages:
       name: image
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
-    version: "3.1.1"
-=======
     version: "3.1.3"
->>>>>>> 69e9d21482336c23ba4232b5793b6912895b8c25
   image_picker:
     dependency: "direct main"
     description:
       name: image_picker
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
-    version: "0.8.4+7"
-=======
     version: "0.8.5"
   image_picker_android:
     dependency: transitive
@@ -281,16 +254,12 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.8.4+11"
->>>>>>> 69e9d21482336c23ba4232b5793b6912895b8c25
   image_picker_for_web:
     dependency: transitive
     description:
       name: image_picker_for_web
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
-    version: "2.1.5"
-=======
     version: "2.1.6"
   image_picker_ios:
     dependency: transitive
@@ -299,18 +268,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.8.4+11"
->>>>>>> 69e9d21482336c23ba4232b5793b6912895b8c25
   image_picker_platform_interface:
     dependency: transitive
     description:
       name: image_picker_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
-    version: "2.4.3"
-=======
     version: "2.4.4"
->>>>>>> 69e9d21482336c23ba4232b5793b6912895b8c25
   intl:
     dependency: "direct main"
     description:
@@ -401,33 +365,21 @@ packages:
       name: path_provider
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
-    version: "2.0.8"
-=======
     version: "2.0.9"
->>>>>>> 69e9d21482336c23ba4232b5793b6912895b8c25
   path_provider_android:
     dependency: transitive
     description:
       name: path_provider_android
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
-    version: "2.0.11"
-=======
     version: "2.0.12"
->>>>>>> 69e9d21482336c23ba4232b5793b6912895b8c25
   path_provider_ios:
     dependency: transitive
     description:
       name: path_provider_ios
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
-    version: "2.0.7"
-=======
     version: "2.0.8"
->>>>>>> 69e9d21482336c23ba4232b5793b6912895b8c25
   path_provider_linux:
     dependency: transitive
     description:
@@ -456,16 +408,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.5"
-<<<<<<< HEAD
-  pedantic:
-    dependency: transitive
-    description:
-      name: pedantic
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.11.1"
-=======
->>>>>>> 69e9d21482336c23ba4232b5793b6912895b8c25
   petitparser:
     dependency: transitive
     description:
@@ -528,33 +470,21 @@ packages:
       name: shared_preferences_android
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
-    version: "2.0.10"
-=======
     version: "2.0.11"
->>>>>>> 69e9d21482336c23ba4232b5793b6912895b8c25
   shared_preferences_ios:
     dependency: transitive
     description:
       name: shared_preferences_ios
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
-    version: "2.0.9"
-=======
     version: "2.1.0"
->>>>>>> 69e9d21482336c23ba4232b5793b6912895b8c25
   shared_preferences_linux:
     dependency: transitive
     description:
       name: shared_preferences_linux
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
-    version: "2.0.4"
-=======
     version: "2.1.0"
->>>>>>> 69e9d21482336c23ba4232b5793b6912895b8c25
   shared_preferences_macos:
     dependency: transitive
     description:
@@ -582,11 +512,7 @@ packages:
       name: shared_preferences_windows
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
-    version: "2.0.4"
-=======
     version: "2.1.0"
->>>>>>> 69e9d21482336c23ba4232b5793b6912895b8c25
   sky_engine:
     dependency: transitive
     description: flutter
@@ -654,11 +580,7 @@ packages:
       name: win32
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
-    version: "2.3.11"
-=======
     version: "2.5.1"
->>>>>>> 69e9d21482336c23ba4232b5793b6912895b8c25
   xdg_directories:
     dependency: transitive
     description:
